@@ -1416,7 +1416,356 @@
     /* Scroll to top smooth */
     html { scroll-behavior: smooth; }
 
+
+    /* ===== AI TOOLS SECTION ===== */
+    .ai-section{
+      max-width:1300px;margin:0 auto;
+      padding:2rem 2rem 1rem;
+    }
+    .ai-section-header{
+      display:flex;align-items:center;justify-content:space-between;
+      margin-bottom:1.2rem;flex-wrap:wrap;gap:0.8rem;
+    }
+    .ai-section-title{
+      font-family:'Syne',sans-serif;font-weight:800;font-size:1.3rem;
+      display:flex;align-items:center;gap:0.6rem;
+    }
+    .ai-title-icon{
+      font-size:1.3rem;
+      animation:aiPulse 2s ease-in-out infinite;
+    }
+    @keyframes aiPulse{
+      0%,100%{filter:drop-shadow(0 0 4px rgba(0,229,255,0.4));}
+      50%{filter:drop-shadow(0 0 12px rgba(0,229,255,0.9));}
+    }
+
+    /* AI Search */
+    .ai-search-wrap{
+      display:flex;max-width:420px;margin:0 auto 1.2rem;gap:0.5rem;
+    }
+    .ai-search-wrap input{
+      flex:1;background:rgba(17,24,39,0.7);
+      border:1px solid rgba(0,229,255,0.15);
+      color:var(--text);padding:0.6rem 1rem;
+      border-radius:10px;font-family:'DM Sans',sans-serif;
+      font-size:0.88rem;outline:none;
+      backdrop-filter:blur(10px);transition:border 0.2s;
+    }
+    .ai-search-wrap input:focus{border-color:rgba(0,229,255,0.5);}
+    .ai-search-wrap input::placeholder{color:var(--muted);}
+    .ai-search-btn{
+      background:linear-gradient(135deg,rgba(0,229,255,0.2),rgba(0,229,255,0.08));
+      border:1px solid rgba(0,229,255,0.25);color:var(--cyan);
+      padding:0.6rem 1rem;border-radius:10px;cursor:pointer;
+      font-family:'DM Sans',sans-serif;font-size:0.85rem;
+      transition:all 0.2s;
+    }
+    .ai-search-btn:hover{background:rgba(0,229,255,0.2);box-shadow:0 0 15px rgba(0,229,255,0.2);}
+
+    /* ===== PREMIUM AI TABS ===== */
+    .ai-tabs-wrap{
+      position:relative;margin-bottom:1.8rem;
+    }
+
+    /* Tab track */
+    .ai-tabs{
+      display:flex;gap:0;
+      background:rgba(10,14,26,0.6);
+      border:1px solid rgba(255,255,255,0.06);
+      border-radius:14px;padding:5px;
+      backdrop-filter:blur(16px);
+      overflow-x:auto;scrollbar-width:none;
+      -webkit-overflow-scrolling:touch;
+      position:relative;
+    }
+    .ai-tabs::-webkit-scrollbar{display:none;}
+
+    /* Sliding indicator */
+    .ai-tab-indicator{
+      position:absolute;
+      top:5px;left:5px;
+      height:calc(100% - 10px);
+      background:linear-gradient(135deg,rgba(0,229,255,0.18),rgba(0,230,118,0.1));
+      border:1px solid rgba(0,229,255,0.35);
+      border-radius:10px;
+      transition:all 0.35s cubic-bezier(0.4,0,0.2,1);
+      box-shadow:0 0 20px rgba(0,229,255,0.15),inset 0 1px 0 rgba(255,255,255,0.08);
+      pointer-events:none;z-index:0;
+    }
+
+    /* Individual tab */
+    .ai-tab{
+      position:relative;z-index:1;
+      display:flex;align-items:center;gap:0.45rem;
+      padding:0.55rem 1rem;
+      border-radius:10px;cursor:pointer;
+      font-size:0.82rem;font-weight:500;
+      font-family:'DM Sans',sans-serif;
+      color:var(--muted);
+      border:none;background:none;
+      white-space:nowrap;flex-shrink:0;
+      transition:color 0.25s;
+      -webkit-tap-highlight-color:transparent;
+    }
+    .ai-tab .tab-icon{font-size:0.95rem;transition:transform 0.3s;}
+    .ai-tab:hover{color:var(--text);}
+    .ai-tab.active{
+      color:#fff;font-weight:700;
+    }
+    .ai-tab.active .tab-icon{
+      transform:scale(1.15);
+      filter:drop-shadow(0 0 6px rgba(0,229,255,0.6));
+    }
+
+    /* Tab count badge */
+    .tab-count{
+      background:rgba(255,255,255,0.08);
+      color:var(--muted);font-size:0.6rem;font-weight:700;
+      padding:0.1rem 0.4rem;border-radius:10px;
+      transition:all 0.25s;min-width:18px;text-align:center;
+    }
+    .ai-tab.active .tab-count{
+      background:rgba(0,229,255,0.2);
+      color:var(--cyan);
+    }
+
+    /* Bottom glow line */
+    .ai-tabs-glow{
+      height:1px;
+      background:linear-gradient(90deg,transparent,rgba(0,229,255,0.3),rgba(0,230,118,0.2),transparent);
+      margin-top:0.3rem;
+      animation:glowPulse 3s ease-in-out infinite;
+    }
+    @keyframes glowPulse{
+      0%,100%{opacity:0.4;}50%{opacity:1;}
+    }
+
+    /* AI cat kept for compatibility */
+    .ai-cat{display:none;}
+
+    @media(max-width:768px){
+      .ai-tabs{border-radius:12px;padding:4px;}
+      .ai-tab{padding:0.5rem 0.7rem;font-size:0.75rem;}
+      .ai-tab .tab-label{display:none;}
+      .ai-tab .tab-icon{font-size:1.1rem;}
+      .tab-count{font-size:0.55rem;padding:0.08rem 0.3rem;}
+      .ai-tab-indicator{border-radius:8px;}
+    }
+
+    /* AI Grid */
+    .ai-grid{
+      display:grid;
+      grid-template-columns:repeat(auto-fill,minmax(220px,1fr));
+      gap:1rem;
+    }
+
+    /* AI Card */
+    .ai-card{
+      background:rgba(17,24,39,0.6);
+      border:1px solid rgba(255,255,255,0.07);
+      border-radius:18px;padding:1.3rem;
+      transition:all 0.35s cubic-bezier(0.4,0,0.2,1);
+      backdrop-filter:blur(12px);
+      display:flex;flex-direction:column;gap:0.8rem;
+      position:relative;overflow:hidden;
+      animation:fadeIn 0.4s ease both;
+    }
+    .ai-card::before{
+      content:'';position:absolute;inset:0;border-radius:18px;
+      background:linear-gradient(135deg,rgba(0,229,255,0.08),transparent 60%);
+      opacity:0;transition:opacity 0.35s;pointer-events:none;
+    }
+    .ai-card:hover::before{opacity:1;}
+    .ai-card:hover{
+      border-color:rgba(0,229,255,0.3);
+      transform:translateY(-5px);
+      box-shadow:
+        0 15px 40px rgba(0,0,0,0.4),
+        0 0 30px rgba(0,229,255,0.07);
+    }
+
+    /* Glow line at top */
+    .ai-card::after{
+      content:'';position:absolute;top:0;left:10%;right:10%;height:1px;
+      background:linear-gradient(90deg,transparent,rgba(0,229,255,0.4),transparent);
+      opacity:0;transition:opacity 0.35s;
+    }
+    .ai-card:hover::after{opacity:1;}
+
+    /* AI Card header */
+    .ai-card-head{display:flex;align-items:center;gap:0.8rem;}
+    .ai-logo{
+      width:46px;height:46px;border-radius:12px;
+      display:flex;align-items:center;justify-content:center;
+      font-size:1.5rem;flex-shrink:0;
+      border:1px solid rgba(255,255,255,0.08);
+      background:rgba(255,255,255,0.04);
+      transition:transform 0.3s;
+    }
+    .ai-card:hover .ai-logo{transform:scale(1.1);}
+    .ai-card-info{}
+    .ai-tool-name{
+      font-family:'Syne',sans-serif;font-weight:700;
+      font-size:0.92rem;color:var(--text);margin-bottom:0.15rem;
+    }
+    .ai-tool-cat{
+      font-size:0.65rem;font-weight:600;text-transform:uppercase;
+      letter-spacing:0.8px;color:var(--cyan);
+    }
+
+    /* Description */
+    .ai-desc{
+      font-size:0.78rem;color:var(--muted);line-height:1.5;flex:1;
+      display:-webkit-box;-webkit-line-clamp:2;
+      -webkit-box-orient:vertical;overflow:hidden;
+    }
+
+    /* Visit button */
+    .ai-visit-btn{
+      display:flex;align-items:center;justify-content:center;gap:0.4rem;
+      background:rgba(0,229,255,0.08);
+      border:1px solid rgba(0,229,255,0.2);
+      color:var(--cyan);font-size:0.8rem;font-weight:700;
+      font-family:'DM Sans',sans-serif;
+      padding:0.55rem;border-radius:10px;
+      cursor:pointer;text-decoration:none;
+      transition:all 0.25s;
+      -webkit-tap-highlight-color:transparent;
+    }
+    .ai-visit-btn:hover{
+      background:rgba(0,229,255,0.18);
+      border-color:rgba(0,229,255,0.5);
+      box-shadow:0 0 20px rgba(0,229,255,0.2);
+      color:#fff;
+    }
+    .ai-visit-btn:active{transform:scale(0.97);}
+    .ai-visit-btn .arrow{transition:transform 0.25s;}
+    .ai-visit-btn:hover .arrow{transform:translateX(3px);}
+
+    /* Divider */
+    .section-divider{
+      max-width:1300px;margin:0 auto 0.5rem;
+      padding:0 2rem;display:flex;align-items:center;gap:1rem;
+    }
+    .section-divider::before,.section-divider::after{
+      content:'';flex:1;height:1px;
+      background:linear-gradient(90deg,transparent,rgba(0,229,255,0.15),transparent);
+    }
+    .section-divider span{
+      font-size:0.72rem;color:var(--muted);
+      white-space:nowrap;letter-spacing:1px;text-transform:uppercase;
+    }
+
+    @media(max-width:768px){
+      .ai-section{padding:1.5rem 1rem 1rem;}
+      .ai-grid{grid-template-columns:repeat(2,1fr);gap:0.7rem;}
+      .ai-card{padding:1rem;border-radius:14px;}
+      .ai-logo{width:38px;height:38px;font-size:1.2rem;border-radius:10px;}
+      .ai-tool-name{font-size:0.82rem;}
+      .ai-search-wrap{max-width:100%;}
+      .ai-cats{gap:0.4rem;}
+      .ai-cat{font-size:0.72rem;padding:0.3rem 0.7rem;}
+    }
+
+
+    /* All AI Mode Button */
+    .all-ai-btn{
+      display:flex;align-items:center;gap:0.5rem;
+      background:rgba(0,229,255,0.08);
+      border:1px solid rgba(0,229,255,0.25);
+      color:var(--cyan);font-size:0.82rem;font-weight:700;
+      font-family:'DM Sans',sans-serif;
+      padding:0.45rem 1rem;border-radius:20px;
+      cursor:pointer;transition:all 0.3s;
+      position:relative;overflow:hidden;
+    }
+    .all-ai-btn::before{
+      content:'';position:absolute;inset:0;
+      background:linear-gradient(135deg,rgba(0,229,255,0.15),transparent);
+      opacity:0;transition:opacity 0.3s;
+    }
+    .all-ai-btn:hover::before{opacity:1;}
+    .all-ai-btn:hover{
+      border-color:rgba(0,229,255,0.5);
+      box-shadow:0 0 20px rgba(0,229,255,0.2);
+    }
+    .all-ai-btn.active{
+      background:rgba(0,229,255,0.15);
+      border-color:rgba(0,229,255,0.5);
+      box-shadow:0 0 20px rgba(0,229,255,0.15);
+      color:#fff;
+    }
+    .all-ai-dot{
+      width:7px;height:7px;border-radius:50%;
+      background:var(--cyan);
+      box-shadow:0 0 6px rgba(0,229,255,0.8);
+      animation:dotPulse 1.5s ease-in-out infinite;
+    }
+    @keyframes dotPulse{
+      0%,100%{opacity:1;transform:scale(1);}
+      50%{opacity:0.5;transform:scale(0.7);}
+    }
+
+
+    /* ===== AI TOOLS ADMIN ===== */
+    .ai-admin-section{
+      background:var(--surface);border:1px solid var(--border);
+      border-radius:16px;padding:1.5rem;margin-bottom:1.5rem;
+    }
+    .ai-admin-section h3{
+      font-family:'Syne',sans-serif;font-weight:700;
+      font-size:1.1rem;margin-bottom:1.2rem;
+      display:flex;align-items:center;gap:0.6rem;
+    }
+    .ai-form-grid{display:grid;grid-template-columns:1fr 1fr;gap:1rem;}
+    .ai-form-grid .fg.full{grid-column:1/-1;}
+
+    .ai-tool-row{
+      display:flex;align-items:center;gap:1rem;
+      padding:0.85rem 1.2rem;border-bottom:1px solid var(--border);
+      flex-wrap:wrap;transition:background 0.2s;
+    }
+    .ai-tool-row:hover{background:rgba(0,229,255,0.03);}
+    .ai-tool-row:last-child{border-bottom:none;}
+    .ai-tool-logo{
+      width:40px;height:40px;border-radius:10px;
+      display:flex;align-items:center;justify-content:center;
+      font-size:1.3rem;flex-shrink:0;
+      background:rgba(0,229,255,0.08);
+      border:1px solid rgba(0,229,255,0.15);
+    }
+    .ai-tool-info{flex:1;min-width:120px;}
+    .ai-tool-info .t{font-weight:600;font-size:0.88rem;}
+    .ai-tool-info .m{font-size:0.72rem;color:var(--muted);margin-top:0.15rem;}
+    .ai-live-badge{
+      font-size:0.6rem;background:rgba(0,230,118,0.1);
+      border:1px solid rgba(0,230,118,0.2);color:var(--green);
+      padding:0.15rem 0.5rem;border-radius:10px;font-weight:700;
+    }
+
   </style>
+  <!-- Firebase SDK -->
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
+    import { getFirestore, collection, addDoc, getDocs, deleteDoc, doc, updateDoc, onSnapshot, orderBy, query, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
+
+    const firebaseConfig = {
+      apiKey: "AIzaSyBzD-TG1A7nD1_pc111nm1z5aCN6lgezPg",
+      authDomain: "hello-pepo.firebaseapp.com",
+      projectId: "hello-pepo",
+      storageBucket: "hello-pepo.firebasestorage.app",
+      messagingSenderId: "1096846509884",
+      appId: "1:1096846509884:web:c35cbe91fd129d9560c039"
+    };
+
+    const fbApp = initializeApp(firebaseConfig);
+    const db = getFirestore(fbApp);
+
+    window._fbDB = db;
+    window._fbModules = { collection, addDoc, getDocs, deleteDoc, doc, updateDoc, onSnapshot, orderBy, query, serverTimestamp };
+    window._fbReady = true;
+    window.dispatchEvent(new Event('fb-ready'));
+  </script>
 </head>
 <body>
 
@@ -1563,6 +1912,71 @@ document.addEventListener('click',(e)=>{
   </div>
   <div class="trending-scroll" id="trendingScroll"></div>
   <div class="scroll-dots" id="scrollDots"></div>
+</div>
+
+  
+<!-- SECTION DIVIDER -->
+<div class="section-divider">
+  <span>✦ AI Tools Hub ✦</span>
+</div>
+
+<!-- AI TOOLS SECTION -->
+<div class="ai-section">
+  <div class="ai-section-header">
+    <div class="ai-section-title">
+      <span class="ai-title-icon">🤖</span> AI Tools Hub
+    </div>
+    <button class="all-ai-btn" onclick="toggleAllAI(this)">
+      <span class="all-ai-dot"></span> All AI Mode
+    </button>
+  </div>
+
+  <!-- Search -->
+  <div class="ai-search-wrap">
+    <input type="text" id="aiSearch" placeholder="🔍 Search AI tools..." oninput="filterAI()"/>
+    <button class="ai-search-btn" onclick="filterAI()">Search</button>
+  </div>
+
+  <!-- Premium Tab Navigation -->
+  <div class="ai-tabs-wrap">
+    <div class="ai-tabs" id="aiTabs">
+      <div class="ai-tab-indicator" id="aiTabIndicator"></div>
+      <button class="ai-tab active" data-cat="All" onclick="setAITab(this,'All')">
+        <span class="tab-icon">🌐</span>
+        <span class="tab-label">All</span>
+        <span class="tab-count" id="tc-all">0</span>
+      </button>
+      <button class="ai-tab" data-cat="Chatbot" onclick="setAITab(this,'Chatbot')">
+        <span class="tab-icon">💬</span>
+        <span class="tab-label">Chatbots</span>
+        <span class="tab-count" id="tc-chatbot">0</span>
+      </button>
+      <button class="ai-tab" data-cat="Image AI" onclick="setAITab(this,'Image AI')">
+        <span class="tab-icon">🎨</span>
+        <span class="tab-label">Image AI</span>
+        <span class="tab-count" id="tc-image">0</span>
+      </button>
+      <button class="ai-tab" data-cat="Video AI" onclick="setAITab(this,'Video AI')">
+        <span class="tab-icon">🎬</span>
+        <span class="tab-label">Video AI</span>
+        <span class="tab-count" id="tc-video">0</span>
+      </button>
+      <button class="ai-tab" data-cat="Coding AI" onclick="setAITab(this,'Coding AI')">
+        <span class="tab-icon">💻</span>
+        <span class="tab-label">Coding</span>
+        <span class="tab-count" id="tc-coding">0</span>
+      </button>
+      <button class="ai-tab" data-cat="Marketing AI" onclick="setAITab(this,'Marketing AI')">
+        <span class="tab-icon">📢</span>
+        <span class="tab-label">Marketing</span>
+        <span class="tab-count" id="tc-marketing">0</span>
+      </button>
+    </div>
+    <div class="ai-tabs-glow"></div>
+  </div>
+
+  <!-- Grid -->
+  <div class="ai-grid" id="aiGrid"></div>
 </div>
 
   <div class="stats-bar" id="statsBar"></div>
@@ -2435,6 +2849,493 @@ const scrollBtn = document.getElementById('scrollTopBtn');
 window.addEventListener('scroll', ()=>{
   scrollBtn.classList.toggle('show', window.scrollY > 400);
 }, {passive:true});
+</script>
+
+
+<script>
+// ===== AI TOOLS DATA =====
+const AI_TOOLS = [
+  {
+    id:1, name:'ChatGPT', category:'Chatbot',
+    logo:'🤖',
+    color:'rgba(16,163,127,0.15)',
+    border:'rgba(16,163,127,0.3)',
+    desc:'OpenAI এর সবচেয়ে popular AI chatbot। লেখা, কোড, analysis সব কিছু করে।',
+    url:'https://chat.openai.com'
+  },
+  {
+    id:2, name:'Gemini', category:'Chatbot',
+    logo:'✨',
+    color:'rgba(66,133,244,0.15)',
+    border:'rgba(66,133,244,0.3)',
+    desc:'Google এর শক্তিশালী AI। multimodal — text, image, code সব বোঝে।',
+    url:'https://gemini.google.com'
+  },
+  {
+    id:3, name:'Claude', category:'Chatbot',
+    logo:'🧠',
+    color:'rgba(207,123,59,0.15)',
+    border:'rgba(207,123,59,0.3)',
+    desc:'Anthropic এর Claude — সবচেয়ে smart ও safe AI assistant।',
+    url:'https://claude.ai'
+  },
+  {
+    id:4, name:'Canva AI', category:'Image AI',
+    logo:'🎨',
+    color:'rgba(0,200,81,0.15)',
+    border:'rgba(0,200,81,0.3)',
+    desc:'Design ও AI image generation এর জন্য সেরা tool। সহজে graphics বানাও।',
+    url:'https://canva.com'
+  },
+  {
+    id:5, name:'Leonardo AI', category:'Image AI',
+    logo:'🖼️',
+    color:'rgba(147,51,234,0.15)',
+    border:'rgba(147,51,234,0.3)',
+    desc:'Professional AI image ও art generation। Game asset, illustration সব বানানো যায়।',
+    url:'https://leonardo.ai'
+  },
+  {
+    id:6, name:'Suno AI', category:'Video AI',
+    logo:'🎵',
+    color:'rgba(236,72,153,0.15)',
+    border:'rgba(236,72,153,0.3)',
+    desc:'Text থেকে music তৈরি করে। যেকোনো genre এর গান বানাও seconds এ।',
+    url:'https://suno.com'
+  },
+  {
+    id:7, name:'GitHub Copilot', category:'Coding AI',
+    logo:'💻',
+    color:'rgba(100,100,100,0.15)',
+    border:'rgba(150,150,150,0.3)',
+    desc:'AI-powered code completion। যেকোনো language এ দ্রুত code লেখো।',
+    url:'https://github.com/features/copilot'
+  },
+  {
+    id:8, name:'Midjourney', category:'Image AI',
+    logo:'🌌',
+    color:'rgba(99,102,241,0.15)',
+    border:'rgba(99,102,241,0.3)',
+    desc:'সবচেয়ে realistic AI image generator। Photorealistic art এর জন্য সেরা।',
+    url:'https://midjourney.com'
+  },
+  {
+    id:9, name:'Copy.ai', category:'Marketing AI',
+    logo:'📢',
+    color:'rgba(245,158,11,0.15)',
+    border:'rgba(245,158,11,0.3)',
+    desc:'Marketing copy, ad text, social media post AI দিয়ে লেখো instantly।',
+    url:'https://copy.ai'
+  },
+  {
+    id:10, name:'Cursor AI', category:'Coding AI',
+    logo:'⚡',
+    color:'rgba(0,229,255,0.15)',
+    border:'rgba(0,229,255,0.3)',
+    desc:'AI-first code editor। পুরো codebase বুঝে suggestion দেয়। VS Code এর মতো।',
+    url:'https://cursor.sh'
+  },
+  {
+    id:11, name:'Runway ML', category:'Video AI',
+    logo:'🎬',
+    color:'rgba(239,68,68,0.15)',
+    border:'rgba(239,68,68,0.3)',
+    desc:'AI video generation ও editing। Text থেকে video বানাও professional quality তে।',
+    url:'https://runwayml.com'
+  },
+  {
+    id:12, name:'Jasper AI', category:'Marketing AI',
+    logo:'🚀',
+    color:'rgba(16,185,129,0.15)',
+    border:'rgba(16,185,129,0.3)',
+    desc:'AI marketing content platform। Blog, email, ad copy সব লেখে automatically।',
+    url:'https://jasper.ai'
+  },
+];
+
+let aiCat = 'All';
+
+function setAICat(cat, btn){
+  aiCat = cat;
+  document.querySelectorAll('.ai-cat').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+  filterAI();
+}
+
+function filterAI(){
+  const search = (document.getElementById('aiSearch')?.value||'').toLowerCase();
+  let list = AI_TOOLS;
+  if(aiCat!=='All') list = list.filter(t=>t.category===aiCat);
+  if(search) list = list.filter(t=>
+    t.name.toLowerCase().includes(search)||
+    t.desc.toLowerCase().includes(search)||
+    t.category.toLowerCase().includes(search)
+  );
+  renderAI(list);
+}
+
+function renderAI(list){
+  const grid = document.getElementById('aiGrid');
+  if(!grid) return;
+
+  if(!list.length){
+    grid.innerHTML='<div style="grid-column:1/-1;text-align:center;padding:3rem;color:var(--muted)"><div style="font-size:2.5rem;margin-bottom:0.8rem">🔍</div><p>কোনো AI tool পাওয়া যায়নি</p></div>';
+    return;
+  }
+
+  grid.innerHTML = list.map((t,i)=>`
+    <div class="ai-card" style="animation-delay:${i*0.05}s;--card-color:${t.color}">
+      <div class="ai-card-head">
+        <div class="ai-logo" style="background:${t.color};border-color:${t.border}">
+          ${t.logo}
+        </div>
+        <div class="ai-card-info">
+          <div class="ai-tool-name">${t.name}</div>
+          <div class="ai-tool-cat">${t.category}</div>
+        </div>
+      </div>
+      <div class="ai-desc">${t.desc}</div>
+      <a class="ai-visit-btn" href="${t.url}" target="_blank" rel="noopener">
+        Visit Tool <span class="arrow">→</span>
+      </a>
+    </div>
+  `).join('');
+}
+
+// Init
+renderAI(AI_TOOLS);
+</script>
+
+
+<script>
+function toggleAllAI(btn){
+  btn.classList.toggle('active');
+  const isActive = btn.classList.contains('active');
+
+  if(isActive){
+    // Show all AI tools, reset filters
+    aiCat = 'All';
+    document.querySelectorAll('.ai-cat').forEach(b=>b.classList.remove('active'));
+    document.querySelector('.ai-cat').classList.add('active');
+    if(document.getElementById('aiSearch')) document.getElementById('aiSearch').value='';
+    renderAI(AI_TOOLS);
+    // Scroll to AI section
+    document.querySelector('.ai-section').scrollIntoView({behavior:'smooth',block:'start'});
+  }
+}
+</script>
+
+
+<!-- AI TOOL EDIT MODAL -->
+<div class="modal-overlay" id="aiEditModal" style="display:none" onclick="if(event.target===this)closeAIModal()">
+  <div class="modal">
+    <h3>✏️ AI Tool Edit করো</h3>
+    <input type="hidden" id="ai-edit-id"/>
+    <div class="ai-form-grid">
+      <div class="fg"><label>Tool Name</label><input type="text" id="ai-edit-name"/></div>
+      <div class="fg"><label>Category</label>
+        <select id="ai-edit-cat">
+          <option value="Chatbot">💬 Chatbot</option>
+          <option value="Image AI">🎨 Image AI</option>
+          <option value="Video AI">🎬 Video AI</option>
+          <option value="Coding AI">💻 Coding AI</option>
+          <option value="Marketing AI">📢 Marketing AI</option>
+        </select>
+      </div>
+      <div class="fg"><label>Logo Emoji</label><input type="text" id="ai-edit-logo"/></div>
+      <div class="fg"><label>Website URL</label><input type="url" id="ai-edit-url"/></div>
+      <div class="fg full"><label>Description</label><textarea id="ai-edit-desc"></textarea></div>
+    </div>
+    <div style="display:flex;gap:0.8rem;margin-top:1.2rem;flex-wrap:wrap">
+      <button class="btn-g" onclick="saveAIEdit()">💾 Save</button>
+      <button class="btn-o" onclick="closeAIModal()">Cancel</button>
+    </div>
+  </div>
+</div>
+
+
+<script>
+// ===== AI TOOLS FIREBASE SYSTEM =====
+
+// Default hardcoded AI tools (shown when Firebase loads)
+const DEFAULT_AI_TOOLS = [
+  {id:'d1',name:'ChatGPT',category:'Chatbot',logo:'🤖',desc:'OpenAI এর সবচেয়ে popular AI chatbot। লেখা, কোড, analysis সব কিছু করে।',url:'https://chat.openai.com',isDefault:true},
+  {id:'d2',name:'Gemini',category:'Chatbot',logo:'✨',desc:'Google এর শক্তিশালী AI। multimodal — text, image, code সব বোঝে।',url:'https://gemini.google.com',isDefault:true},
+  {id:'d3',name:'Claude',category:'Chatbot',logo:'🧠',desc:'Anthropic এর Claude — সবচেয়ে smart ও safe AI assistant।',url:'https://claude.ai',isDefault:true},
+  {id:'d4',name:'Canva AI',category:'Image AI',logo:'🎨',desc:'Design ও AI image generation এর জন্য সেরা tool।',url:'https://canva.com',isDefault:true},
+  {id:'d5',name:'Leonardo AI',category:'Image AI',logo:'🖼️',desc:'Professional AI image ও art generation। Game asset, illustration সব বানানো যায়।',url:'https://leonardo.ai',isDefault:true},
+  {id:'d6',name:'Suno AI',category:'Video AI',logo:'🎵',desc:'Text থেকে music তৈরি করে। যেকোনো genre এর গান বানাও seconds এ।',url:'https://suno.com',isDefault:true},
+  {id:'d7',name:'GitHub Copilot',category:'Coding AI',logo:'💻',desc:'AI-powered code completion। যেকোনো language এ দ্রুত code লেখো।',url:'https://github.com/features/copilot',isDefault:true},
+  {id:'d8',name:'Midjourney',category:'Image AI',logo:'🌌',desc:'সবচেয়ে realistic AI image generator। Photorealistic art এর জন্য সেরা।',url:'https://midjourney.com',isDefault:true},
+  {id:'d9',name:'Copy.ai',category:'Marketing AI',logo:'📢',desc:'Marketing copy, ad text, social media post AI দিয়ে লেখো instantly।',url:'https://copy.ai',isDefault:true},
+  {id:'d10',name:'Cursor AI',category:'Coding AI',logo:'⚡',desc:'AI-first code editor। পুরো codebase বুঝে suggestion দেয়।',url:'https://cursor.sh',isDefault:true},
+  {id:'d11',name:'Runway ML',category:'Video AI',logo:'🎬',desc:'AI video generation ও editing। Text থেকে video বানাও।',url:'https://runwayml.com',isDefault:true},
+  {id:'d12',name:'Jasper AI',category:'Marketing AI',logo:'🚀',desc:'AI marketing content platform। Blog, email, ad copy সব লেখে।',url:'https://jasper.ai',isDefault:true},
+];
+
+let allAITools = [...DEFAULT_AI_TOOLS];
+let aiUnsubscribe = null;
+
+// Load AI tools from Firebase realtime
+function loadAIToolsFromFirebase(){
+  if(!window._fbReady){
+    window.addEventListener('fb-ready', loadAIToolsFromFirebase, {once:true});
+    return;
+  }
+
+  const { collection, onSnapshot, orderBy, query } = window._fbModules;
+  const db = window._fbDB;
+
+  if(aiUnsubscribe) aiUnsubscribe();
+
+  aiUnsubscribe = onSnapshot(
+    query(collection(db,'ai_tools'), orderBy('createdAt','desc')),
+    (snapshot) => {
+      const fbTools = snapshot.docs.map(d=>({id:d.id,...d.data()}));
+      // Merge: defaults first, then Firebase added tools
+      const defaultIds = DEFAULT_AI_TOOLS.map(t=>t.id);
+      allAITools = [...DEFAULT_AI_TOOLS, ...fbTools.filter(t=>!defaultIds.includes(t.id))];
+
+      // Re-render AI section
+      if(typeof renderAI === 'function') renderAI(allAITools);
+      if(typeof filterAI === 'function') filterAI();
+
+      // Update admin list
+      renderAIAdminList(allAITools);
+      document.getElementById('aiToolCount') && (document.getElementById('aiToolCount').textContent = allAITools.length);
+    },
+    (err) => {
+      console.error('AI Firebase error:', err);
+      renderAI(DEFAULT_AI_TOOLS);
+    }
+  );
+}
+
+// Render AI Admin List
+function renderAIAdminList(tools){
+  const list = document.getElementById('aiAdminList');
+  if(!list) return;
+
+  if(!tools.length){
+    list.innerHTML='<div style="padding:2rem;text-align:center;color:var(--muted)">কোনো AI tool নেই</div>';
+    return;
+  }
+
+  list.innerHTML = tools.map(t=>`
+    <div class="ai-tool-row">
+      <div class="ai-tool-logo">${t.logo||'🤖'}</div>
+      <div class="ai-tool-info">
+        <div class="t">${t.name} ${t.isDefault?'<span style="font-size:0.6rem;color:var(--muted);font-weight:400">(default)</span>':''}</div>
+        <div class="m">${t.category} • <a href="${t.url}" target="_blank" style="color:var(--cyan);font-size:0.7rem">${t.url?.substring(0,30)}...</a></div>
+      </div>
+      <div class="app-row-actions">
+        <button class="edit-btn" onclick="openAIEdit('${t.id}')">✏️</button>
+        ${!t.isDefault ? `<button class="del-btn" onclick="deleteAITool('${t.id}','${t.name}')">🗑️</button>` : ''}
+      </div>
+    </div>
+  `).join('');
+}
+
+// Add AI Tool
+async function addAITool(){
+  const name = document.getElementById('ai-name').value.trim();
+  const cat  = document.getElementById('ai-cat-select').value;
+  const logo = document.getElementById('ai-logo').value.trim() || '🤖';
+  const url  = document.getElementById('ai-url').value.trim();
+  const desc = document.getElementById('ai-desc').value.trim();
+
+  if(!name){ showToast('Tool name দাও!','error'); return; }
+  if(!url)  { showToast('Website URL দাও!','error'); return; }
+  if(!desc) { showToast('Description দাও!','error'); return; }
+
+  if(!window._fbReady){ showToast('Firebase ready নয়!','error'); return; }
+
+  const btn = document.getElementById('aiAddBtn');
+  btn.disabled=true; btn.textContent='⏳ Saving...';
+
+  try{
+    const { collection, addDoc, serverTimestamp } = window._fbModules;
+    await addDoc(collection(window._fbDB,'ai_tools'),{
+      name, category:cat, logo, url, desc,
+      createdAt: serverTimestamp()
+    });
+    clearAIForm();
+    showToast('"'+name+'" Firebase এ add হয়েছে! ✅');
+  }catch(e){
+    showToast('Error: '+e.message,'error');
+  }
+  btn.disabled=false; btn.textContent='➕ Add to Firebase';
+}
+
+function clearAIForm(){
+  ['ai-name','ai-logo','ai-url','ai-desc'].forEach(id=>{
+    const el=document.getElementById(id);
+    if(el) el.value='';
+  });
+  const logo = document.getElementById('ai-logo');
+  if(logo) logo.value='🤖';
+}
+
+// Edit AI Tool
+let _editingAI = null;
+function openAIEdit(id){
+  const tool = allAITools.find(t=>t.id===id);
+  if(!tool) return;
+  _editingAI = tool;
+  document.getElementById('ai-edit-id').value = id;
+  document.getElementById('ai-edit-name').value = tool.name;
+  document.getElementById('ai-edit-cat').value = tool.category;
+  document.getElementById('ai-edit-logo').value = tool.logo||'🤖';
+  document.getElementById('ai-edit-url').value = tool.url;
+  document.getElementById('ai-edit-desc').value = tool.desc;
+  document.getElementById('aiEditModal').style.display='flex';
+}
+function closeAIModal(){ document.getElementById('aiEditModal').style.display='none'; _editingAI=null; }
+
+async function saveAIEdit(){
+  const id   = document.getElementById('ai-edit-id').value;
+  const name = document.getElementById('ai-edit-name').value.trim();
+  if(!name){ showToast('Tool name দাও!','error'); return; }
+
+  const updated = {
+    name,
+    category: document.getElementById('ai-edit-cat').value,
+    logo: document.getElementById('ai-edit-logo').value.trim()||'🤖',
+    url: document.getElementById('ai-edit-url').value.trim(),
+    desc: document.getElementById('ai-edit-desc').value.trim(),
+  };
+
+  if(_editingAI?.isDefault){
+    // For default tools — update locally only
+    const idx = allAITools.findIndex(t=>t.id===id);
+    if(idx>-1) allAITools[idx]={...allAITools[idx],...updated};
+    renderAI(allAITools);
+    renderAIAdminList(allAITools);
+    showToast('"'+name+'" updated! ✅');
+  } else if(window._fbReady){
+    const { doc, updateDoc } = window._fbModules;
+    await updateDoc(doc(window._fbDB,'ai_tools',id), updated);
+    showToast('"'+name+'" Firebase এ update হয়েছে! ✅');
+  }
+  closeAIModal();
+}
+
+// Delete AI Tool
+async function deleteAITool(id, name){
+  if(!confirm('"'+name+'" delete করবে?')) return;
+  if(!window._fbReady){ showToast('Firebase ready নয়!','error'); return; }
+  const { doc, deleteDoc } = window._fbModules;
+  await deleteDoc(doc(window._fbDB,'ai_tools',id));
+  showToast('"'+name+'" deleted!');
+}
+
+// Init Firebase AI Tools
+window.addEventListener('fb-ready', loadAIToolsFromFirebase);
+loadAIToolsFromFirebase();
+</script>
+
+
+<script>
+// ===== PREMIUM AI TABS =====
+function setAITab(btn, cat){
+  // Update active state
+  document.querySelectorAll('.ai-tab').forEach(t=>t.classList.remove('active'));
+  btn.classList.add('active');
+  aiCat = cat;
+
+  // Move sliding indicator
+  moveTabIndicator(btn);
+
+  // Filter with animation
+  filterAIAnimated();
+}
+
+function moveTabIndicator(activeTab){
+  const indicator = document.getElementById('aiTabIndicator');
+  const tabs = document.getElementById('aiTabs');
+  if(!indicator || !activeTab || !tabs) return;
+
+  const tabRect = activeTab.getBoundingClientRect();
+  const tabsRect = tabs.getBoundingClientRect();
+  const scrollLeft = tabs.scrollLeft;
+
+  indicator.style.width = activeTab.offsetWidth + 'px';
+  indicator.style.left = (activeTab.offsetLeft) + 'px';
+
+  // Scroll tab into view on mobile
+  const tabLeft = activeTab.offsetLeft;
+  const tabRight = tabLeft + activeTab.offsetWidth;
+  const visibleLeft = tabs.scrollLeft;
+  const visibleRight = visibleLeft + tabs.offsetWidth;
+
+  if(tabLeft < visibleLeft + 20){
+    tabs.scrollTo({left: tabLeft - 10, behavior:'smooth'});
+  } else if(tabRight > visibleRight - 20){
+    tabs.scrollTo({left: tabRight - tabs.offsetWidth + 10, behavior:'smooth'});
+  }
+}
+
+function filterAIAnimated(){
+  const grid = document.getElementById('aiGrid');
+  if(!grid) return;
+
+  // Fade out
+  grid.style.opacity = '0';
+  grid.style.transform = 'translateY(8px)';
+  grid.style.transition = 'all 0.15s ease';
+
+  setTimeout(()=>{
+    filterAI();
+    // Fade in
+    grid.style.opacity = '1';
+    grid.style.transform = 'translateY(0)';
+  }, 150);
+}
+
+function updateTabCounts(tools){
+  const counts = {
+    'all': tools.length,
+    'chatbot': tools.filter(t=>t.category==='Chatbot').length,
+    'image': tools.filter(t=>t.category==='Image AI').length,
+    'video': tools.filter(t=>t.category==='Video AI').length,
+    'coding': tools.filter(t=>t.category==='Coding AI').length,
+    'marketing': tools.filter(t=>t.category==='Marketing AI').length,
+  };
+  Object.entries(counts).forEach(([k,v])=>{
+    const el = document.getElementById('tc-'+k);
+    if(el) el.textContent = v;
+  });
+}
+
+// Override setAICat to use new tab system
+const _origSetAICat = window.setAICat;
+window.setAICat = function(cat, btn){
+  aiCat = cat;
+  filterAI();
+};
+
+// Override renderAI to also update counts
+const _baseRenderAI = window.renderAI;
+window.renderAI = function(tools){
+  _baseRenderAI && _baseRenderAI(tools);
+  updateTabCounts(tools || window.allAITools || []);
+};
+
+// Init indicator position on load
+window.addEventListener('load', ()=>{
+  setTimeout(()=>{
+    const firstTab = document.querySelector('.ai-tab.active');
+    if(firstTab) moveTabIndicator(firstTab);
+  }, 300);
+});
+
+// Also init after AI tools load
+window.addEventListener('fb-ready', ()=>{
+  setTimeout(()=>{
+    const firstTab = document.querySelector('.ai-tab.active');
+    if(firstTab) moveTabIndicator(firstTab);
+  }, 800);
+});
 </script>
 
 </body>

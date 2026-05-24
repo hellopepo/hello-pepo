@@ -1212,6 +1212,33 @@
     }
     .app-modal-dl-btn:hover{transform:translateY(-2px);box-shadow:0 12px 35px rgba(0,230,118,0.45);}
     .app-modal-dl-btn:active{transform:scale(0.98);}
+
+    /* ===== REVIEW & RATING CSS ===== */
+    .modal-rating-wrap{margin-bottom:1.2rem;padding:1rem;background:rgba(255,255,255,0.03);border-radius:12px;border:1px solid rgba(255,255,255,0.06);text-align:center;}
+    .modal-rating-title{font-size:0.82rem;color:var(--muted);margin-bottom:0.6rem;font-weight:600;}
+    .modal-stars{display:flex;justify-content:center;gap:0.4rem;margin-bottom:0.4rem;}
+    .star{font-size:1.8rem;color:rgba(255,255,255,0.15);cursor:pointer;transition:all 0.2s cubic-bezier(0.34,1.56,0.64,1);line-height:1;}
+    .star.active,.star:hover{color:#f59e0b;transform:scale(1.2);filter:drop-shadow(0 0 6px rgba(245,158,11,0.6));}
+    .modal-rating-avg{font-size:0.78rem;color:var(--muted);}
+    .modal-rating-avg b{color:#f59e0b;}
+    .modal-review-wrap{margin-bottom:1.2rem;}
+    .modal-review-title{font-size:0.85rem;font-weight:700;color:var(--text);margin-bottom:0.6rem;}
+    .modal-review-input-row{display:flex;gap:0.5rem;margin-bottom:0.75rem;}
+    .modal-review-input-row input{flex:1;background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);color:var(--text);padding:0.55rem 0.85rem;border-radius:10px;font-family:"DM Sans",sans-serif;font-size:0.82rem;outline:none;transition:border-color 0.2s;}
+    .modal-review-input-row input:focus{border-color:rgba(0,230,118,0.4);}
+    .modal-review-input-row button{background:linear-gradient(135deg,var(--green),var(--green2));color:#000;font-weight:700;border:none;padding:0.55rem 1rem;border-radius:10px;cursor:pointer;font-family:"DM Sans",sans-serif;font-size:0.82rem;white-space:nowrap;transition:all 0.2s;}
+    .modal-review-input-row button:hover{transform:scale(1.05);}
+    .modal-reviews-list{display:flex;flex-direction:column;gap:0.5rem;max-height:160px;overflow-y:auto;}
+    .modal-reviews-list::-webkit-scrollbar{width:3px;}
+    .modal-reviews-list::-webkit-scrollbar-thumb{background:rgba(0,230,118,0.3);border-radius:2px;}
+    .review-item{background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.06);border-radius:10px;padding:0.6rem 0.85rem;display:flex;gap:0.6rem;align-items:flex-start;}
+    .review-avatar{width:28px;height:28px;border-radius:50%;flex-shrink:0;background:linear-gradient(135deg,var(--green),var(--cyan));display:flex;align-items:center;justify-content:center;font-size:0.75rem;font-weight:700;color:#000;}
+    .review-text{font-size:0.78rem;color:#9aa5be;line-height:1.4;}
+    .review-time{font-size:0.65rem;color:var(--muted);margin-top:0.2rem;}
+    .no-reviews{text-align:center;color:var(--muted);font-size:0.78rem;padding:1rem 0;}
+    .modal-site-promo{text-align:center;margin-top:0.85rem;font-size:0.78rem;color:var(--muted);line-height:1.6;padding:0.75rem;background:rgba(0,230,118,0.04);border-radius:10px;border:1px solid rgba(0,230,118,0.1);}
+    .modal-site-promo a{color:var(--green);text-decoration:none;font-weight:600;}
+    .modal-site-promo a:hover{text-decoration:underline;}
     }
 
 
@@ -1761,6 +1788,223 @@
     .sport-tab{background:var(--surface);border:1px solid var(--border);color:var(--muted);padding:0.5rem 1.2rem;border-radius:25px;font-weight:600;font-family:'DM Sans',sans-serif;font-size:0.85rem;cursor:pointer;transition:all 0.2s;display:flex;align-items:center;gap:0.4rem;}
     .sport-tab.active{background:rgba(0,230,118,0.1);border-color:var(--green);color:var(--green);}
     .sport-tab:hover:not(.active){border-color:var(--muted);color:var(--text);}
+    .fifa-tab-btn,.sport-tab.fifa-tab{
+      background:linear-gradient(135deg,rgba(255,215,0,0.08),rgba(0,229,255,0.06));
+      border-color:rgba(255,215,0,0.25);color:#ffd700;
+    }
+    .sport-tab.fifa-tab.active{
+      background:linear-gradient(135deg,rgba(255,215,0,0.15),rgba(0,229,255,0.1));
+      border-color:#ffd700;color:#ffd700;
+      box-shadow:0 0 20px rgba(255,215,0,0.15);
+    }
+
+    /* ===== FIFA WORLD CUP CSS ===== */
+
+    /* Hero */
+    .fifa-hero{
+      position:relative;border-radius:20px;overflow:hidden;
+      margin-bottom:1.5rem;
+      border:1px solid rgba(255,215,0,0.2);
+      min-height:200px;
+    }
+    .fifa-hero-bg{
+      position:absolute;inset:0;
+      background:
+        radial-gradient(ellipse 80% 60% at 50% 0%,rgba(255,215,0,0.12),transparent 70%),
+        radial-gradient(ellipse 60% 50% at 0% 100%,rgba(0,229,255,0.08),transparent 60%),
+        radial-gradient(ellipse 60% 50% at 100% 100%,rgba(0,230,118,0.06),transparent 60%),
+        linear-gradient(135deg,#0d1522,#111827);
+      animation:fifaBgPulse 4s ease-in-out infinite alternate;
+    }
+    @keyframes fifaBgPulse{
+      0%{opacity:0.8;}100%{opacity:1;}
+    }
+    /* Animated grid lines */
+    .fifa-hero-bg::after{
+      content:'';position:absolute;inset:0;
+      background-image:linear-gradient(rgba(255,215,0,0.04) 1px,transparent 1px),
+        linear-gradient(90deg,rgba(255,215,0,0.04) 1px,transparent 1px);
+      background-size:30px 30px;
+    }
+    .fifa-hero-content{
+      position:relative;z-index:1;
+      display:flex;flex-direction:column;align-items:center;
+      padding:2rem 1.5rem;text-align:center;
+    }
+    .fifa-trophy{
+      font-size:3rem;margin-bottom:0.5rem;
+      animation:trophyBounce 2s ease-in-out infinite;
+      filter:drop-shadow(0 0 20px rgba(255,215,0,0.5));
+    }
+    @keyframes trophyBounce{
+      0%,100%{transform:translateY(0) scale(1);}
+      50%{transform:translateY(-6px) scale(1.05);}
+    }
+    .fifa-hero-title{
+      font-family:'Syne',sans-serif;font-weight:800;
+      font-size:clamp(1.4rem,4vw,2.2rem);
+      background:linear-gradient(135deg,#ffd700,#fff,#00e5ff);
+      -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+      margin-bottom:0.25rem;
+    }
+    .fifa-hero-sub{color:var(--muted);font-size:0.9rem;margin-bottom:1.25rem;}
+    .fifa-countdown-label{color:rgba(255,215,0,0.7);font-size:0.72rem;font-weight:700;text-transform:uppercase;letter-spacing:1px;margin-bottom:0.6rem;}
+    .fifa-countdown{display:flex;align-items:center;gap:0.5rem;}
+    .cd-unit{text-align:center;min-width:52px;}
+    .cd-num{
+      font-family:'Syne',sans-serif;font-weight:800;font-size:1.8rem;line-height:1;
+      background:linear-gradient(135deg,#ffd700,#fff);
+      -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+      background:#0d1522;border:1px solid rgba(255,215,0,0.25);border-radius:10px;
+      padding:0.3rem 0.5rem;min-width:52px;text-align:center;
+      color:#ffd700;-webkit-text-fill-color:#ffd700;
+      box-shadow:0 0 15px rgba(255,215,0,0.1);
+    }
+    .cd-lbl{font-size:0.62rem;color:var(--muted);margin-top:0.3rem;text-transform:uppercase;letter-spacing:0.5px;}
+    .cd-sep{font-size:1.5rem;font-weight:800;color:rgba(255,215,0,0.5);animation:sepBlink 1s step-end infinite;}
+    @keyframes sepBlink{0%,100%{opacity:1;}50%{opacity:0.2;}}
+
+    /* FIFA Sub Tabs */
+    .fifa-tabs{
+      display:flex;gap:0.5rem;overflow-x:auto;scrollbar-width:none;
+      padding:0 0 0.75rem;margin-bottom:1.25rem;
+      border-bottom:1px solid var(--border);
+    }
+    .fifa-tabs::-webkit-scrollbar{display:none;}
+    .fifa-tab{
+      background:var(--surface);border:1px solid var(--border);
+      color:var(--muted);padding:0.45rem 1rem;border-radius:20px;
+      font-family:'DM Sans',sans-serif;font-size:0.82rem;font-weight:600;
+      cursor:pointer;transition:all 0.2s;white-space:nowrap;
+    }
+    .fifa-tab.active{
+      background:rgba(255,215,0,0.1);border-color:rgba(255,215,0,0.4);
+      color:#ffd700;box-shadow:0 0 15px rgba(255,215,0,0.1);
+    }
+    .fifa-tab:hover:not(.active){border-color:var(--muted);color:var(--text);}
+
+    /* Tab content */
+    .fifa-tab-content{display:none;}
+    .fifa-tab-content.active{display:block;animation:fadeUp 0.3s ease;}
+    .fifa-section-title{
+      font-family:'Syne',sans-serif;font-weight:700;font-size:1rem;
+      color:var(--text);margin-bottom:1rem;padding-bottom:0.5rem;
+      border-bottom:1px solid var(--border);
+      display:flex;align-items:center;gap:0.5rem;
+    }
+
+    /* Match cards */
+    .fifa-matches{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:1rem;}
+    .fifa-match-card{
+      background:var(--surface);border:1px solid var(--border);border-radius:16px;
+      padding:1.1rem;position:relative;overflow:hidden;
+      transition:all 0.3s cubic-bezier(0.34,1.56,0.64,1);
+      animation:cardIn 0.4s ease both;
+    }
+    @keyframes cardIn{from{opacity:0;transform:translateY(16px);}to{opacity:1;transform:translateY(0);}}
+    .fifa-match-card:hover{transform:translateY(-3px);border-color:rgba(255,215,0,0.25);box-shadow:0 12px 35px rgba(0,0,0,0.4),0 0 20px rgba(255,215,0,0.08);}
+    .fifa-match-card.live-card{border-color:rgba(255,45,85,0.3);animation:cardIn 0.4s ease both,livePulse 2s ease-in-out infinite;}
+    @keyframes livePulse{0%,100%{box-shadow:0 0 0 0 rgba(255,45,85,0.2);}50%{box-shadow:0 0 0 6px rgba(255,45,85,0);}}
+    .fmc-status{
+      font-size:0.65rem;font-weight:700;letter-spacing:0.8px;text-transform:uppercase;
+      margin-bottom:0.75rem;display:flex;align-items:center;gap:0.4rem;
+    }
+    .fmc-live{color:#ff2d55;}.fmc-live::before{content:'';width:6px;height:6px;border-radius:50%;background:#ff2d55;display:inline-block;animation:pulse 1s infinite;}
+    .fmc-finished{color:var(--muted);}
+    .fmc-upcoming{color:var(--cyan);}
+    .fmc-group{margin-left:auto;font-size:0.65rem;color:var(--muted);background:var(--surface2);padding:0.15rem 0.5rem;border-radius:6px;}
+
+    .fmc-teams{display:flex;align-items:center;justify-content:space-between;gap:0.5rem;}
+    .fmc-team{display:flex;flex-direction:column;align-items:center;gap:0.35rem;flex:1;}
+    .fmc-flag{font-size:2rem;line-height:1;}
+    .fmc-name{font-size:0.75rem;font-weight:600;color:var(--text);text-align:center;}
+    .fmc-score{
+      font-family:'Syne',sans-serif;font-weight:800;font-size:1.6rem;
+      color:#ffd700;min-width:40px;text-align:center;
+      text-shadow:0 0 15px rgba(255,215,0,0.4);
+    }
+    .fmc-vs{font-size:0.75rem;color:var(--muted);font-weight:600;}
+    .fmc-divider{display:flex;flex-direction:column;align-items:center;gap:0.2rem;}
+    .fmc-time{font-size:0.7rem;color:var(--cyan);margin-top:0.6rem;text-align:center;}
+    .fmc-venue{font-size:0.65rem;color:var(--muted);text-align:center;margin-top:0.2rem;}
+
+    /* Standings table */
+    .fifa-group-block{margin-bottom:1.5rem;}
+    .fifa-group-title{
+      font-family:'Syne',sans-serif;font-weight:700;font-size:0.88rem;
+      color:#ffd700;margin-bottom:0.6rem;
+      display:flex;align-items:center;gap:0.5rem;
+    }
+    .standings-table{width:100%;border-collapse:collapse;font-size:0.78rem;}
+    .standings-table th{
+      color:var(--muted);font-weight:600;padding:0.4rem 0.5rem;
+      text-align:center;border-bottom:1px solid var(--border);font-size:0.7rem;text-transform:uppercase;letter-spacing:0.5px;
+    }
+    .standings-table th:first-child,.standings-table td:first-child{text-align:left;}
+    .standings-table td{padding:0.5rem;text-align:center;border-bottom:1px solid rgba(255,255,255,0.04);}
+    .standings-table tr:hover td{background:rgba(255,255,255,0.03);}
+    .std-team{display:flex;align-items:center;gap:0.5rem;}
+    .std-flag{font-size:1.1rem;}
+    .std-name{font-weight:500;color:var(--text);}
+    .std-pts{font-weight:700;color:#ffd700;}
+    .std-rank{font-size:0.7rem;color:var(--muted);width:16px;text-align:center;}
+    .qualified{background:rgba(0,230,118,0.04);}
+    .qualified .std-pts{color:var(--green);}
+
+    /* Top Scorers */
+    .scorer-row{
+      display:flex;align-items:center;gap:0.85rem;
+      background:var(--surface);border:1px solid var(--border);border-radius:12px;
+      padding:0.85rem 1rem;margin-bottom:0.6rem;
+      transition:all 0.25s;
+    }
+    .scorer-row:hover{transform:translateX(4px);border-color:rgba(255,215,0,0.2);}
+    .scorer-rank{
+      font-family:'Syne',sans-serif;font-weight:800;font-size:1rem;
+      min-width:24px;text-align:center;
+    }
+    .scorer-rank.gold{color:#ffd700;filter:drop-shadow(0 0 6px rgba(255,215,0,0.5));}
+    .scorer-rank.silver{color:#c0c0c0;}
+    .scorer-rank.bronze{color:#cd7f32;}
+    .scorer-rank.other{color:var(--muted);}
+    .scorer-flag{font-size:1.5rem;}
+    .scorer-info{flex:1;}
+    .scorer-name{font-weight:700;font-size:0.9rem;}
+    .scorer-country{font-size:0.72rem;color:var(--muted);margin-top:0.1rem;}
+    .scorer-goals{
+      font-family:'Syne',sans-serif;font-weight:800;font-size:1.3rem;color:#ffd700;
+      display:flex;flex-direction:column;align-items:center;
+    }
+    .scorer-goals span{font-size:0.6rem;color:var(--muted);font-weight:500;font-family:'DM Sans',sans-serif;}
+
+    /* Fixtures */
+    .fixture-row{
+      display:flex;align-items:center;gap:0.75rem;
+      background:var(--surface);border:1px solid var(--border);border-radius:12px;
+      padding:0.85rem 1rem;margin-bottom:0.6rem;
+      transition:all 0.25s;
+    }
+    .fixture-row:hover{border-color:rgba(0,229,255,0.2);box-shadow:0 4px 15px rgba(0,0,0,0.3);}
+    .fixture-date{
+      background:rgba(0,229,255,0.08);border:1px solid rgba(0,229,255,0.15);
+      border-radius:10px;padding:0.4rem 0.6rem;text-align:center;min-width:52px;flex-shrink:0;
+    }
+    .fixture-day{font-size:1rem;font-weight:800;font-family:'Syne',sans-serif;color:var(--cyan);}
+    .fixture-mon{font-size:0.62rem;color:var(--muted);text-transform:uppercase;letter-spacing:0.5px;}
+    .fixture-teams{flex:1;}
+    .fixture-matchup{font-weight:600;font-size:0.88rem;display:flex;align-items:center;gap:0.4rem;}
+    .fixture-meta{font-size:0.7rem;color:var(--muted);margin-top:0.2rem;}
+    .fixture-time{
+      font-size:0.75rem;font-weight:600;color:var(--cyan);
+      background:rgba(0,229,255,0.08);padding:0.25rem 0.5rem;
+      border-radius:6px;white-space:nowrap;
+    }
+
+    @media(max-width:480px){
+      .fifa-matches{grid-template-columns:1fr;}
+      .cd-num{font-size:1.3rem;min-width:42px;}
+      .fifa-countdown{gap:0.3rem;}
+    }
 
     /* Section title */
     .sports-section-title{display:flex;align-items:center;gap:0.6rem;font-family:'Syne',sans-serif;font-weight:700;font-size:1rem;color:var(--text);margin-bottom:1rem;padding-bottom:0.5rem;border-bottom:1px solid var(--border);}
@@ -2073,6 +2317,187 @@
     .tv-card .feat-live-dot{color:#ff2d55;}.tv-card .fd{background:#ff2d55;}
     .tg-card .feat-live-dot{color:#29b6f6;}.tg-card .fd{background:#29b6f6;}
 
+    /* ===== APPS & MODS CARD ===== */
+    .feat-card.apps-mod-card{
+      background:linear-gradient(135deg,rgba(0,230,118,0.06),rgba(0,229,255,0.04));
+      border:1px solid rgba(0,230,118,0.18);
+      position:relative;overflow:hidden;
+    }
+    /* Glassmorphism shimmer layer */
+    .feat-card.apps-mod-card::before{
+      content:'';position:absolute;inset:0;border-radius:inherit;
+      background:linear-gradient(135deg,
+        rgba(0,230,118,0.12) 0%,
+        rgba(0,229,255,0.06) 50%,
+        transparent 100%);
+      opacity:0;transition:opacity 0.4s;
+    }
+    .feat-card.apps-mod-card::after{background:rgba(0,230,118,0.15);}
+    .feat-card.apps-mod-card:hover{
+      box-shadow:
+        0 24px 60px rgba(0,230,118,0.15),
+        0 0 0 1px rgba(0,230,118,0.3),
+        0 0 50px rgba(0,230,118,0.08);
+      border-color:rgba(0,230,118,0.4);
+    }
+    .feat-card.apps-mod-card:hover::before{opacity:1;}
+
+    /* Animated scan line */
+    .feat-card.apps-mod-card .feat-card-inner::after{
+      content:'';
+      position:absolute;left:0;right:0;height:1px;
+      background:linear-gradient(90deg,transparent,rgba(0,230,118,0.4),transparent);
+      top:-100%;
+      animation:scanLine 3s ease-in-out infinite;
+      pointer-events:none;
+    }
+    @keyframes scanLine{
+      0%{top:-100%;opacity:0;}
+      30%{opacity:1;}
+      100%{top:200%;opacity:0;}
+    }
+
+    .apps-mod-icon-wrap{
+      background:linear-gradient(135deg,rgba(0,230,118,0.15),rgba(0,229,255,0.08))!important;
+      border-color:rgba(0,230,118,0.25)!important;
+      position:relative;
+    }
+    .apps-mod-icon-wrap::after{
+      content:'';position:absolute;inset:-3px;border-radius:inherit;
+      border:1px solid rgba(0,230,118,0.2);
+      animation:iconRing 2s ease-in-out infinite;
+    }
+    @keyframes iconRing{
+      0%,100%{transform:scale(1);opacity:0.5;}
+      50%{transform:scale(1.08);opacity:1;}
+    }
+
+    .apps-mod-live-dot{color:var(--green)!important;}
+    .apps-mod-fd{background:var(--green)!important;}
+
+    .apps-mod-title{
+      background:linear-gradient(135deg,var(--green),var(--cyan));
+      -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+      background-clip:text;
+    }
+
+    .apps-mod-cta{
+      background:linear-gradient(135deg,rgba(0,230,118,0.12),rgba(0,229,255,0.08))!important;
+      color:var(--green)!important;
+      border:1px solid rgba(0,230,118,0.25)!important;
+      transition:all 0.3s!important;
+    }
+    .feat-card.apps-mod-card:hover .apps-mod-cta{
+      background:linear-gradient(135deg,var(--green),var(--cyan))!important;
+      color:#000!important;border-color:transparent!important;
+      box-shadow:0 4px 20px rgba(0,230,118,0.35)!important;
+    }
+
+    /* Updated Daily badge */
+    .apps-mod-badge{
+      display:inline-flex;align-items:center;gap:0.3rem;
+      background:rgba(0,230,118,0.1);border:1px solid rgba(0,230,118,0.2);
+      color:var(--green);font-size:0.62rem;font-weight:700;
+      padding:0.18rem 0.55rem;border-radius:20px;
+      letter-spacing:0.5px;text-transform:uppercase;
+      margin-bottom:0.5rem;width:fit-content;
+    }
+    .apps-mod-badge-dot{
+      width:5px;height:5px;border-radius:50%;background:var(--green);
+      animation:badgePulse 1.5s ease-in-out infinite;
+    }
+    @keyframes badgePulse{0%,100%{opacity:1;transform:scale(1);}50%{opacity:0.4;transform:scale(1.4);}}
+
+    /* App count chip */
+    .apps-mod-count{
+      font-size:0.72rem;color:var(--muted);margin-top:0.35rem;
+      display:flex;align-items:center;gap:0.35rem;
+    }
+    .apps-mod-count b{color:var(--green);font-weight:700;}
+
+    /* ===== AI HUB CARD ===== */
+    .feat-card.ai-hub-card{
+      background:linear-gradient(135deg,rgba(168,85,247,0.08),rgba(0,229,255,0.05));
+      border:1px solid rgba(168,85,247,0.2);
+      position:relative;overflow:hidden;
+    }
+    .feat-card.ai-hub-card::before{
+      content:'';position:absolute;inset:0;border-radius:inherit;
+      background:linear-gradient(135deg,rgba(168,85,247,0.15),rgba(0,229,255,0.08),transparent);
+      opacity:0;transition:opacity 0.4s;
+    }
+    .feat-card.ai-hub-card::after{background:rgba(168,85,247,0.18);}
+    .feat-card.ai-hub-card:hover{
+      box-shadow:0 24px 60px rgba(168,85,247,0.2),0 0 0 1px rgba(168,85,247,0.35),0 0 40px rgba(168,85,247,0.1);
+      border-color:rgba(168,85,247,0.4);
+    }
+    .feat-card.ai-hub-card:hover::before{opacity:1;}
+
+    /* AI card animated glow orb */
+    .feat-card.ai-hub-card .feat-card-inner::before{
+      content:'';
+      position:absolute;top:-30px;right:-30px;
+      width:100px;height:100px;border-radius:50%;
+      background:radial-gradient(circle,rgba(168,85,247,0.35),transparent);
+      filter:blur(20px);
+      animation:aiOrb 3s ease-in-out infinite alternate;
+      pointer-events:none;
+    }
+    @keyframes aiOrb{
+      0%{transform:translate(0,0) scale(1);opacity:0.5;}
+      100%{transform:translate(-10px,10px) scale(1.2);opacity:0.9;}
+    }
+
+    .ai-live-dot{color:#a855f7!important;}
+    .ai-fd{background:#a855f7!important;}
+    .ai-icon-wrap{
+      background:linear-gradient(135deg,rgba(168,85,247,0.2),rgba(0,229,255,0.12))!important;
+      border-color:rgba(168,85,247,0.3)!important;
+      animation:aiIconPulse 2s ease-in-out infinite alternate;
+    }
+    @keyframes aiIconPulse{
+      0%{box-shadow:0 0 0 0 rgba(168,85,247,0);}
+      100%{box-shadow:0 0 20px 4px rgba(168,85,247,0.3);}
+    }
+    .ai-hub-title{
+      background:linear-gradient(135deg,#a855f7,#00e5ff);
+      -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+      background-clip:text;
+    }
+    .ai-hub-cta{
+      background:linear-gradient(135deg,rgba(168,85,247,0.15),rgba(0,229,255,0.1))!important;
+      color:#c084fc!important;
+      border:1px solid rgba(168,85,247,0.3)!important;
+      transition:all 0.3s!important;
+    }
+    .feat-card.ai-hub-card:hover .ai-hub-cta{
+      background:linear-gradient(135deg,#a855f7,#00e5ff)!important;
+      color:#000!important;
+      border-color:transparent!important;
+    }
+
+    /* Equal height cards fix */
+    .featured-cards{align-items:stretch!important;}
+    .feat-card{display:flex;flex-direction:column;}
+    .feat-card-inner{display:flex;flex-direction:column;flex:1;height:100%;}
+    .feat-desc{flex:1;}
+
+    /* Categories above quick access */
+    .featured-section .categories{
+      margin:0 0 1rem 0;
+      padding:0 0.2rem;
+      justify-content:flex-start;
+      gap:0.5rem;
+    }
+    @media(max-width:768px){
+      .featured-section .categories{
+        overflow-x:auto;flex-wrap:nowrap;
+        padding-bottom:0.25rem;
+        scrollbar-width:none;
+      }
+      .featured-section .categories::-webkit-scrollbar{display:none;}
+    }
+
     /* Mobile */
     @media(max-width:640px){
       .featured-cards{grid-template-columns:1fr;gap:0.9rem;}
@@ -2221,6 +2646,16 @@ document.addEventListener('click',(e)=>{
   <!-- ===== PREMIUM FEATURED SECTION ===== -->
   <div class="featured-section">
     <div class="featured-label">Quick Access</div>
+
+    <!-- Category filter buttons ABOVE cards -->
+    <div class="categories" id="catBtns">
+      <button class="cat-btn active" onclick="setCat('All',this)">🌐 All</button>
+      <button class="cat-btn" onclick="setCat('Game APK',this)">🎮 Game APK</button>
+      <button class="cat-btn" onclick="setCat('App',this)">📱 App</button>
+      <button class="cat-btn" onclick="setCat('Mod',this)">🔧 Mod</button>
+      <button class="cat-btn" onclick="setCat('Other',this)">📦 Other</button>
+    </div>
+
     <div class="featured-cards">
 
       <!-- Live Sports -->
@@ -2245,6 +2680,30 @@ document.addEventListener('click',(e)=>{
         </div>
       </div>
 
+      <!-- AI Tools Hub — NEW card above Telegram -->
+      <div class="feat-card ai-hub-card" onclick="document.getElementById('aiToolsSection').scrollIntoView({behavior:'smooth'})">
+        <div class="feat-card-inner">
+          <div class="feat-live-dot ai-live-dot"><span class="fd ai-fd"></span> New</div>
+          <div class="feat-icon-wrap ai-icon-wrap">🤖</div>
+          <div class="feat-title ai-hub-title">AI Tools Hub</div>
+          <div class="feat-desc">ChatGPT, Gemini, Claude & more — all in one place</div>
+          <button class="feat-cta ai-hub-cta">Explore AI →</button>
+        </div>
+      </div>
+
+      <!-- Apps & Mods -->
+      <div class="feat-card apps-mod-card" onclick="document.getElementById('grid').scrollIntoView({behavior:'smooth'})">
+        <div class="feat-card-inner">
+          <div class="feat-live-dot apps-mod-live-dot"><span class="fd apps-mod-fd"></span> Updated Daily</div>
+          <div class="feat-icon-wrap apps-mod-icon-wrap">📦</div>
+          <div class="apps-mod-badge"><span class="apps-mod-badge-dot"></span>Updated Daily</div>
+          <div class="feat-title apps-mod-title">Apps & Mods</div>
+          <div class="feat-desc">Latest apps, mods & premium tools — all free to download</div>
+          <div class="apps-mod-count">📱 <b id="appsModCount">0</b> apps available</div>
+          <button class="feat-cta apps-mod-cta">Browse Apps →</button>
+        </div>
+      </div>
+
       <!-- Telegram -->
       <div class="feat-card tg-card" onclick="window.open('https://t.me/AraFaaaah','_blank')">
         <div class="feat-card-inner">
@@ -2259,13 +2718,6 @@ document.addEventListener('click',(e)=>{
     </div>
   </div>
   <!-- ===== END FEATURED SECTION ===== -->
-  <div class="categories">
-    <button class="cat-btn active" onclick="setCat('All',this)">🌐 All</button>
-    <button class="cat-btn" onclick="setCat('Game APK',this)">🎮 Game APK</button>
-    <button class="cat-btn" onclick="setCat('App',this)">📱 App</button>
-    <button class="cat-btn" onclick="setCat('Mod',this)">🔧 Mod</button>
-    <button class="cat-btn" onclick="setCat('Other',this)">📦 Other</button>
-  </div>
   
 <!-- APP DETAIL MODAL -->
 <div class="app-modal-overlay" id="appDetailModal" onclick="if(event.target===this)closeAppModal()">
@@ -2284,18 +2736,44 @@ document.addEventListener('click',(e)=>{
       </div>
     </div>
     <div class="app-modal-desc" id="modalDesc"></div>
-    <button class="app-modal-dl-btn" id="modalDlBtn">⬇️ Download APK</button>
+    <div class="app-modal-desc" id="modalDesc2" style="display:none"></div>
+
+    <!-- Rating Stars -->
+    <div class="modal-rating-wrap">
+      <div class="modal-rating-title">⭐ এই App rate করো</div>
+      <div class="modal-stars" id="modalStars">
+        <span class="star" onclick="rateApp(1)">★</span>
+        <span class="star" onclick="rateApp(2)">★</span>
+        <span class="star" onclick="rateApp(3)">★</span>
+        <span class="star" onclick="rateApp(4)">★</span>
+        <span class="star" onclick="rateApp(5)">★</span>
+      </div>
+      <div class="modal-rating-avg" id="modalRatingAvg"></div>
+    </div>
+
+    <!-- User Reviews -->
+    <div class="modal-review-wrap">
+      <div class="modal-review-title">💬 Reviews</div>
+      <div class="modal-review-input-row">
+        <input type="text" id="reviewInput" placeholder="তোমার মতামত লেখো..." maxlength="120"/>
+        <button onclick="submitReview()">Post</button>
+      </div>
+      <div class="modal-reviews-list" id="reviewsList"></div>
+    </div>
+
+    <button class="app-modal-dl-btn" id="modalDlBtn">⬇️ Free Download APK</button>
+
+    <!-- Site promo -->
+    <div class="modal-site-promo">
+      🆓 আরও free APK পেতে 👉
+      <a href="https://hellopepo.github.io" target="_blank">hellopepo.github.io</a>
+      · ✈️ <a href="https://t.me/AraFaaaah" target="_blank">Telegram Join করো</a>
+    </div>
   </div>
 </div>
 
-<!-- TRENDING SECTION -->
+<!-- TRENDING SECTION — no title -->
 <div class="trending-section" id="trendingSection">
-  <div class="trending-header">
-    <div class="trending-title">
-      <span class="fire">🔥</span> Trending Now
-    </div>
-    <span class="trending-see-all" onclick="document.getElementById('grid').scrollIntoView({behavior:'smooth'})">See All →</span>
-  </div>
   <div class="trending-scroll" id="trendingScroll"></div>
   <div class="scroll-dots" id="scrollDots"></div>
 </div>
@@ -2307,7 +2785,7 @@ document.addEventListener('click',(e)=>{
 </div>
 
 <!-- AI TOOLS SECTION -->
-<div class="ai-section">
+<div class="ai-section" id="aiToolsSection">
   <div class="ai-section-header">
     <div class="ai-section-title">
       <span class="ai-title-icon">🤖</span> AI Tools Hub
@@ -2501,13 +2979,14 @@ document.addEventListener('click',(e)=>{
   <div class="sports-header">
     <div class="live-pulse"><span class="ldot"></span> Live Updates</div>
     <h2>🏆 Live Sports</h2>
-    <p>Cricket, Football — Real-time scores & standings</p>
+    <p>Cricket, Football, FIFA World Cup — Real-time scores & standings</p>
   </div>
 
   <!-- Sport Tabs -->
   <div class="sport-tabs">
     <button class="sport-tab active" onclick="setSportTab('cricket',this)">🏏 Cricket</button>
     <button class="sport-tab" onclick="setSportTab('football',this)">⚽ Football</button>
+    <button class="sport-tab fifa-tab" onclick="setSportTab('fifa',this)">🌍 FIFA World Cup</button>
   </div>
 
   <!-- Refresh -->
@@ -2521,6 +3000,65 @@ document.addEventListener('click',(e)=>{
 
   <!-- Content -->
   <div id="sportsContent"></div>
+
+  <!-- FIFA WORLD CUP SECTION -->
+  <div id="fifaSection" style="display:none">
+
+    <!-- Hero banner -->
+    <div class="fifa-hero">
+      <div class="fifa-hero-bg"></div>
+      <div class="fifa-hero-content">
+        <div class="fifa-trophy">🏆</div>
+        <div class="fifa-hero-title">FIFA World Cup 2026</div>
+        <div class="fifa-hero-sub">USA · Canada · Mexico</div>
+        <div class="fifa-countdown-wrap">
+          <div class="fifa-countdown-label">Tournament Starts In</div>
+          <div class="fifa-countdown" id="fifaCountdown">
+            <div class="cd-unit"><div class="cd-num" id="cd-days">--</div><div class="cd-lbl">Days</div></div>
+            <div class="cd-sep">:</div>
+            <div class="cd-unit"><div class="cd-num" id="cd-hours">--</div><div class="cd-lbl">Hours</div></div>
+            <div class="cd-sep">:</div>
+            <div class="cd-unit"><div class="cd-num" id="cd-mins">--</div><div class="cd-lbl">Mins</div></div>
+            <div class="cd-sep">:</div>
+            <div class="cd-unit"><div class="cd-num" id="cd-secs">--</div><div class="cd-lbl">Secs</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- FIFA Sub Tabs -->
+    <div class="fifa-tabs">
+      <button class="fifa-tab active" onclick="setFifaTab('scores',this)">📊 Live Scores</button>
+      <button class="fifa-tab" onclick="setFifaTab('standings',this)">🏅 Standings</button>
+      <button class="fifa-tab" onclick="setFifaTab('scorers',this)">⚽ Top Scorers</button>
+      <button class="fifa-tab" onclick="setFifaTab('fixtures',this)">📅 Fixtures</button>
+    </div>
+
+    <!-- Live Scores Tab -->
+    <div id="fifa-scores" class="fifa-tab-content active">
+      <div class="fifa-section-title">📊 Live & Recent Matches</div>
+      <div class="fifa-matches" id="fifaMatches"></div>
+    </div>
+
+    <!-- Standings Tab -->
+    <div id="fifa-standings" class="fifa-tab-content">
+      <div class="fifa-section-title">🏅 Group Standings</div>
+      <div id="fifaStandings"></div>
+    </div>
+
+    <!-- Top Scorers Tab -->
+    <div id="fifa-scorers" class="fifa-tab-content">
+      <div class="fifa-section-title">⚽ Top Scorers</div>
+      <div class="fifa-scorers-list" id="fifaScorers"></div>
+    </div>
+
+    <!-- Fixtures Tab -->
+    <div id="fifa-fixtures" class="fifa-tab-content">
+      <div class="fifa-section-title">📅 Upcoming Fixtures</div>
+      <div class="fifa-fixtures-list" id="fifaFixtures"></div>
+    </div>
+
+  </div>
 </div>
 
 <!-- LIVE TV PAGE -->
@@ -2723,6 +3261,12 @@ function renderApps(search=''){
     <div class="stat">📦 Apps: <span>${allApps.length}</span></div>
     <div class="stat">⬇️ Downloads: <span>${total}</span></div>
   `;
+
+  // Update Apps & Mods card count dynamically
+  const countEl = document.getElementById('appsModCount');
+  if(countEl){
+    countEl.textContent = allApps.length || '0';
+  }
 
   if(!list.length){
     grid.innerHTML='<div class="empty"><div class="icon">📂</div><h3>কোনো app নেই</h3><p>এখনো কিছু add হয়নি</p></div>';
@@ -3294,7 +3838,198 @@ function setSportTab(sport, btn){
   currentSport=sport;
   document.querySelectorAll('.sport-tab').forEach(b=>b.classList.remove('active'));
   btn.classList.add('active');
-  loadSportsData();
+  // Show/hide FIFA section vs regular sports content
+  const fifaSection = document.getElementById('fifaSection');
+  const sportsContent = document.getElementById('sportsContent');
+  const refreshWrap = document.querySelector('.sports-refresh');
+  if(sport === 'fifa'){
+    fifaSection.style.display = 'block';
+    sportsContent.style.display = 'none';
+    if(refreshWrap) refreshWrap.style.display = 'none';
+    initFIFA();
+  } else {
+    fifaSection.style.display = 'none';
+    sportsContent.style.display = 'block';
+    if(refreshWrap) refreshWrap.style.display = 'flex';
+    loadSportsData();
+  }
+}
+
+// ─────────────────────────────────────────
+// ===== FIFA WORLD CUP 2026 ENGINE =====
+// ─────────────────────────────────────────
+
+const FIFA_DATA = {
+  matches: [
+    {id:1,home:'🇧🇷 Brazil',homeFlag:'🇧🇷',homeCode:'BRA',away:'🇦🇷 Argentina',awayFlag:'🇦🇷',awayCode:'ARG',homeScore:2,awayScore:1,status:'live',minute:"67'",group:'Group A',venue:'MetLife Stadium, New Jersey'},
+    {id:2,home:'🏴󠁧󠁢󠁥󠁮󠁧󠁿 England',homeFlag:'🏴󠁧󠁢󠁥󠁮󠁧󠁿',homeCode:'ENG',away:'🇫🇷 France',awayFlag:'🇫🇷',awayCode:'FRA',homeScore:1,awayScore:1,status:'live',minute:"45+2'",group:'Group B',venue:'AT&T Stadium, Dallas'},
+    {id:3,home:'🇩🇪 Germany',homeFlag:'🇩🇪',homeCode:'GER',away:'🇪🇸 Spain',awayFlag:'🇪🇸',awayCode:'ESP',homeScore:3,awayScore:2,status:'finished',minute:'FT',group:'Group C',venue:'SoFi Stadium, LA'},
+    {id:4,home:'🇵🇹 Portugal',homeFlag:'🇵🇹',homeCode:'POR',away:'🇧🇪 Belgium',awayFlag:'🇧🇪',awayCode:'BEL',homeScore:1,awayScore:0,status:'finished',minute:'FT',group:'Group D',venue:'Levi\'s Stadium'},
+    {id:5,home:'🇳🇱 Netherlands',homeFlag:'🇳🇱',homeCode:'NED',away:'🇺🇾 Uruguay',awayFlag:'🇺🇾',awayCode:'URU',homeScore:0,awayScore:0,status:'upcoming',minute:'19:00',group:'Group E',venue:'Gillette Stadium'},
+    {id:6,home:'🇯🇵 Japan',homeFlag:'🇯🇵',homeCode:'JPN',away:'🇲🇽 Mexico',awayFlag:'🇲🇽',awayCode:'MEX',homeScore:0,awayScore:0,status:'upcoming',minute:'22:00',group:'Group F',venue:'Azteca Stadium'},
+  ],
+  groups: [
+    {name:'Group A',teams:[
+      {flag:'🇧🇷',name:'Brazil',p:3,w:2,d:1,l:0,gf:7,ga:3,pts:7},
+      {flag:'🇦🇷',name:'Argentina',p:3,w:2,d:0,l:1,gf:5,ga:4,pts:6},
+      {flag:'🇲🇦',name:'Morocco',p:3,w:1,d:0,l:2,gf:3,ga:5,pts:3},
+      {flag:'🇨🇷',name:'Costa Rica',p:3,w:0,d:1,l:2,gf:2,ga:5,pts:1},
+    ]},
+    {name:'Group B',teams:[
+      {flag:'🏴󠁧󠁢󠁥󠁮󠁧󠁿',name:'England',p:3,w:2,d:1,l:0,gf:6,ga:2,pts:7},
+      {flag:'🇫🇷',name:'France',p:3,w:2,d:1,l:0,gf:8,ga:3,pts:7},
+      {flag:'🇺🇸',name:'USA',p:3,w:1,d:0,l:2,gf:4,ga:6,pts:3},
+      {flag:'🇹🇳',name:'Tunisia',p:3,w:0,d:0,l:3,gf:1,ga:8,pts:0},
+    ]},
+    {name:'Group C',teams:[
+      {flag:'🇩🇪',name:'Germany',p:3,w:3,d:0,l:0,gf:9,ga:2,pts:9},
+      {flag:'🇪🇸',name:'Spain',p:3,w:2,d:0,l:1,gf:7,ga:4,pts:6},
+      {flag:'🇯🇵',name:'Japan',p:3,w:1,d:0,l:2,gf:3,ga:5,pts:3},
+      {flag:'🇨🇷',name:'Costa Rica',p:3,w:0,d:0,l:3,gf:0,ga:8,pts:0},
+    ]},
+  ],
+  scorers: [
+    {name:'Kylian Mbappé',country:'France',flag:'🇫🇷',goals:6},
+    {name:'Erling Haaland',country:'Norway',flag:'🇳🇴',goals:5},
+    {name:'Vinicius Jr.',country:'Brazil',flag:'🇧🇷',goals:4},
+    {name:'Harry Kane',country:'England',flag:'🏴󠁧󠁢󠁥󠁮󠁧󠁿',goals:4},
+    {name:'Cristiano Ronaldo',country:'Portugal',flag:'🇵🇹',goals:3},
+    {name:'Lamine Yamal',country:'Spain',flag:'🇪🇸',goals:3},
+    {name:'Bukayo Saka',country:'England',flag:'🏴󠁧󠁢󠁥󠁮󠁧󠁿',goals:3},
+    {name:'Neymar Jr.',country:'Brazil',flag:'🇧🇷',goals:2},
+  ],
+  fixtures: [
+    {day:'15',month:'JUN',time:'18:00',home:'🇮🇹 Italy',away:'🇭🇷 Croatia',group:'Group G',venue:'Rose Bowl, LA'},
+    {day:'16',month:'JUN',time:'15:00',home:'🇸🇳 Senegal',away:'🇨🇦 Canada',group:'Group H',venue:'BC Place, Vancouver'},
+    {day:'16',month:'JUN',time:'21:00',home:'🇦🇺 Australia',away:'🇸🇦 Saudi Arabia',group:'Group I',venue:'SoFi Stadium'},
+    {day:'17',month:'JUN',time:'18:00',home:'🇷🇸 Serbia',away:'🇨🇲 Cameroon',group:'Group J',venue:'Lumen Field'},
+    {day:'17',month:'JUN',time:'21:00',home:'🇺🇾 Uruguay',away:'🇰🇷 South Korea',group:'Group E',venue:'Hard Rock Stadium'},
+    {day:'18',month:'JUN',time:'15:00',home:'🇳🇬 Nigeria',away:'🇬🇭 Ghana',group:'Group K',venue:'Estadio Akron'},
+    {day:'18',month:'JUN',time:'21:00',home:'🇨🇭 Switzerland',away:'🇹🇷 Turkey',group:'Group L',venue:'NRG Stadium'},
+    {day:'19',month:'JUN',time:'18:00',home:'🇲🇽 Mexico',away:'🇵🇱 Poland',group:'Group F',venue:'Azteca Stadium'},
+  ]
+};
+
+function initFIFA(){
+  startFIFACountdown();
+  renderFIFAScores();
+  renderFIFAStandings();
+  renderFIFAScorers();
+  renderFIFAFixtures();
+}
+
+// Countdown to FIFA WC 2026 (June 11, 2026)
+let countdownInterval = null;
+function startFIFACountdown(){
+  if(countdownInterval) clearInterval(countdownInterval);
+  const target = new Date('2026-06-11T18:00:00Z');
+  function update(){
+    const now = new Date();
+    const diff = target - now;
+    if(diff <= 0){
+      document.getElementById('cd-days').textContent = '00';
+      document.getElementById('cd-hours').textContent = '00';
+      document.getElementById('cd-mins').textContent = '00';
+      document.getElementById('cd-secs').textContent = '00';
+      clearInterval(countdownInterval);return;
+    }
+    const d = Math.floor(diff/86400000);
+    const h = Math.floor((diff%86400000)/3600000);
+    const m = Math.floor((diff%3600000)/60000);
+    const s = Math.floor((diff%60000)/1000);
+    document.getElementById('cd-days').textContent = String(d).padStart(2,'0');
+    document.getElementById('cd-hours').textContent = String(h).padStart(2,'0');
+    document.getElementById('cd-mins').textContent = String(m).padStart(2,'0');
+    document.getElementById('cd-secs').textContent = String(s).padStart(2,'0');
+  }
+  update();
+  countdownInterval = setInterval(update, 1000);
+}
+
+function setFifaTab(tab, btn){
+  document.querySelectorAll('.fifa-tab').forEach(b=>b.classList.remove('active'));
+  document.querySelectorAll('.fifa-tab-content').forEach(c=>c.classList.remove('active'));
+  btn.classList.add('active');
+  document.getElementById('fifa-'+tab).classList.add('active');
+}
+
+function renderFIFAScores(){
+  const el = document.getElementById('fifaMatches');
+  el.innerHTML = FIFA_DATA.matches.map((m,i) => {
+    const statusClass = m.status==='live'?'fmc-live':m.status==='finished'?'fmc-finished':'fmc-upcoming';
+    const statusText = m.status==='live'?`● LIVE ${m.minute}`:m.status==='finished'?'FULL TIME':`UPCOMING ${m.minute}`;
+    const scoreHtml = m.status==='upcoming'
+      ? `<div class="fmc-divider"><span class="fmc-vs">VS</span></div>`
+      : `<div class="fmc-divider"><div class="fmc-score">${m.homeScore} - ${m.awayScore}</div></div>`;
+    return `<div class="fifa-match-card ${m.status==='live'?'live-card':''}" style="animation-delay:${i*0.08}s">
+      <div style="display:flex;align-items:center">
+        <div class="fmc-status ${statusClass}">${statusText}</div>
+        <div class="fmc-group">${m.group}</div>
+      </div>
+      <div class="fmc-teams">
+        <div class="fmc-team"><div class="fmc-flag">${m.homeFlag}</div><div class="fmc-name">${m.homeCode}</div></div>
+        ${scoreHtml}
+        <div class="fmc-team"><div class="fmc-flag">${m.awayFlag}</div><div class="fmc-name">${m.awayCode}</div></div>
+      </div>
+      <div class="fmc-venue">📍 ${m.venue}</div>
+    </div>`;
+  }).join('');
+}
+
+function renderFIFAStandings(){
+  const el = document.getElementById('fifaStandings');
+  el.innerHTML = FIFA_DATA.groups.map(g => `
+    <div class="fifa-group-block">
+      <div class="fifa-group-title">⚽ ${g.name}</div>
+      <table class="standings-table">
+        <thead><tr>
+          <th style="width:16px">#</th><th>Team</th><th>P</th><th>W</th><th>D</th><th>L</th><th>GF</th><th>GA</th><th>Pts</th>
+        </tr></thead>
+        <tbody>
+          ${g.teams.map((t,i) => `<tr class="${i<2?'qualified':''}">
+            <td class="std-rank">${i+1}</td>
+            <td><div class="std-team"><span class="std-flag">${t.flag}</span><span class="std-name">${t.name}</span></div></td>
+            <td>${t.p}</td><td>${t.w}</td><td>${t.d}</td><td>${t.l}</td>
+            <td>${t.gf}</td><td>${t.ga}</td>
+            <td class="std-pts">${t.pts}</td>
+          </tr>`).join('')}
+        </tbody>
+      </table>
+    </div>
+  `).join('');
+}
+
+function renderFIFAScorers(){
+  const el = document.getElementById('fifaScorers');
+  const ranks = ['gold','silver','bronze'];
+  el.innerHTML = FIFA_DATA.scorers.map((s,i) => `
+    <div class="scorer-row" style="animation:cardIn 0.3s ${i*0.06}s ease both">
+      <div class="scorer-rank ${ranks[i]||'other'}">${i===0?'🥇':i===1?'🥈':i===2?'🥉':'#'+(i+1)}</div>
+      <div class="scorer-flag">${s.flag}</div>
+      <div class="scorer-info">
+        <div class="scorer-name">${s.name}</div>
+        <div class="scorer-country">${s.country}</div>
+      </div>
+      <div class="scorer-goals">${s.goals}<span>goals</span></div>
+    </div>
+  `).join('');
+}
+
+function renderFIFAFixtures(){
+  const el = document.getElementById('fifaFixtures');
+  el.innerHTML = FIFA_DATA.fixtures.map((f,i) => `
+    <div class="fixture-row" style="animation:cardIn 0.3s ${i*0.06}s ease both">
+      <div class="fixture-date">
+        <div class="fixture-day">${f.day}</div>
+        <div class="fixture-mon">${f.month}</div>
+      </div>
+      <div class="fixture-teams">
+        <div class="fixture-matchup">${f.home} <span style="color:var(--muted);margin:0 0.2rem">vs</span> ${f.away}</div>
+        <div class="fixture-meta">📍 ${f.venue} · ${f.group}</div>
+      </div>
+      <div class="fixture-time">${f.time}</div>
+    </div>
+  `).join('');
 }
 
 // ── Main loader ──
@@ -3738,6 +4473,56 @@ function closeAppModal(){
   document.body.style.overflow = '';
 }
 document.addEventListener('keydown', e=>{ if(e.key==='Escape') closeAppModal(); });
+
+// ===== RATING & REVIEW SYSTEM =====
+let _currentModalAppId = null;
+function rateApp(stars){
+  document.querySelectorAll('.star').forEach((s,i)=>{ s.classList.toggle('active', i<stars); });
+  const ratings=JSON.parse(localStorage.getItem('hp_ratings')||'{}');
+  if(!ratings[_currentModalAppId]) ratings[_currentModalAppId]=[];
+  ratings[_currentModalAppId].push(stars);
+  localStorage.setItem('hp_ratings',JSON.stringify(ratings));
+  updateRatingAvg(_currentModalAppId);
+  toast('Rating এর জন্য ধন্যবাদ! u2b50');
+}
+function updateRatingAvg(appId){
+  const ratings=JSON.parse(localStorage.getItem('hp_ratings')||'{}');
+  const arr=ratings[appId]||[];
+  const el=document.getElementById('modalRatingAvg');
+  if(!el) return;
+  if(!arr.length){el.textContent='u098fu0996u09a8u09cb u0995u09cbu09a8u09cb rating u09a8u09c7u0987';return;}
+  const avg=(arr.reduce((a,b)=>a+b,0)/arr.length).toFixed(1);
+  el.innerHTML='<b>u2605 '+avg+'</b> u00b7 '+arr.length+' u099cu09a8 rate u0995u09b0u09c7u099bu09c7';
+}
+function submitReview(){
+  const input=document.getElementById('reviewInput');
+  const text=input.value.trim();
+  if(!text||text.length<3){toast('u098fu0995u099fu09c1 u09acu09dc u0995u09b0u09c7 u09b2u09c7u0996u09cb!','error');return;}
+  const reviews=JSON.parse(localStorage.getItem('hp_reviews')||'{}');
+  if(!reviews[_currentModalAppId]) reviews[_currentModalAppId]=[];
+  reviews[_currentModalAppId].unshift({text,time:new Date().toLocaleDateString('bn-BD')});
+  if(reviews[_currentModalAppId].length>20) reviews[_currentModalAppId].pop();
+  localStorage.setItem('hp_reviews',JSON.stringify(reviews));
+  input.value='';
+  renderReviews(_currentModalAppId);
+  toast('Review post u09b9u09afu09bcu09c7u099bu09c7! u2705');
+}
+function renderReviews(appId){
+  const reviews=JSON.parse(localStorage.getItem('hp_reviews')||'{}');
+  const arr=reviews[appId]||[];
+  const list=document.getElementById('reviewsList');
+  if(!list) return;
+  if(!arr.length){list.innerHTML='<div class="no-reviews">u098fu0996u09a8u09cb u0995u09cbu09a8u09cb review u09a8u09c7u0987 u2014 u09aau09cdu09b0u09a5u09ae u09b9u09cbu0993!</div>';return;}
+  list.innerHTML=arr.map(r=>'<div class="review-item"><div class="review-avatar">ud83dudc64</div><div><div class="review-text">'+r.text+'</div><div class="review-time">'+r.time+'</div></div></div>').join('');
+}
+const _origOpenAppModal=window.openAppModal;
+window.openAppModal=function(app){
+  _origOpenAppModal(app);
+  _currentModalAppId=String(app.id);
+  document.querySelectorAll('.star').forEach(s=>s.classList.remove('active'));
+  updateRatingAvg(_currentModalAppId);
+  renderReviews(_currentModalAppId);
+};
 </script>
 
 <!-- ===== PWA INSTALL BANNER ===== -->

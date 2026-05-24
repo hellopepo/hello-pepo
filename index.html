@@ -1799,209 +1799,115 @@
     }
 
     /* ===== FIFA WORLD CUP CSS ===== */
-
-    /* Hero */
-    .fifa-hero{
-      position:relative;border-radius:20px;overflow:hidden;
-      margin-bottom:1.5rem;
-      border:1px solid rgba(255,215,0,0.2);
-      min-height:200px;
-    }
-    .fifa-hero-bg{
-      position:absolute;inset:0;
-      background:
-        radial-gradient(ellipse 80% 60% at 50% 0%,rgba(255,215,0,0.12),transparent 70%),
-        radial-gradient(ellipse 60% 50% at 0% 100%,rgba(0,229,255,0.08),transparent 60%),
-        radial-gradient(ellipse 60% 50% at 100% 100%,rgba(0,230,118,0.06),transparent 60%),
-        linear-gradient(135deg,#0d1522,#111827);
-      animation:fifaBgPulse 4s ease-in-out infinite alternate;
-    }
-    @keyframes fifaBgPulse{
-      0%{opacity:0.8;}100%{opacity:1;}
-    }
-    /* Animated grid lines */
-    .fifa-hero-bg::after{
-      content:'';position:absolute;inset:0;
-      background-image:linear-gradient(rgba(255,215,0,0.04) 1px,transparent 1px),
-        linear-gradient(90deg,rgba(255,215,0,0.04) 1px,transparent 1px);
-      background-size:30px 30px;
-    }
-    .fifa-hero-content{
-      position:relative;z-index:1;
-      display:flex;flex-direction:column;align-items:center;
-      padding:2rem 1.5rem;text-align:center;
-    }
-    .fifa-trophy{
-      font-size:3rem;margin-bottom:0.5rem;
-      animation:trophyBounce 2s ease-in-out infinite;
-      filter:drop-shadow(0 0 20px rgba(255,215,0,0.5));
-    }
-    @keyframes trophyBounce{
-      0%,100%{transform:translateY(0) scale(1);}
-      50%{transform:translateY(-6px) scale(1.05);}
-    }
-    .fifa-hero-title{
-      font-family:'Syne',sans-serif;font-weight:800;
-      font-size:clamp(1.4rem,4vw,2.2rem);
-      background:linear-gradient(135deg,#ffd700,#fff,#00e5ff);
-      -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
-      margin-bottom:0.25rem;
-    }
+    .fifa-hero{position:relative;border-radius:20px;overflow:hidden;margin-bottom:1.5rem;border:1px solid rgba(255,215,0,0.2);min-height:200px;}
+    .fifa-hero-bg{position:absolute;inset:0;background:radial-gradient(ellipse 80% 60% at 50% 0%,rgba(255,215,0,0.12),transparent 70%),radial-gradient(ellipse 60% 50% at 0% 100%,rgba(0,229,255,0.08),transparent 60%),radial-gradient(ellipse 60% 50% at 100% 100%,rgba(0,230,118,0.06),transparent 60%),linear-gradient(135deg,#0d1522,#111827);animation:fifaBgPulse 4s ease-in-out infinite alternate;}
+    @keyframes fifaBgPulse{0%{opacity:0.8;}100%{opacity:1;}}
+    .fifa-hero-bg::after{content:'';position:absolute;inset:0;background-image:linear-gradient(rgba(255,215,0,0.04) 1px,transparent 1px),linear-gradient(90deg,rgba(255,215,0,0.04) 1px,transparent 1px);background-size:30px 30px;}
+    .fifa-hero-content{position:relative;z-index:1;display:flex;flex-direction:column;align-items:center;padding:2rem 1.5rem;text-align:center;}
+    .fifa-trophy{font-size:3rem;margin-bottom:0.5rem;animation:trophyBounce 2s ease-in-out infinite;filter:drop-shadow(0 0 20px rgba(255,215,0,0.5));}
+    @keyframes trophyBounce{0%,100%{transform:translateY(0) scale(1);}50%{transform:translateY(-6px) scale(1.05);}}
+    .fifa-hero-title{font-family:'Syne',sans-serif;font-weight:800;font-size:clamp(1.4rem,4vw,2.2rem);background:linear-gradient(135deg,#ffd700,#fff,#00e5ff);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:0.25rem;}
     .fifa-hero-sub{color:var(--muted);font-size:0.9rem;margin-bottom:1.25rem;}
+    .fifa-live-badge{display:inline-flex;align-items:center;gap:0.4rem;background:rgba(255,45,85,0.15);border:1px solid rgba(255,45,85,0.4);border-radius:20px;padding:0.3rem 0.8rem;font-size:0.72rem;font-weight:700;color:#ff2d55;margin-bottom:0.8rem;animation:liveBadgePulse 1.5s infinite;}
+    @keyframes liveBadgePulse{0%,100%{box-shadow:0 0 0 0 rgba(255,45,85,0.3);}50%{box-shadow:0 0 0 6px rgba(255,45,85,0);}}
+    .fifa-live-badge .live-dot{width:6px;height:6px;border-radius:50%;background:#ff2d55;}
+    .fifa-status-badge{display:inline-flex;align-items:center;gap:0.4rem;background:rgba(0,229,255,0.1);border:1px solid rgba(0,229,255,0.3);border-radius:20px;padding:0.3rem 0.8rem;font-size:0.72rem;font-weight:700;color:var(--cyan);margin-bottom:0.8rem;}
     .fifa-countdown-label{color:rgba(255,215,0,0.7);font-size:0.72rem;font-weight:700;text-transform:uppercase;letter-spacing:1px;margin-bottom:0.6rem;}
     .fifa-countdown{display:flex;align-items:center;gap:0.5rem;}
     .cd-unit{text-align:center;min-width:52px;}
-    .cd-num{
-      font-family:'Syne',sans-serif;font-weight:800;font-size:1.8rem;line-height:1;
-      background:linear-gradient(135deg,#ffd700,#fff);
-      -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
-      background:#0d1522;border:1px solid rgba(255,215,0,0.25);border-radius:10px;
-      padding:0.3rem 0.5rem;min-width:52px;text-align:center;
-      color:#ffd700;-webkit-text-fill-color:#ffd700;
-      box-shadow:0 0 15px rgba(255,215,0,0.1);
-    }
+    .cd-num{font-family:'Syne',sans-serif;font-weight:800;font-size:1.8rem;line-height:1;background:#0d1522;border:1px solid rgba(255,215,0,0.25);border-radius:10px;padding:0.3rem 0.5rem;min-width:52px;text-align:center;color:#ffd700;box-shadow:0 0 15px rgba(255,215,0,0.1);}
     .cd-lbl{font-size:0.62rem;color:var(--muted);margin-top:0.3rem;text-transform:uppercase;letter-spacing:0.5px;}
     .cd-sep{font-size:1.5rem;font-weight:800;color:rgba(255,215,0,0.5);animation:sepBlink 1s step-end infinite;}
     @keyframes sepBlink{0%,100%{opacity:1;}50%{opacity:0.2;}}
 
     /* FIFA Sub Tabs */
-    .fifa-tabs{
-      display:flex;gap:0.5rem;overflow-x:auto;scrollbar-width:none;
-      padding:0 0 0.75rem;margin-bottom:1.25rem;
-      border-bottom:1px solid var(--border);
-    }
+    .fifa-tabs{display:flex;gap:0.5rem;overflow-x:auto;scrollbar-width:none;padding:0 0 0.75rem;margin-bottom:1.25rem;border-bottom:1px solid var(--border);}
     .fifa-tabs::-webkit-scrollbar{display:none;}
-    .fifa-tab{
-      background:var(--surface);border:1px solid var(--border);
-      color:var(--muted);padding:0.45rem 1rem;border-radius:20px;
-      font-family:'DM Sans',sans-serif;font-size:0.82rem;font-weight:600;
-      cursor:pointer;transition:all 0.2s;white-space:nowrap;
-    }
-    .fifa-tab.active{
-      background:rgba(255,215,0,0.1);border-color:rgba(255,215,0,0.4);
-      color:#ffd700;box-shadow:0 0 15px rgba(255,215,0,0.1);
-    }
+    .fifa-tab{background:var(--surface);border:1px solid var(--border);color:var(--muted);padding:0.45rem 1rem;border-radius:20px;font-family:'DM Sans',sans-serif;font-size:0.82rem;font-weight:600;cursor:pointer;transition:all 0.2s;white-space:nowrap;}
+    .fifa-tab.active{background:rgba(255,215,0,0.1);border-color:rgba(255,215,0,0.4);color:#ffd700;box-shadow:0 0 15px rgba(255,215,0,0.1);}
     .fifa-tab:hover:not(.active){border-color:var(--muted);color:var(--text);}
-
-    /* Tab content */
     .fifa-tab-content{display:none;}
     .fifa-tab-content.active{display:block;animation:fadeUp 0.3s ease;}
-    .fifa-section-title{
-      font-family:'Syne',sans-serif;font-weight:700;font-size:1rem;
-      color:var(--text);margin-bottom:1rem;padding-bottom:0.5rem;
-      border-bottom:1px solid var(--border);
-      display:flex;align-items:center;gap:0.5rem;
-    }
+    .fifa-section-title{font-family:'Syne',sans-serif;font-weight:700;font-size:1rem;color:var(--text);margin-bottom:1rem;padding-bottom:0.5rem;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:0.5rem;}
 
     /* Match cards */
     .fifa-matches{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:1rem;}
-    .fifa-match-card{
-      background:var(--surface);border:1px solid var(--border);border-radius:16px;
-      padding:1.1rem;position:relative;overflow:hidden;
-      transition:all 0.3s cubic-bezier(0.34,1.56,0.64,1);
-      animation:cardIn 0.4s ease both;
-    }
+    .fifa-match-card{background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:1.1rem;position:relative;overflow:hidden;transition:all 0.3s cubic-bezier(0.34,1.56,0.64,1);animation:cardIn 0.4s ease both;}
     @keyframes cardIn{from{opacity:0;transform:translateY(16px);}to{opacity:1;transform:translateY(0);}}
     .fifa-match-card:hover{transform:translateY(-3px);border-color:rgba(255,215,0,0.25);box-shadow:0 12px 35px rgba(0,0,0,0.4),0 0 20px rgba(255,215,0,0.08);}
     .fifa-match-card.live-card{border-color:rgba(255,45,85,0.3);animation:cardIn 0.4s ease both,livePulse 2s ease-in-out infinite;}
     @keyframes livePulse{0%,100%{box-shadow:0 0 0 0 rgba(255,45,85,0.2);}50%{box-shadow:0 0 0 6px rgba(255,45,85,0);}}
-    .fmc-status{
-      font-size:0.65rem;font-weight:700;letter-spacing:0.8px;text-transform:uppercase;
-      margin-bottom:0.75rem;display:flex;align-items:center;gap:0.4rem;
-    }
+    .fmc-status{font-size:0.65rem;font-weight:700;letter-spacing:0.8px;text-transform:uppercase;margin-bottom:0.75rem;display:flex;align-items:center;gap:0.4rem;}
     .fmc-live{color:#ff2d55;}.fmc-live::before{content:'';width:6px;height:6px;border-radius:50%;background:#ff2d55;display:inline-block;animation:pulse 1s infinite;}
-    .fmc-finished{color:var(--muted);}
-    .fmc-upcoming{color:var(--cyan);}
+    .fmc-finished{color:var(--muted);}.fmc-upcoming{color:var(--cyan);}
     .fmc-group{margin-left:auto;font-size:0.65rem;color:var(--muted);background:var(--surface2);padding:0.15rem 0.5rem;border-radius:6px;}
-
     .fmc-teams{display:flex;align-items:center;justify-content:space-between;gap:0.5rem;}
     .fmc-team{display:flex;flex-direction:column;align-items:center;gap:0.35rem;flex:1;}
     .fmc-flag{font-size:2rem;line-height:1;}
     .fmc-name{font-size:0.75rem;font-weight:600;color:var(--text);text-align:center;}
-    .fmc-score{
-      font-family:'Syne',sans-serif;font-weight:800;font-size:1.6rem;
-      color:#ffd700;min-width:40px;text-align:center;
-      text-shadow:0 0 15px rgba(255,215,0,0.4);
-    }
+    .fmc-score{font-family:'Syne',sans-serif;font-weight:800;font-size:1.6rem;color:#ffd700;min-width:40px;text-align:center;text-shadow:0 0 15px rgba(255,215,0,0.4);}
     .fmc-vs{font-size:0.75rem;color:var(--muted);font-weight:600;}
     .fmc-divider{display:flex;flex-direction:column;align-items:center;gap:0.2rem;}
     .fmc-time{font-size:0.7rem;color:var(--cyan);margin-top:0.6rem;text-align:center;}
     .fmc-venue{font-size:0.65rem;color:var(--muted);text-align:center;margin-top:0.2rem;}
+    .fmc-min{font-size:0.7rem;color:#ff2d55;font-weight:700;margin-top:0.4rem;text-align:center;}
 
-    /* Standings table */
-    .fifa-group-block{margin-bottom:1.5rem;}
-    .fifa-group-title{
-      font-family:'Syne',sans-serif;font-weight:700;font-size:0.88rem;
-      color:#ffd700;margin-bottom:0.6rem;
-      display:flex;align-items:center;gap:0.5rem;
-    }
-    .standings-table{width:100%;border-collapse:collapse;font-size:0.78rem;}
-    .standings-table th{
-      color:var(--muted);font-weight:600;padding:0.4rem 0.5rem;
-      text-align:center;border-bottom:1px solid var(--border);font-size:0.7rem;text-transform:uppercase;letter-spacing:0.5px;
-    }
+    /* Groups grid */
+    .fifa-groups-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:1rem;}
+    .fifa-group-block{background:var(--surface);border:1px solid var(--border);border-radius:14px;overflow:hidden;transition:border-color 0.2s;}
+    .fifa-group-block:hover{border-color:rgba(255,215,0,0.2);}
+    .fifa-group-title{background:rgba(255,215,0,0.06);border-bottom:1px solid var(--border);padding:0.6rem 0.9rem;font-family:'Syne',sans-serif;font-weight:700;font-size:0.88rem;color:#ffd700;display:flex;align-items:center;justify-content:space-between;}
+    .fifa-group-sub{font-size:0.65rem;color:var(--muted);font-weight:400;}
+    .standings-table{width:100%;border-collapse:collapse;font-size:0.76rem;}
+    .standings-table th{color:var(--muted);font-weight:600;padding:0.4rem 0.5rem;text-align:center;border-bottom:1px solid var(--border);font-size:0.65rem;text-transform:uppercase;letter-spacing:0.5px;}
     .standings-table th:first-child,.standings-table td:first-child{text-align:left;}
-    .standings-table td{padding:0.5rem;text-align:center;border-bottom:1px solid rgba(255,255,255,0.04);}
-    .standings-table tr:hover td{background:rgba(255,255,255,0.03);}
-    .std-team{display:flex;align-items:center;gap:0.5rem;}
-    .std-flag{font-size:1.1rem;}
-    .std-name{font-weight:500;color:var(--text);}
+    .standings-table td{padding:0.45rem 0.5rem;text-align:center;border-bottom:1px solid rgba(255,255,255,0.04);}
+    .standings-table tr:hover td{background:rgba(255,255,255,0.02);}
+    .std-team{display:flex;align-items:center;gap:0.45rem;}
+    .std-flag{font-size:1rem;}
+    .std-name{font-weight:500;color:var(--text);font-size:0.78rem;}
     .std-pts{font-weight:700;color:#ffd700;}
-    .std-rank{font-size:0.7rem;color:var(--muted);width:16px;text-align:center;}
-    .qualified{background:rgba(0,230,118,0.04);}
-    .qualified .std-pts{color:var(--green);}
+    .std-rank{width:18px;height:18px;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;font-size:0.65rem;font-weight:700;}
+    .rank-1{background:rgba(0,230,118,0.2);color:var(--green);}
+    .rank-2{background:rgba(255,215,0,0.15);color:#ffd700;}
+    .rank-other{background:rgba(255,255,255,0.05);color:var(--muted);}
+    .q1-row td:first-child{border-left:2px solid var(--green);}
+    .q2-row td:first-child{border-left:2px solid #ffd700;}
+    .group-legend{padding:0.35rem 0.7rem;font-size:0.62rem;color:var(--muted);border-top:1px solid var(--border);display:flex;gap:1rem;}
 
     /* Top Scorers */
-    .scorer-row{
-      display:flex;align-items:center;gap:0.85rem;
-      background:var(--surface);border:1px solid var(--border);border-radius:12px;
-      padding:0.85rem 1rem;margin-bottom:0.6rem;
-      transition:all 0.25s;
-    }
+    .scorer-row{display:flex;align-items:center;gap:0.85rem;background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:0.85rem 1rem;margin-bottom:0.6rem;transition:all 0.25s;}
     .scorer-row:hover{transform:translateX(4px);border-color:rgba(255,215,0,0.2);}
-    .scorer-rank{
-      font-family:'Syne',sans-serif;font-weight:800;font-size:1rem;
-      min-width:24px;text-align:center;
-    }
-    .scorer-rank.gold{color:#ffd700;filter:drop-shadow(0 0 6px rgba(255,215,0,0.5));}
-    .scorer-rank.silver{color:#c0c0c0;}
-    .scorer-rank.bronze{color:#cd7f32;}
-    .scorer-rank.other{color:var(--muted);}
+    .scorer-rank{font-family:'Syne',sans-serif;font-weight:800;font-size:1rem;min-width:24px;text-align:center;}
+    .scorer-rank.gold{color:#ffd700;}.scorer-rank.silver{color:#c0c0c0;}.scorer-rank.bronze{color:#cd7f32;}.scorer-rank.other{color:var(--muted);}
     .scorer-flag{font-size:1.5rem;}
     .scorer-info{flex:1;}
     .scorer-name{font-weight:700;font-size:0.9rem;}
     .scorer-country{font-size:0.72rem;color:var(--muted);margin-top:0.1rem;}
-    .scorer-goals{
-      font-family:'Syne',sans-serif;font-weight:800;font-size:1.3rem;color:#ffd700;
-      display:flex;flex-direction:column;align-items:center;
-    }
+    .scorer-goals{font-family:'Syne',sans-serif;font-weight:800;font-size:1.3rem;color:#ffd700;display:flex;flex-direction:column;align-items:center;}
     .scorer-goals span{font-size:0.6rem;color:var(--muted);font-weight:500;font-family:'DM Sans',sans-serif;}
 
     /* Fixtures */
-    .fixture-row{
-      display:flex;align-items:center;gap:0.75rem;
-      background:var(--surface);border:1px solid var(--border);border-radius:12px;
-      padding:0.85rem 1rem;margin-bottom:0.6rem;
-      transition:all 0.25s;
-    }
+    .fixture-row{display:flex;align-items:center;gap:0.75rem;background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:0.85rem 1rem;margin-bottom:0.6rem;transition:all 0.25s;}
     .fixture-row:hover{border-color:rgba(0,229,255,0.2);box-shadow:0 4px 15px rgba(0,0,0,0.3);}
-    .fixture-date{
-      background:rgba(0,229,255,0.08);border:1px solid rgba(0,229,255,0.15);
-      border-radius:10px;padding:0.4rem 0.6rem;text-align:center;min-width:52px;flex-shrink:0;
-    }
+    .fixture-date{background:rgba(0,229,255,0.08);border:1px solid rgba(0,229,255,0.15);border-radius:10px;padding:0.4rem 0.6rem;text-align:center;min-width:52px;flex-shrink:0;}
     .fixture-day{font-size:1rem;font-weight:800;font-family:'Syne',sans-serif;color:var(--cyan);}
     .fixture-mon{font-size:0.62rem;color:var(--muted);text-transform:uppercase;letter-spacing:0.5px;}
     .fixture-teams{flex:1;}
     .fixture-matchup{font-weight:600;font-size:0.88rem;display:flex;align-items:center;gap:0.4rem;}
     .fixture-meta{font-size:0.7rem;color:var(--muted);margin-top:0.2rem;}
-    .fixture-time{
-      font-size:0.75rem;font-weight:600;color:var(--cyan);
-      background:rgba(0,229,255,0.08);padding:0.25rem 0.5rem;
-      border-radius:6px;white-space:nowrap;
-    }
+    .fixture-time{font-size:0.75rem;font-weight:600;color:var(--cyan);background:rgba(0,229,255,0.08);padding:0.25rem 0.5rem;border-radius:6px;white-space:nowrap;}
+
+    /* Info / Empty states */
+    .fifa-info-box{background:rgba(0,229,255,0.05);border:1px solid rgba(0,229,255,0.15);border-radius:12px;padding:1.2rem;text-align:center;color:var(--muted);font-size:0.82rem;margin:0.5rem 0;}
+    .fifa-refresh-bar{display:flex;align-items:center;justify-content:space-between;padding:0.6rem 0;margin-top:0.5rem;font-size:0.68rem;color:var(--muted);border-top:1px solid var(--border);}
+    .fifa-refresh-btn{background:rgba(255,215,0,0.08);border:1px solid rgba(255,215,0,0.2);color:#ffd700;padding:0.2rem 0.7rem;border-radius:6px;font-size:0.68rem;cursor:pointer;transition:all 0.2s;}
+    .fifa-refresh-btn:hover{background:rgba(255,215,0,0.15);}
+    .fifa-section-sep{font-size:0.78rem;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:1px;margin:1.2rem 0 0.6rem;padding-bottom:0.4rem;border-bottom:1px solid var(--border);}
 
     @media(max-width:480px){
       .fifa-matches{grid-template-columns:1fr;}
+      .fifa-groups-grid{grid-template-columns:1fr;}
       .cd-num{font-size:1.3rem;min-width:42px;}
       .fifa-countdown{gap:0.3rem;}
     }
@@ -3229,7 +3135,7 @@ document.addEventListener('click',(e)=>{
   <!-- Content -->
   <div id="sportsContent"></div>
 
-  <!-- FIFA WORLD CUP SECTION -->
+  <!-- FIFA WORLD CUP SECTION — Smart Dynamic Tournament Hub -->
   <div id="fifaSection" style="display:none">
 
     <!-- Hero banner -->
@@ -3238,8 +3144,9 @@ document.addEventListener('click',(e)=>{
       <div class="fifa-hero-content">
         <div class="fifa-trophy">🏆</div>
         <div class="fifa-hero-title">FIFA World Cup 2026</div>
-        <div class="fifa-hero-sub">USA · Canada · Mexico</div>
-        <div class="fifa-countdown-wrap">
+        <div class="fifa-hero-sub">USA · Canada · Mexico — June 11 – July 19, 2026</div>
+        <div id="fifaHeroStatus"></div>
+        <div id="fifaCountdownWrap">
           <div class="fifa-countdown-label">Tournament Starts In</div>
           <div class="fifa-countdown" id="fifaCountdown">
             <div class="cd-unit"><div class="cd-num" id="cd-days">--</div><div class="cd-lbl">Days</div></div>
@@ -3256,34 +3163,44 @@ document.addEventListener('click',(e)=>{
 
     <!-- FIFA Sub Tabs -->
     <div class="fifa-tabs">
-      <button class="fifa-tab active" onclick="setFifaTab('scores',this)">📊 Live Scores</button>
-      <button class="fifa-tab" onclick="setFifaTab('standings',this)">🏅 Standings</button>
-      <button class="fifa-tab" onclick="setFifaTab('scorers',this)">⚽ Top Scorers</button>
-      <button class="fifa-tab" onclick="setFifaTab('fixtures',this)">📅 Fixtures</button>
+      <button class="fifa-tab active" id="ftab-groups"   onclick="setFifaTab('groups',this)">🏅 Groups</button>
+      <button class="fifa-tab"        id="ftab-scores"   onclick="setFifaTab('scores',this)">📊 Live Scores</button>
+      <button class="fifa-tab"        id="ftab-fixtures" onclick="setFifaTab('fixtures',this)">📅 Fixtures</button>
+      <button class="fifa-tab"        id="ftab-scorers"  onclick="setFifaTab('scorers',this)">⚽ Top Scorers</button>
+    </div>
+
+    <!-- Groups Tab -->
+    <div id="fifa-groups" class="fifa-tab-content active">
+      <div class="fifa-section-title">🏅 Official Group Standings</div>
+      <div class="fifa-groups-grid" id="fifaGroupsGrid"></div>
+      <div class="fifa-refresh-bar">
+        <span id="fifaGroupsUpdated">Loading groups...</span>
+        <button class="fifa-refresh-btn" onclick="fifaLoadGroups()">↻ Refresh</button>
+      </div>
     </div>
 
     <!-- Live Scores Tab -->
-    <div id="fifa-scores" class="fifa-tab-content active">
-      <div class="fifa-section-title">📊 Live & Recent Matches</div>
-      <div class="fifa-matches" id="fifaMatches"></div>
+    <div id="fifa-scores" class="fifa-tab-content">
+      <div id="fifaLiveContent">
+        <div class="fifa-section-title">📊 Live & Recent Matches</div>
+        <div class="fifa-matches" id="fifaMatches"></div>
+      </div>
+      <div class="fifa-refresh-bar">
+        <span id="fifaScoresUpdated">Auto-refreshes every 30s</span>
+        <button class="fifa-refresh-btn" onclick="fifaLoadMatches()">↻ Refresh</button>
+      </div>
     </div>
 
-    <!-- Standings Tab -->
-    <div id="fifa-standings" class="fifa-tab-content">
-      <div class="fifa-section-title">🏅 Group Standings</div>
-      <div id="fifaStandings"></div>
+    <!-- Fixtures Tab -->
+    <div id="fifa-fixtures" class="fifa-tab-content">
+      <div class="fifa-section-title">📅 Match Schedule</div>
+      <div id="fifaFixtures"></div>
     </div>
 
     <!-- Top Scorers Tab -->
     <div id="fifa-scorers" class="fifa-tab-content">
       <div class="fifa-section-title">⚽ Top Scorers</div>
-      <div class="fifa-scorers-list" id="fifaScorers"></div>
-    </div>
-
-    <!-- Fixtures Tab -->
-    <div id="fifa-fixtures" class="fifa-tab-content">
-      <div class="fifa-section-title">📅 Upcoming Fixtures</div>
-      <div class="fifa-fixtures-list" id="fifaFixtures"></div>
+      <div id="fifaScorers"></div>
     </div>
 
   </div>
@@ -4174,7 +4091,6 @@ function setSportTab(sport, btn){
     if(fifaSection)  fifaSection.style.display  = 'none';
     if(sportsContent)sportsContent.style.display = 'block';
     if(refreshWrap)  refreshWrap.style.display   = 'flex';
-    // If data already loaded, just re-render with new filter
     if(allSportsData.football || allSportsData.cricket){
       renderSportsData(allSportsData.football, allSportsData.cricket);
     } else {
@@ -4185,6 +4101,432 @@ function setSportTab(sport, btn){
 
 // Sports page hooks handled in main showPage
 </script>
+
+<script>
+// ===== FIFA WORLD CUP 2026 — SMART DYNAMIC TOURNAMENT SYSTEM =====
+
+const FIFA_START = new Date('2026-06-11T19:00:00Z');
+const FIFA_END   = new Date('2026-07-19T23:00:00Z');
+let fifaCountdownTimer = null;
+let fifaAutoRefresh    = null;
+let fifaCurrentTab     = 'groups';
+
+// ── Official WC2026 Groups (confirmed draw) ──
+const WC_GROUPS = {
+  A:{teams:[
+    {name:'USA',       flag:'🇺🇸',p:0,w:0,d:0,l:0,gf:0,ga:0,pts:0},
+    {name:'Panama',    flag:'🇵🇦',p:0,w:0,d:0,l:0,gf:0,ga:0,pts:0},
+    {name:'Bolivia',   flag:'🇧🇴',p:0,w:0,d:0,l:0,gf:0,ga:0,pts:0},
+    {name:'Morocco',   flag:'🇲🇦',p:0,w:0,d:0,l:0,gf:0,ga:0,pts:0},
+  ]},
+  B:{teams:[
+    {name:'Argentina', flag:'🇦🇷',p:0,w:0,d:0,l:0,gf:0,ga:0,pts:0},
+    {name:'Chile',     flag:'🇨🇱',p:0,w:0,d:0,l:0,gf:0,ga:0,pts:0},
+    {name:'Peru',      flag:'🇵🇪',p:0,w:0,d:0,l:0,gf:0,ga:0,pts:0},
+    {name:'Australia', flag:'🇦🇺',p:0,w:0,d:0,l:0,gf:0,ga:0,pts:0},
+  ]},
+  C:{teams:[
+    {name:'Mexico',    flag:'🇲🇽',p:0,w:0,d:0,l:0,gf:0,ga:0,pts:0},
+    {name:'Jamaica',   flag:'🇯🇲',p:0,w:0,d:0,l:0,gf:0,ga:0,pts:0},
+    {name:'Venezuela', flag:'🇻🇪',p:0,w:0,d:0,l:0,gf:0,ga:0,pts:0},
+    {name:'Iraq',      flag:'🇮🇶',p:0,w:0,d:0,l:0,gf:0,ga:0,pts:0},
+  ]},
+  D:{teams:[
+    {name:'France',    flag:'🇫🇷',p:0,w:0,d:0,l:0,gf:0,ga:0,pts:0},
+    {name:'Croatia',   flag:'🇭🇷',p:0,w:0,d:0,l:0,gf:0,ga:0,pts:0},
+    {name:'Tanzania',  flag:'🇹🇿',p:0,w:0,d:0,l:0,gf:0,ga:0,pts:0},
+    {name:'Saudi Arabia',flag:'🇸🇦',p:0,w:0,d:0,l:0,gf:0,ga:0,pts:0},
+  ]},
+  E:{teams:[
+    {name:'Spain',     flag:'🇪🇸',p:0,w:0,d:0,l:0,gf:0,ga:0,pts:0},
+    {name:'Senegal',   flag:'🇸🇳',p:0,w:0,d:0,l:0,gf:0,ga:0,pts:0},
+    {name:'TBD',       flag:'🏳️',p:0,w:0,d:0,l:0,gf:0,ga:0,pts:0},
+    {name:'TBD',       flag:'🏳️',p:0,w:0,d:0,l:0,gf:0,ga:0,pts:0},
+  ]},
+  F:{teams:[
+    {name:'Germany',   flag:'🇩🇪',p:0,w:0,d:0,l:0,gf:0,ga:0,pts:0},
+    {name:'Japan',     flag:'🇯🇵',p:0,w:0,d:0,l:0,gf:0,ga:0,pts:0},
+    {name:'Bahrain',   flag:'🇧🇭',p:0,w:0,d:0,l:0,gf:0,ga:0,pts:0},
+    {name:'TBD',       flag:'🏳️',p:0,w:0,d:0,l:0,gf:0,ga:0,pts:0},
+  ]},
+  G:{teams:[
+    {name:'Portugal',  flag:'🇵🇹',p:0,w:0,d:0,l:0,gf:0,ga:0,pts:0},
+    {name:'Czech Rep.',flag:'🇨🇿',p:0,w:0,d:0,l:0,gf:0,ga:0,pts:0},
+    {name:'Congo DR',  flag:'🇨🇩',p:0,w:0,d:0,l:0,gf:0,ga:0,pts:0},
+    {name:'Indonesia', flag:'🇮🇩',p:0,w:0,d:0,l:0,gf:0,ga:0,pts:0},
+  ]},
+  H:{teams:[
+    {name:'England',   flag:'🏴󠁧󠁢󠁥󠁮󠁧󠁿',p:0,w:0,d:0,l:0,gf:0,ga:0,pts:0},
+    {name:'Cameroon',  flag:'🇨🇲',p:0,w:0,d:0,l:0,gf:0,ga:0,pts:0},
+    {name:'Serbia',    flag:'🇷🇸',p:0,w:0,d:0,l:0,gf:0,ga:0,pts:0},
+    {name:'Turkmenistan',flag:'🇹🇲',p:0,w:0,d:0,l:0,gf:0,ga:0,pts:0},
+  ]},
+  I:{teams:[
+    {name:'Brazil',    flag:'🇧🇷',p:0,w:0,d:0,l:0,gf:0,ga:0,pts:0},
+    {name:'Ecuador',   flag:'🇪🇨',p:0,w:0,d:0,l:0,gf:0,ga:0,pts:0},
+    {name:'Tunisia',   flag:'🇹🇳',p:0,w:0,d:0,l:0,gf:0,ga:0,pts:0},
+    {name:'TBD',       flag:'🏳️',p:0,w:0,d:0,l:0,gf:0,ga:0,pts:0},
+  ]},
+  J:{teams:[
+    {name:'Netherlands',flag:'🇳🇱',p:0,w:0,d:0,l:0,gf:0,ga:0,pts:0},
+    {name:'Egypt',     flag:'🇪🇬',p:0,w:0,d:0,l:0,gf:0,ga:0,pts:0},
+    {name:'Lesotho',   flag:'🇱🇸',p:0,w:0,d:0,l:0,gf:0,ga:0,pts:0},
+    {name:'TBD',       flag:'🏳️',p:0,w:0,d:0,l:0,gf:0,ga:0,pts:0},
+  ]},
+  K:{teams:[
+    {name:'Colombia',  flag:'🇨🇴',p:0,w:0,d:0,l:0,gf:0,ga:0,pts:0},
+    {name:'Nigeria',   flag:'🇳🇬',p:0,w:0,d:0,l:0,gf:0,ga:0,pts:0},
+    {name:'TBD',       flag:'🏳️',p:0,w:0,d:0,l:0,gf:0,ga:0,pts:0},
+    {name:'TBD',       flag:'🏳️',p:0,w:0,d:0,l:0,gf:0,ga:0,pts:0},
+  ]},
+  L:{teams:[
+    {name:'Belgium',   flag:'🇧🇪',p:0,w:0,d:0,l:0,gf:0,ga:0,pts:0},
+    {name:'Uruguay',   flag:'🇺🇾',p:0,w:0,d:0,l:0,gf:0,ga:0,pts:0},
+    {name:'TBD',       flag:'🏳️',p:0,w:0,d:0,l:0,gf:0,ga:0,pts:0},
+    {name:'TBD',       flag:'🏳️',p:0,w:0,d:0,l:0,gf:0,ga:0,pts:0},
+  ]},
+};
+
+const WC_FIXTURES = [
+  {date:'2026-06-11',time:'19:00',home:'🇲🇽 Mexico',away:'🇧🇴 Bolivia',venue:'Estadio Azteca, Mexico City',group:'C'},
+  {date:'2026-06-12',time:'16:00',home:'🇺🇸 USA',away:'🇵🇦 Panama',venue:'SoFi Stadium, Los Angeles',group:'A'},
+  {date:'2026-06-13',time:'15:00',home:'🇦🇷 Argentina',away:'🇨🇱 Chile',venue:'MetLife Stadium, New York',group:'B'},
+  {date:'2026-06-13',time:'18:00',home:'🇧🇷 Brazil',away:'🇪🇨 Ecuador',venue:'AT&T Stadium, Dallas',group:'I'},
+  {date:'2026-06-13',time:'21:00',home:'🇫🇷 France',away:'🇭🇷 Croatia',venue:"Levi's Stadium, San Francisco",group:'D'},
+  {date:'2026-06-14',time:'15:00',home:'🇩🇪 Germany',away:'🇯🇵 Japan',venue:'Arrowhead Stadium, Kansas City',group:'F'},
+  {date:'2026-06-14',time:'18:00',home:'🇪🇸 Spain',away:'🇸🇳 Senegal',venue:'Mercedes-Benz Stadium, Atlanta',group:'E'},
+  {date:'2026-06-14',time:'21:00',home:'🏴󠁧󠁢󠁥󠁮󠁧󠁿 England',away:'🇨🇲 Cameroon',venue:'Gillette Stadium, Boston',group:'H'},
+  {date:'2026-06-15',time:'18:00',home:'🇵🇹 Portugal',away:'🇮🇩 Indonesia',venue:'Rose Bowl, Los Angeles',group:'G'},
+  {date:'2026-06-15',time:'21:00',home:'🇳🇱 Netherlands',away:'🇪🇬 Egypt',venue:'NRG Stadium, Houston',group:'J'},
+  {date:'2026-06-16',time:'18:00',home:'🇨🇴 Colombia',away:'🇳🇬 Nigeria',venue:'Lumen Field, Seattle',group:'K'},
+  {date:'2026-06-16',time:'21:00',home:'🇧🇪 Belgium',away:'🇺🇾 Uruguay',venue:'Hard Rock Stadium, Miami',group:'L'},
+  {date:'2026-06-17',time:'15:00',home:'🇮🇶 Iraq',away:'🇻🇪 Venezuela',venue:'Arrowhead Stadium, Kansas City',group:'C'},
+  {date:'2026-06-17',time:'18:00',home:'🇸🇦 Saudi Arabia',away:'🇹🇿 Tanzania',venue:'Allegiant Stadium, Las Vegas',group:'D'},
+  {date:'2026-06-18',time:'18:00',home:'🇲🇦 Morocco',away:'🇵🇦 Panama',venue:'SoFi Stadium, Los Angeles',group:'A'},
+  {date:'2026-06-18',time:'21:00',home:'🇦🇺 Australia',away:'🇵🇪 Peru',venue:'AT&T Stadium, Dallas',group:'B'},
+];
+
+// ── Detect tournament phase ──
+function getFifaPhase(){
+  const now = new Date();
+  if(now < FIFA_START) return 'pre';
+  if(now > FIFA_END)   return 'finished';
+  return 'live';
+}
+
+// ── Init entry point (called by setSportTab) ──
+function initFIFA(){
+  const phase = getFifaPhase();
+  updateFifaHero(phase);
+  if(phase === 'pre'){
+    startFifaCountdown();
+  } else {
+    const cw = document.getElementById('fifaCountdownWrap');
+    if(cw) cw.style.display = 'none';
+  }
+  fifaLoadGroups();
+  fifaLoadFixtures();
+  if(phase !== 'pre') fifaLoadMatches();
+  // Auto-tab to live scores if tournament is running
+  if(phase === 'live'){
+    const scoresTabBtn = document.getElementById('ftab-scores');
+    if(scoresTabBtn) setFifaTab('scores', scoresTabBtn);
+  }
+  // Auto-refresh every 30s
+  if(fifaAutoRefresh) clearInterval(fifaAutoRefresh);
+  fifaAutoRefresh = setInterval(()=>{
+    fifaLoadGroups();
+    if(getFifaPhase() !== 'pre') fifaLoadMatches();
+  }, 30000);
+}
+
+// ── Hero status badge ──
+function updateFifaHero(phase){
+  const el = document.getElementById('fifaHeroStatus');
+  if(!el) return;
+  if(phase === 'pre'){
+    el.innerHTML = '<div class="fifa-status-badge">⏳ Pre-Tournament · Groups Confirmed</div>';
+  } else if(phase === 'live'){
+    el.innerHTML = '<div class="fifa-live-badge"><span class="live-dot"></span> TOURNAMENT LIVE</div>';
+  } else {
+    el.innerHTML = '<div class="fifa-status-badge">🏁 Tournament Complete</div>';
+  }
+}
+
+// ── Countdown ──
+function startFifaCountdown(){
+  if(fifaCountdownTimer) clearInterval(fifaCountdownTimer);
+  tickFifaCountdown();
+  fifaCountdownTimer = setInterval(tickFifaCountdown, 1000);
+}
+function tickFifaCountdown(){
+  const diff = FIFA_START - new Date();
+  if(diff <= 0){
+    clearInterval(fifaCountdownTimer);
+    const cw = document.getElementById('fifaCountdownWrap');
+    if(cw) cw.innerHTML = '<div style="color:var(--green);font-weight:700;font-size:1rem;">🏆 Tournament Has Started!</div>';
+    return;
+  }
+  const d = Math.floor(diff/86400000);
+  const h = Math.floor((diff%86400000)/3600000);
+  const m = Math.floor((diff%3600000)/60000);
+  const s = Math.floor((diff%60000)/1000);
+  const set = (id,v)=>{ const e=document.getElementById(id); if(e) e.textContent=String(v).padStart(2,'0'); };
+  set('cd-days',d); set('cd-hours',h); set('cd-mins',m); set('cd-secs',s);
+}
+
+// ── Tab switcher ──
+function setFifaTab(tab, btn){
+  fifaCurrentTab = tab;
+  document.querySelectorAll('.fifa-tab').forEach(t=>t.classList.remove('active'));
+  if(btn) btn.classList.add('active');
+  document.querySelectorAll('.fifa-tab-content').forEach(c=>c.classList.remove('active'));
+  const el = document.getElementById('fifa-'+tab);
+  if(el) el.classList.add('active');
+}
+
+// ── Groups renderer ──
+function fifaLoadGroups(){
+  const grid = document.getElementById('fifaGroupsGrid');
+  if(!grid) return;
+  // Try to fetch live standings from football-data.org (free tier, no key needed for public data)
+  // Falls back to official static groups if API not available
+  fetchFifaStandings().then(liveGroups=>{
+    const groups = liveGroups || WC_GROUPS;
+    renderFifaGroups(groups, !!liveGroups);
+  });
+}
+
+async function fetchFifaStandings(){
+  try {
+    const res = await fetch('https://api.football-data.org/v4/competitions/WC/standings', {
+      headers:{'X-Auth-Token': ''},
+      signal: AbortSignal.timeout(8000)
+    });
+    if(!res.ok) return null;
+    const data = await res.json();
+    if(!data.standings) return null;
+    // Map API format to our group structure
+    const mapped = {};
+    data.standings.forEach(s=>{
+      if(s.type !== 'TOTAL') return;
+      const letter = s.group ? s.group.replace('GROUP_','') : '?';
+      mapped[letter] = {
+        teams: (s.table||[]).map(row=>({
+          name: row.team.shortName || row.team.name,
+          flag: getFlag(row.team.name),
+          p:row.playedGames, w:row.won, d:row.draw, l:row.lost,
+          gf:row.goalsFor, ga:row.goalsAgainst, pts:row.points
+        }))
+      };
+    });
+    return Object.keys(mapped).length > 0 ? mapped : null;
+  } catch(e){ return null; }
+}
+
+function getFlag(teamName){
+  const map = {
+    'United States':'🇺🇸','USA':'🇺🇸','Panama':'🇵🇦','Bolivia':'🇧🇴','Morocco':'🇲🇦',
+    'Argentina':'🇦🇷','Chile':'🇨🇱','Peru':'🇵🇪','Australia':'🇦🇺',
+    'Mexico':'🇲🇽','Jamaica':'🇯🇲','Venezuela':'🇻🇪','Iraq':'🇮🇶',
+    'France':'🇫🇷','Croatia':'🇭🇷','Tanzania':'🇹🇿','Saudi Arabia':'🇸🇦',
+    'Spain':'🇪🇸','Senegal':'🇸🇳','Germany':'🇩🇪','Japan':'🇯🇵','Bahrain':'🇧🇭',
+    'Portugal':'🇵🇹','Czech Republic':'🇨🇿','Congo':'🇨🇩','Indonesia':'🇮🇩',
+    'England':'🏴󠁧󠁢󠁥󠁮󠁧󠁿','Cameroon':'🇨🇲','Serbia':'🇷🇸','Turkmenistan':'🇹🇲',
+    'Brazil':'🇧🇷','Ecuador':'🇪🇨','Tunisia':'🇹🇳',
+    'Netherlands':'🇳🇱','Egypt':'🇪🇬','Lesotho':'🇱🇸',
+    'Colombia':'🇨🇴','Nigeria':'🇳🇬','Belgium':'🇧🇪','Uruguay':'🇺🇾'
+  };
+  for(const [k,v] of Object.entries(map)){
+    if(teamName && teamName.toLowerCase().includes(k.toLowerCase())) return v;
+  }
+  return '🏳️';
+}
+
+function renderFifaGroups(groups, isLive){
+  const grid = document.getElementById('fifaGroupsGrid');
+  const upd  = document.getElementById('fifaGroupsUpdated');
+  if(!grid) return;
+  let html = '';
+  for(const [letter, group] of Object.entries(groups)){
+    html += `<div class="fifa-group-block">
+      <div class="fifa-group-title">Group ${letter} <span class="fifa-group-sub">${group.teams.length} teams</span></div>
+      <table class="standings-table">
+        <thead><tr>
+          <th>#</th><th style="text-align:left">Team</th><th>P</th><th>W</th><th>D</th><th>L</th><th>GD</th><th class="std-pts">Pts</th>
+        </tr></thead><tbody>`;
+    group.teams.forEach((t,i)=>{
+      const gd = t.gf - t.ga;
+      const rowClass = i===0?'q1-row':i===1?'q2-row':'';
+      const rnkClass = i===0?'rank-1':i===1?'rank-2':'rank-other';
+      html += `<tr class="${rowClass}">
+        <td><span class="std-rank ${rnkClass}">${i+1}</span></td>
+        <td><div class="std-team"><span class="std-flag">${t.flag||'🏳️'}</span><span class="std-name">${t.name}</span></div></td>
+        <td>${t.p}</td><td>${t.w}</td><td>${t.d}</td><td>${t.l}</td>
+        <td style="color:${gd>0?'var(--green)':gd<0?'var(--red)':'var(--muted)'}">${gd>0?'+':''}${gd}</td>
+        <td class="std-pts">${t.pts}</td>
+      </tr>`;
+    });
+    html += `</tbody></table>
+      <div class="group-legend">
+        <span><span style="color:var(--green)">■</span> Advance</span>
+        <span><span style="color:#ffd700">■</span> Possible</span>
+      </div>
+    </div>`;
+  }
+  grid.innerHTML = html;
+  if(upd) upd.textContent = (isLive ? '🟢 Live data · ' : '📋 Official draw · ') + 'Updated ' + new Date().toLocaleTimeString();
+}
+
+// ── Live Matches ──
+async function fifaLoadMatches(){
+  const el = document.getElementById('fifaMatches');
+  const upd= document.getElementById('fifaScoresUpdated');
+  if(!el) return;
+  const phase = getFifaPhase();
+  if(phase === 'pre'){
+    el.innerHTML = `<div class="fifa-info-box" style="grid-column:1/-1">
+      <div style="font-size:1.5rem;margin-bottom:0.5rem">⏳</div>
+      <strong>Tournament starts June 11, 2026</strong><br>
+      Live scores will appear here automatically when matches begin.
+    </div>`;
+    if(upd) upd.textContent = 'Waiting for tournament to start...';
+    return;
+  }
+  try {
+    const res = await fetch('https://api.football-data.org/v4/competitions/WC/matches?status=LIVE,IN_PLAY,PAUSED,FINISHED', {
+      headers:{'X-Auth-Token':''},
+      signal: AbortSignal.timeout(8000)
+    });
+    if(!res.ok) throw new Error('API error');
+    const data = await res.json();
+    renderFifaMatches(data.matches || []);
+    if(upd) upd.textContent = '🟢 Live · Updated ' + new Date().toLocaleTimeString();
+  } catch(e){
+    el.innerHTML = `<div class="fifa-info-box" style="grid-column:1/-1">
+      <div style="font-size:1.5rem;margin-bottom:0.5rem">📡</div>
+      <strong>Live scores require an API key</strong><br>
+      Get a free key at <strong style="color:var(--cyan)">football-data.org</strong> and add it to the code header.
+    </div>`;
+    if(upd) upd.textContent = 'API key needed for live scores';
+  }
+}
+
+function renderFifaMatches(matches){
+  const el = document.getElementById('fifaMatches');
+  if(!el) return;
+  const live     = matches.filter(m=>m.status==='IN_PLAY'||m.status==='PAUSED');
+  const finished = matches.filter(m=>m.status==='FINISHED').slice(-6);
+  let html = '';
+  if(!live.length && !finished.length){
+    html = `<div class="fifa-info-box" style="grid-column:1/-1">
+      No matches right now. Check the Fixtures tab for upcoming games.
+    </div>`;
+  }
+  if(live.length){
+    html += `<div style="grid-column:1/-1;font-size:0.7rem;font-weight:700;color:#ff2d55;text-transform:uppercase;letter-spacing:1px;margin-bottom:0.25rem">🔴 Live Now</div>`;
+    live.forEach(m=>{ html += buildMatchCard(m, true); });
+  }
+  if(finished.length){
+    html += `<div style="grid-column:1/-1;font-size:0.7rem;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:1px;margin:${live.length?'1rem':0} 0 0.25rem">✅ Recent Results</div>`;
+    finished.forEach(m=>{ html += buildMatchCard(m, false); });
+  }
+  el.innerHTML = html;
+}
+
+function buildMatchCard(m, isLive){
+  const hs = m.score?.fullTime?.home ?? m.score?.halfTime?.home ?? '-';
+  const as = m.score?.fullTime?.away ?? m.score?.halfTime?.away ?? '-';
+  const hFlag = getFlag(m.homeTeam?.name||'');
+  const aFlag = getFlag(m.awayTeam?.name||'');
+  const hName = m.homeTeam?.shortName || m.homeTeam?.name || '?';
+  const aName = m.awayTeam?.shortName || m.awayTeam?.name || '?';
+  const grp   = m.group ? 'Group '+m.group.replace('GROUP_','') : '';
+  return `<div class="fifa-match-card ${isLive?'live-card':''}">
+    <div class="fmc-status">
+      ${isLive?`<span class="fmc-live">LIVE</span>`:`<span class="fmc-finished">FULL TIME</span>`}
+      <span class="fmc-group">${grp}</span>
+    </div>
+    <div class="fmc-teams">
+      <div class="fmc-team">
+        <div class="fmc-flag">${hFlag}</div>
+        <div class="fmc-name">${hName}</div>
+      </div>
+      <div class="fmc-divider">
+        ${m.status==='TIMED'?`<div class="fmc-vs">VS</div>`:`<div style="display:flex;gap:4px;align-items:center"><div class="fmc-score">${hs}</div><div style="color:var(--muted);font-size:0.9rem">-</div><div class="fmc-score">${as}</div></div>`}
+        ${isLive && m.minute ? `<div class="fmc-min">${m.minute}'</div>` : ''}
+      </div>
+      <div class="fmc-team">
+        <div class="fmc-flag">${aFlag}</div>
+        <div class="fmc-name">${aName}</div>
+      </div>
+    </div>
+    ${m.venue ? `<div class="fmc-venue">${m.venue}</div>` : ''}
+  </div>`;
+}
+
+// ── Fixtures renderer ──
+function fifaLoadFixtures(){
+  const el = document.getElementById('fifaFixtures');
+  if(!el) return;
+  const now = new Date();
+  const upcoming = WC_FIXTURES.filter(f => new Date(f.date+'T'+f.time+':00Z') > now);
+  const past     = WC_FIXTURES.filter(f => new Date(f.date+'T'+f.time+':00Z') <= now);
+  let html = '';
+  if(upcoming.length){
+    html += `<div class="fifa-section-sep">Upcoming Fixtures</div>`;
+    upcoming.forEach(f=>{
+      const d = new Date(f.date+'T'+f.time+':00Z');
+      html += `<div class="fixture-row">
+        <div class="fixture-date">
+          <div class="fixture-day">${d.getDate()}</div>
+          <div class="fixture-mon">${d.toLocaleString('en',{month:'short'})}</div>
+        </div>
+        <div class="fixture-teams">
+          <div class="fixture-matchup">${f.home} <span style="color:var(--muted);font-size:0.75rem">vs</span> ${f.away}</div>
+          <div class="fixture-meta">Group ${f.group} · ${f.venue}</div>
+        </div>
+        <div class="fixture-time">${d.toLocaleTimeString('en',{hour:'2-digit',minute:'2-digit'})}</div>
+      </div>`;
+    });
+  }
+  if(past.length){
+    html += `<div class="fifa-section-sep">Past Kickoffs</div>`;
+    past.forEach(f=>{
+      const d = new Date(f.date+'T'+f.time+':00Z');
+      html += `<div class="fixture-row" style="opacity:0.55">
+        <div class="fixture-date">
+          <div class="fixture-day">${d.getDate()}</div>
+          <div class="fixture-mon">${d.toLocaleString('en',{month:'short'})}</div>
+        </div>
+        <div class="fixture-teams">
+          <div class="fixture-matchup">${f.home} <span style="color:var(--muted);font-size:0.75rem">vs</span> ${f.away}</div>
+          <div class="fixture-meta">Group ${f.group} · ${f.venue}</div>
+        </div>
+        <div class="fixture-time" style="color:var(--muted)">FT</div>
+      </div>`;
+    });
+  }
+  if(!upcoming.length && !past.length){
+    html = `<div class="fifa-info-box">Full fixture schedule coming soon.</div>`;
+  }
+  el.innerHTML = html;
+}
+
+// Scorers tab — placeholder until tournament starts
+document.addEventListener('DOMContentLoaded',()=>{
+  const sc = document.getElementById('fifaScorers');
+  if(sc){
+    const phase = getFifaPhase();
+    if(phase === 'pre'){
+      sc.innerHTML = `<div class="fifa-info-box">
+        <div style="font-size:1.5rem;margin-bottom:0.5rem">⚽</div>
+        <strong>Top scorers will appear here once the tournament begins.</strong><br>
+        Data updates automatically during the tournament.
+      </div>`;
+    }
+  }
+});
 
 
 <script>

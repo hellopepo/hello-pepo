@@ -1798,7 +1798,124 @@
       box-shadow:0 0 20px rgba(255,215,0,0.15);
     }
 
-    /* ===== FIFA WORLD CUP CSS ===== */
+    /* IPL tab */
+    .sport-tab.ipl-tab{background:linear-gradient(135deg,rgba(255,107,0,0.1),rgba(255,215,0,0.06));border-color:rgba(255,107,0,0.3);color:#ff6b00;}
+    .sport-tab.ipl-tab.active{background:linear-gradient(135deg,rgba(255,107,0,0.18),rgba(255,215,0,0.08));border-color:#ff6b00;color:#ff6b00;box-shadow:0 0 20px rgba(255,107,0,0.2);}
+
+    /* ===== CRICKET HUB CSS ===== */
+    .ipl-hero{position:relative;border-radius:20px;overflow:hidden;margin-bottom:1.5rem;min-height:215px;border:1px solid rgba(255,107,0,0.2);}
+    .ipl-hero-bg{position:absolute;inset:0;background:radial-gradient(ellipse 80% 60% at 50% 0%,rgba(255,107,0,0.14),transparent 65%),radial-gradient(ellipse 50% 50% at 0% 100%,rgba(255,215,0,0.07),transparent 55%),radial-gradient(ellipse 50% 50% at 100% 80%,rgba(0,230,118,0.05),transparent 55%),linear-gradient(135deg,#0d1522,#111827);}
+    .ipl-hero-bg::after{content:'';position:absolute;inset:0;background-image:linear-gradient(rgba(255,107,0,0.03) 1px,transparent 1px),linear-gradient(90deg,rgba(255,107,0,0.03) 1px,transparent 1px);background-size:32px 32px;}
+    .ipl-orb{position:absolute;border-radius:50%;filter:blur(50px);pointer-events:none;animation:iplOrbFloat 6s ease-in-out infinite alternate;}
+    .ipl-orb1{width:180px;height:180px;top:-60px;right:-40px;background:rgba(255,107,0,0.18);}
+    .ipl-orb2{width:140px;height:140px;bottom:-50px;left:-30px;background:rgba(255,215,0,0.12);animation-delay:-3s;}
+    @keyframes iplOrbFloat{0%{transform:translate(0,0)scale(1);}100%{transform:translate(15px,-15px)scale(1.1);}}
+    .ipl-hero-content{position:relative;z-index:1;display:flex;flex-direction:column;align-items:center;padding:1.75rem 1.5rem;text-align:center;}
+    .ipl-trophy-wrap{position:relative;margin-bottom:0.6rem;}
+    .ipl-trophy{font-size:3rem;display:block;animation:trophyBounce 2.5s ease-in-out infinite;filter:drop-shadow(0 0 18px rgba(255,107,0,0.6));}
+    .ipl-trophy-ring{position:absolute;inset:-8px;border-radius:50%;border:2px solid rgba(255,107,0,0.3);animation:iplRingPulse 2s ease-in-out infinite;}
+    @keyframes iplRingPulse{0%,100%{transform:scale(1);opacity:0.5;}50%{transform:scale(1.15);opacity:0;}}
+    .ipl-hero-title{font-family:'Syne',sans-serif;font-weight:800;font-size:clamp(1.5rem,4vw,2.4rem);background:linear-gradient(135deg,#ff6b00,#ffd700,#fff);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:0.2rem;}
+    .ipl-hero-sub{color:var(--muted);font-size:0.85rem;margin-bottom:1.2rem;}
+    .ipl-hero-stats{display:flex;align-items:center;gap:1.2rem;}
+    .ipl-hstat{text-align:center;}
+    .ipl-hnum{font-family:'Syne',sans-serif;font-weight:800;font-size:1.6rem;color:#ff6b00;}
+    .ipl-hlbl{font-size:0.65rem;color:var(--muted);text-transform:uppercase;letter-spacing:0.5px;margin-top:0.1rem;}
+    .ipl-hdiv{width:1px;height:30px;background:rgba(255,107,0,0.2);}
+
+    /* Sub tabs */
+    .ipl-subtabs{display:flex;gap:0.5rem;overflow-x:auto;scrollbar-width:none;padding:0 0 0.75rem;margin-bottom:1.25rem;border-bottom:1px solid var(--border);}
+    .ipl-subtabs::-webkit-scrollbar{display:none;}
+    .ipl-stab{background:var(--surface);border:1px solid var(--border);color:var(--muted);padding:0.45rem 1rem;border-radius:20px;font-family:'DM Sans',sans-serif;font-size:0.82rem;font-weight:600;cursor:pointer;transition:all 0.2s;white-space:nowrap;}
+    .ipl-stab.active{background:rgba(255,107,0,0.12);border-color:rgba(255,107,0,0.4);color:#ff6b00;box-shadow:0 0 15px rgba(255,107,0,0.1);}
+    .ipl-stab:hover:not(.active){border-color:var(--muted);color:var(--text);}
+    .ipl-pane{display:none;animation:fadeUp 0.3s ease;}
+    .ipl-pane.active{display:block;}
+    .ipl-pane-title{font-family:'Syne',sans-serif;font-weight:700;font-size:1rem;color:var(--text);margin-bottom:1rem;padding-bottom:0.5rem;border-bottom:1px solid var(--border);}
+
+    /* Match card */
+    .ipl-match{background:var(--surface);border:1px solid var(--border);border-radius:18px;margin-bottom:1rem;overflow:hidden;transition:all 0.3s;animation:cardIn 0.4s ease both;}
+    .ipl-match:hover{transform:translateY(-3px);box-shadow:0 12px 35px rgba(0,0,0,0.4);}
+    .ipl-match.live-now{border-color:rgba(255,45,85,0.35);animation:cardIn 0.4s ease both,iplPulse 2.5s ease-in-out infinite;}
+    @keyframes iplPulse{0%,100%{box-shadow:0 0 0 0 rgba(255,45,85,0.15);}50%{box-shadow:0 0 0 8px rgba(255,45,85,0);}}
+    .ipl-mbar{display:flex;align-items:center;justify-content:space-between;padding:0.6rem 1rem;border-bottom:1px solid var(--border);background:rgba(255,255,255,0.02);}
+    .ipl-slive{display:flex;align-items:center;gap:0.4rem;color:#ff2d55;font-size:0.7rem;font-weight:700;text-transform:uppercase;letter-spacing:0.8px;}
+    .ipl-ldot{width:7px;height:7px;border-radius:50%;background:#ff2d55;animation:pulse 1s infinite;}
+    .ipl-sdone{color:var(--muted);font-size:0.7rem;font-weight:600;}
+    .ipl-ssoon{color:var(--cyan);font-size:0.7rem;font-weight:600;}
+    .ipl-venue{color:var(--muted);font-size:0.68rem;}
+    .ipl-mno{font-size:0.65rem;color:var(--muted);background:var(--surface2);padding:0.15rem 0.5rem;border-radius:6px;}
+    .ipl-sc{padding:1rem;}
+    .ipl-trow{display:flex;align-items:center;gap:0.85rem;padding:0.65rem 0;border-bottom:1px solid rgba(255,255,255,0.04);}
+    .ipl-trow:last-child{border-bottom:none;}
+    .ipl-tlogo{width:44px;height:44px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:1.4rem;flex-shrink:0;border:1px solid rgba(255,255,255,0.1);background:rgba(255,255,255,0.04);}
+    .ipl-tinfo{flex:1;}
+    .ipl-tname{font-weight:700;font-size:0.92rem;margin-bottom:0.12rem;}
+    .ipl-tab2{font-size:0.64rem;color:var(--muted);letter-spacing:0.5px;}
+    .ipl-tscore{text-align:right;}
+    .ipl-runs{font-family:'Syne',sans-serif;font-weight:800;font-size:1.3rem;color:var(--text);}
+    .ipl-runs.batting{color:#ff6b00;text-shadow:0 0 10px rgba(255,107,0,0.3);}
+    .ipl-wkov{font-size:0.7rem;color:var(--muted);margin-top:0.15rem;text-align:right;}
+    .ipl-bat-badge{font-size:0.58rem;font-weight:700;background:rgba(255,107,0,0.12);border:1px solid rgba(255,107,0,0.25);color:#ff6b00;padding:0.15rem 0.45rem;border-radius:4px;text-transform:uppercase;display:inline-block;margin-left:0.35rem;}
+    .ipl-rrrow{display:flex;gap:0.5rem;flex-wrap:wrap;padding:0.5rem 1rem;border-top:1px solid rgba(255,255,255,0.04);}
+    .ipl-rr{font-size:0.68rem;font-weight:600;padding:0.2rem 0.6rem;border-radius:20px;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);color:var(--muted);}
+    .ipl-rr b{color:var(--text);}
+    .ipl-mfooter{padding:0.6rem 1rem;background:rgba(255,255,255,0.02);border-top:1px solid var(--border);font-size:0.75rem;font-weight:600;text-align:center;}
+    .ipl-mfooter.result{color:var(--green);}
+    .ipl-mfooter.status{color:var(--cyan);}
+    .ipl-mfooter.toss{color:var(--muted);}
+
+    /* Points table */
+    .ipl-table-wrap{overflow-x:auto;}
+    .ipl-ptable{width:100%;border-collapse:collapse;font-size:0.78rem;min-width:500px;}
+    .ipl-ptable th{color:var(--muted);font-weight:600;padding:0.5rem 0.5rem;text-align:center;border-bottom:1px solid var(--border);font-size:0.68rem;text-transform:uppercase;letter-spacing:0.5px;white-space:nowrap;}
+    .ipl-ptable th:nth-child(2){text-align:left;}
+    .ipl-ptable td{padding:0.55rem 0.5rem;text-align:center;border-bottom:1px solid rgba(255,255,255,0.04);}
+    .ipl-ptable td:nth-child(2){text-align:left;}
+    .ipl-ptable tr:hover td{background:rgba(255,255,255,0.025);}
+    .ipl-ptable .qual td{background:rgba(0,230,118,0.025);}
+    .ipl-tc{display:flex;align-items:center;gap:0.5rem;}
+    .ipl-tem{font-size:1.2rem;}
+    .ipl-tn{font-weight:600;color:var(--text);white-space:nowrap;}
+    .ipl-pts{font-weight:700;color:#ff6b00;}
+    .ipl-ptable .qual .ipl-pts{color:var(--green);}
+    .ipl-nrr-p{color:var(--green);font-size:0.72rem;}
+    .ipl-nrr-n{color:var(--red);font-size:0.72rem;}
+    .rank-circle{width:20px;height:20px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:0.65rem;font-weight:700;flex-shrink:0;}
+    .rq{background:rgba(0,230,118,0.15);color:var(--green);border:1px solid rgba(0,230,118,0.3);}
+    .rn{background:rgba(255,255,255,0.05);color:var(--muted);}
+
+    /* Cap cards */
+    .cap-row{display:flex;align-items:center;gap:1rem;background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:0.9rem 1rem;margin-bottom:0.65rem;transition:all 0.25s;animation:cardIn 0.3s ease both;}
+    .cap-row:hover{transform:translateX(5px);}
+    .cap-row.oc:hover{border-color:rgba(255,107,0,0.35);box-shadow:0 4px 20px rgba(255,107,0,0.1);}
+    .cap-row.pc:hover{border-color:rgba(168,85,247,0.35);box-shadow:0 4px 20px rgba(168,85,247,0.1);}
+    .cap-rank-num{font-family:'Syne',sans-serif;font-weight:800;font-size:1.1rem;min-width:26px;text-align:center;flex-shrink:0;}
+    .cap-avatar{width:44px;height:44px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1.4rem;flex-shrink:0;border:2px solid rgba(255,255,255,0.1);background:rgba(255,255,255,0.05);}
+    .cap-info{flex:1;}
+    .cap-player{font-weight:700;font-size:0.9rem;}
+    .cap-team{font-size:0.72rem;color:var(--muted);margin-top:0.1rem;}
+    .cap-stat-box{display:flex;flex-direction:column;align-items:flex-end;}
+    .cap-big{font-family:'Syne',sans-serif;font-weight:800;font-size:1.4rem;}
+    .oc-color{color:#ff6b00;text-shadow:0 0 12px rgba(255,107,0,0.4);}
+    .pc-color{color:#a855f7;text-shadow:0 0 12px rgba(168,85,247,0.4);}
+    .cap-unit{font-size:0.62rem;color:var(--muted);text-transform:uppercase;letter-spacing:0.5px;}
+    .cap-extras{display:flex;gap:0.6rem;margin-top:0.25rem;}
+    .cap-mini{font-size:0.68rem;color:var(--muted);}
+    .cap-mini b{color:var(--text);}
+
+    /* Schedule */
+    .ipl-fix{display:flex;align-items:center;gap:0.75rem;background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:0.8rem 1rem;margin-bottom:0.6rem;transition:all 0.25s;animation:cardIn 0.3s ease both;}
+    .ipl-fix:hover{border-color:rgba(255,107,0,0.2);box-shadow:0 4px 15px rgba(0,0,0,0.3);}
+    .ipl-fdate{background:rgba(255,107,0,0.08);border:1px solid rgba(255,107,0,0.15);border-radius:10px;padding:0.4rem 0.6rem;text-align:center;min-width:52px;flex-shrink:0;}
+    .ipl-fday{font-size:1rem;font-weight:800;font-family:'Syne',sans-serif;color:#ff6b00;}
+    .ipl-fmon{font-size:0.6rem;color:var(--muted);text-transform:uppercase;letter-spacing:0.5px;}
+    .ipl-finfo{flex:1;}
+    .ipl-fmatch{font-weight:600;font-size:0.88rem;display:flex;align-items:center;gap:0.4rem;flex-wrap:wrap;}
+    .ipl-fmeta{font-size:0.68rem;color:var(--muted);margin-top:0.2rem;}
+    .ipl-ftime{font-size:0.75rem;font-weight:600;color:#ff6b00;background:rgba(255,107,0,0.08);padding:0.25rem 0.5rem;border-radius:6px;white-space:nowrap;}
+
+    @media(max-width:480px){.ipl-hero-stats{gap:0.8rem;}.ipl-hnum{font-size:1.2rem;}.ipl-subtabs{gap:0.35rem;}}
     .fifa-hero{position:relative;border-radius:20px;overflow:hidden;margin-bottom:1.5rem;border:1px solid rgba(255,215,0,0.2);min-height:200px;}
     .fifa-hero-bg{position:absolute;inset:0;background:radial-gradient(ellipse 80% 60% at 50% 0%,rgba(255,215,0,0.12),transparent 70%),radial-gradient(ellipse 60% 50% at 0% 100%,rgba(0,229,255,0.08),transparent 60%),radial-gradient(ellipse 60% 50% at 100% 100%,rgba(0,230,118,0.06),transparent 60%),linear-gradient(135deg,#0d1522,#111827);animation:fifaBgPulse 4s ease-in-out infinite alternate;}
     @keyframes fifaBgPulse{0%{opacity:0.8;}100%{opacity:1;}}
@@ -2332,7 +2449,110 @@
     }
     .apps-mod-count b{color:var(--green);font-weight:700;}
 
-    /* ===== AI HUB CARD ===== */
+    /* App count chip */
+    .apps-mod-count{
+      font-size:0.72rem;color:var(--muted);margin-top:0.35rem;
+      display:flex;align-items:center;gap:0.35rem;
+    }
+    .apps-mod-count b{color:var(--green);font-weight:700;}
+
+    /* ===== PDF LIBRARY CARD ===== */
+    .feat-card.pdf-card{
+      background:linear-gradient(135deg,rgba(245,158,11,0.07),rgba(239,68,68,0.04));
+      border:1px solid rgba(245,158,11,0.2);position:relative;overflow:hidden;
+    }
+    .feat-card.pdf-card::before{content:'';position:absolute;inset:0;border-radius:inherit;background:linear-gradient(135deg,rgba(245,158,11,0.14),rgba(239,68,68,0.06),transparent);opacity:0;transition:opacity 0.4s;}
+    .feat-card.pdf-card::after{content:'';position:absolute;top:0;left:-100%;width:60%;height:100%;background:linear-gradient(90deg,transparent,rgba(245,158,11,0.08),transparent);transition:left 0.6s;}
+    .feat-card.pdf-card:hover{box-shadow:0 24px 60px rgba(245,158,11,0.15),0 0 0 1px rgba(245,158,11,0.3),0 0 50px rgba(245,158,11,0.07);border-color:rgba(245,158,11,0.4);}
+    .feat-card.pdf-card:hover::before{opacity:1;}
+    .feat-card.pdf-card:hover::after{left:140%;}
+    .pdf-live-dot{color:#f59e0b!important;}
+    .pdf-fd{background:#f59e0b!important;}
+    .pdf-icon-wrap{background:linear-gradient(135deg,rgba(245,158,11,0.18),rgba(239,68,68,0.1))!important;border-color:rgba(245,158,11,0.3)!important;animation:pdfIconPulse 2.5s ease-in-out infinite alternate;}
+    @keyframes pdfIconPulse{0%{box-shadow:0 0 0 0 rgba(245,158,11,0);}100%{box-shadow:0 0 18px 4px rgba(245,158,11,0.25);}}
+    .pdf-badge{display:inline-flex;align-items:center;gap:0.3rem;background:rgba(245,158,11,0.1);border:1px solid rgba(245,158,11,0.22);color:#f59e0b;font-size:0.62rem;font-weight:700;padding:0.18rem 0.55rem;border-radius:20px;letter-spacing:0.5px;text-transform:uppercase;margin-bottom:0.5rem;width:fit-content;}
+    .pdf-badge-dot{width:5px;height:5px;border-radius:50%;background:#f59e0b;animation:badgePulse 1.5s ease-in-out infinite;}
+    .pdf-title{background:linear-gradient(135deg,#f59e0b,#ef4444);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+    .pdf-count-row{font-size:0.72rem;color:var(--muted);margin-top:0.35rem;display:flex;align-items:center;gap:0.35rem;}
+    .pdf-count-row b{color:#f59e0b;font-weight:700;}
+    .pdf-cta{background:linear-gradient(135deg,rgba(245,158,11,0.12),rgba(239,68,68,0.08))!important;color:#f59e0b!important;border:1px solid rgba(245,158,11,0.25)!important;}
+    .feat-card.pdf-card:hover .pdf-cta{background:linear-gradient(135deg,#f59e0b,#ef4444)!important;color:#000!important;border-color:transparent!important;box-shadow:0 4px 20px rgba(245,158,11,0.35)!important;}
+
+    /* ===== PDF LIBRARY SECTION ===== */
+    .pdf-section{padding:1.5rem;margin-bottom:0.5rem;}
+    .pdf-section-header{display:flex;align-items:flex-start;justify-content:space-between;gap:1rem;margin-bottom:1.2rem;flex-wrap:wrap;}
+    .pdf-section-title{font-family:'Syne',sans-serif;font-weight:800;font-size:1.3rem;background:linear-gradient(135deg,#f59e0b,#ef4444);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+    .pdf-section-sub{color:var(--muted);font-size:0.8rem;margin-top:0.2rem;}
+    .pdf-total-chip{background:rgba(245,158,11,0.1);border:1px solid rgba(245,158,11,0.2);color:#f59e0b;font-size:0.75rem;font-weight:700;padding:0.3rem 0.8rem;border-radius:20px;white-space:nowrap;}
+    .pdf-search-row{display:flex;flex-direction:column;gap:0.75rem;margin-bottom:1.25rem;}
+    .pdf-search-wrap{display:flex;align-items:center;gap:0.5rem;background:rgba(255,255,255,0.04);border:1px solid var(--border);border-radius:12px;padding:0.6rem 1rem;transition:border-color 0.2s;}
+    .pdf-search-wrap:focus-within{border-color:rgba(245,158,11,0.4);}
+    .pdf-search-icon{font-size:1rem;flex-shrink:0;}
+    .pdf-search-wrap input{flex:1;background:transparent;border:none;color:var(--text);font-family:'DM Sans',sans-serif;font-size:0.9rem;outline:none;}
+    .pdf-search-wrap input::placeholder{color:var(--muted);}
+    .pdf-cats{display:flex;gap:0.4rem;overflow-x:auto;scrollbar-width:none;padding-bottom:0.2rem;}
+    .pdf-cats::-webkit-scrollbar{display:none;}
+    .pdf-cat{background:var(--surface);border:1px solid var(--border);color:var(--muted);padding:0.35rem 0.8rem;border-radius:20px;font-family:'DM Sans',sans-serif;font-size:0.78rem;font-weight:600;cursor:pointer;transition:all 0.2s;white-space:nowrap;}
+    .pdf-cat.active{background:rgba(245,158,11,0.12);border-color:rgba(245,158,11,0.35);color:#f59e0b;}
+    .pdf-cat:hover:not(.active){border-color:var(--muted);color:var(--text);}
+
+    /* Book grid */
+    .pdf-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:1rem;}
+    .pdf-book-card{background:var(--surface);border:1px solid var(--border);border-radius:16px;overflow:hidden;cursor:pointer;transition:all 0.3s cubic-bezier(0.34,1.56,0.64,1);animation:cardIn 0.4s ease both;}
+    .pdf-book-card:hover{transform:translateY(-5px) scale(1.02);border-color:rgba(245,158,11,0.3);box-shadow:0 16px 40px rgba(0,0,0,0.4),0 0 20px rgba(245,158,11,0.1);}
+    .pdf-cover{height:120px;background:linear-gradient(135deg,var(--bg),var(--surface2));display:flex;align-items:center;justify-content:center;font-size:3rem;border-bottom:1px solid var(--border);position:relative;overflow:hidden;}
+    .pdf-cover img{width:100%;height:100%;object-fit:cover;}
+    .pdf-cover-grad{position:absolute;bottom:0;left:0;right:0;height:40px;background:linear-gradient(transparent,var(--surface2));}
+    .pdf-book-body{padding:0.75rem;}
+    .pdf-book-cat{font-size:0.62rem;font-weight:700;color:#f59e0b;letter-spacing:0.5px;text-transform:uppercase;margin-bottom:0.25rem;}
+    .pdf-book-title{font-weight:700;font-size:0.85rem;line-height:1.3;margin-bottom:0.25rem;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;}
+    .pdf-book-author{font-size:0.7rem;color:var(--muted);margin-bottom:0.6rem;}
+    .pdf-dl-chip{width:100%;background:linear-gradient(135deg,rgba(245,158,11,0.1),rgba(239,68,68,0.07));border:1px solid rgba(245,158,11,0.2);color:#f59e0b;font-size:0.75rem;font-weight:600;padding:0.45rem;border-radius:8px;cursor:pointer;font-family:'DM Sans',sans-serif;transition:all 0.2s;display:flex;align-items:center;justify-content:center;gap:0.3rem;}
+    .pdf-dl-chip:hover{background:linear-gradient(135deg,#f59e0b,#ef4444);color:#000;border-color:transparent;}
+    .pdf-empty{text-align:center;padding:3rem 1rem;color:var(--muted);grid-column:1/-1;}
+    .pdf-empty-icon{font-size:3rem;margin-bottom:0.75rem;}
+    .pdf-empty-title{font-family:'Syne',sans-serif;font-weight:700;color:var(--text2);margin-bottom:0.35rem;}
+    .pdf-empty-sub{font-size:0.82rem;}
+
+    /* PDF Modal */
+    .pdf-modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,0.85);backdrop-filter:blur(12px);z-index:600;display:flex;align-items:center;justify-content:center;padding:1rem;opacity:0;pointer-events:none;transition:opacity 0.3s;}
+    .pdf-modal-overlay.open{opacity:1;pointer-events:auto;}
+    .pdf-modal{background:linear-gradient(135deg,rgba(17,24,39,0.98),rgba(10,14,26,0.98));border:1px solid rgba(245,158,11,0.2);border-radius:20px;width:100%;max-width:480px;overflow:hidden;transform:translateY(30px) scale(0.96);transition:transform 0.35s cubic-bezier(0.34,1.56,0.64,1);}
+    .pdf-modal-overlay.open .pdf-modal{transform:translateY(0) scale(1);}
+    .pdf-modal-header{display:flex;align-items:center;justify-content:space-between;padding:1.25rem 1.25rem 1rem;border-bottom:1px solid var(--border);}
+    .pdf-modal-info{display:flex;align-items:center;gap:0.85rem;flex:1;min-width:0;}
+    .pdf-modal-icon{font-size:2.5rem;flex-shrink:0;}
+    .pdf-modal-title{font-family:'Syne',sans-serif;font-weight:800;font-size:1.1rem;line-height:1.2;}
+    .pdf-modal-meta{font-size:0.75rem;color:var(--muted);margin-top:0.2rem;}
+    .pdf-modal-close{background:var(--surface2);border:1px solid var(--border);color:var(--muted);width:32px;height:32px;border-radius:8px;cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:all 0.2s;}
+    .pdf-modal-close:hover{color:var(--text);background:var(--surface3);}
+    .pdf-modal-desc{padding:1rem 1.25rem;color:var(--muted);font-size:0.85rem;line-height:1.6;border-bottom:1px solid var(--border);}
+    .pdf-modal-actions{display:flex;gap:0.75rem;padding:1rem 1.25rem;}
+    .pdf-dl-btn{flex:1;background:linear-gradient(135deg,#f59e0b,#ef4444);color:#000;font-weight:700;font-family:'DM Sans',sans-serif;font-size:0.88rem;padding:0.75rem;border-radius:12px;text-decoration:none;text-align:center;transition:all 0.2s;display:flex;align-items:center;justify-content:center;gap:0.4rem;}
+    .pdf-dl-btn:hover{transform:translateY(-2px);box-shadow:0 8px 25px rgba(245,158,11,0.35);}
+    .pdf-read-btn{flex:1;background:rgba(245,158,11,0.1);border:1px solid rgba(245,158,11,0.25);color:#f59e0b;font-weight:600;font-family:'DM Sans',sans-serif;font-size:0.88rem;padding:0.75rem;border-radius:12px;text-decoration:none;text-align:center;transition:all 0.2s;display:flex;align-items:center;justify-content:center;gap:0.4rem;}
+    .pdf-read-btn:hover{background:rgba(245,158,11,0.18);}
+
+    /* PDF Admin */
+    .pdf-admin-card{background:var(--surface);border:1px solid rgba(245,158,11,0.2);border-radius:18px;padding:1.5rem;margin-bottom:1.5rem;}
+    .pdf-admin-title{font-family:'Syne',sans-serif;font-weight:800;font-size:1.1rem;background:linear-gradient(135deg,#f59e0b,#ef4444);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:1.25rem;}
+    .pdf-add-form{background:rgba(245,158,11,0.04);border:1px solid rgba(245,158,11,0.15);border-radius:14px;padding:1.25rem;margin-bottom:1.25rem;}
+    .pdf-add-form-title{font-weight:700;font-size:0.9rem;color:var(--text);margin-bottom:1rem;}
+    .pdf-cover-prev{width:80px;height:100px;border-radius:10px;border:2px dashed rgba(245,158,11,0.3);background:rgba(245,158,11,0.05);display:flex;align-items:center;justify-content:center;font-size:2rem;margin-top:0.5rem;overflow:hidden;}
+    .pdf-cover-prev img{width:100%;height:100%;object-fit:cover;border-radius:8px;}
+    .pdf-admin-list-header{font-weight:700;font-size:0.88rem;color:var(--text);padding:0.75rem 0;border-top:1px solid var(--border);margin-top:0.5rem;margin-bottom:0.5rem;}
+    .pdf-admin-row{display:flex;align-items:center;gap:0.85rem;padding:0.8rem 0;border-bottom:1px solid rgba(255,255,255,0.04);transition:background 0.2s;}
+    .pdf-admin-row:hover{background:rgba(255,255,255,0.02);}
+    .pdf-admin-row:last-child{border-bottom:none;}
+    .pdf-admin-icon{width:40px;height:50px;border-radius:8px;background:rgba(245,158,11,0.1);border:1px solid rgba(245,158,11,0.2);display:flex;align-items:center;justify-content:center;font-size:1.3rem;flex-shrink:0;overflow:hidden;}
+    .pdf-admin-icon img{width:100%;height:100%;object-fit:cover;border-radius:7px;}
+    .pdf-admin-info{flex:1;min-width:0;}
+    .pdf-admin-name{font-weight:600;font-size:0.88rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+    .pdf-admin-meta{font-size:0.72rem;color:var(--muted);margin-top:0.15rem;}
+    .pdf-del-btn{background:rgba(255,77,109,0.1);border:none;color:var(--red);padding:0.35rem 0.75rem;border-radius:6px;font-size:0.75rem;font-weight:600;cursor:pointer;font-family:'DM Sans',sans-serif;transition:all 0.2s;flex-shrink:0;}
+    .pdf-del-btn:hover{background:var(--red);color:#fff;}
+
+    @media(max-width:480px){.pdf-grid{grid-template-columns:repeat(auto-fill,minmax(140px,1fr));}.pdf-modal-actions{flex-direction:column;}}
     .feat-card.ai-hub-card{
       background:linear-gradient(135deg,rgba(168,85,247,0.08),rgba(0,229,255,0.05));
       border:1px solid rgba(168,85,247,0.2);
@@ -2690,7 +2910,7 @@
 
   <!-- Desktop Nav -->
   <div class="nav-right" id="desktopNav">
-    <a class="tg-btn" href="https://t.me/AraFaaaah" target="_blank" style="font-size:0.8rem;padding:0.35rem 0.9rem;">
+    <a class="tg-btn" href="https://t.me/+c6wr1cp_PgY1MTM1" target="_blank" style="font-size:0.8rem;padding:0.35rem 0.9rem;">
       ✈️ <span>Telegram</span>
     </a>
   </div>
@@ -2703,7 +2923,7 @@
 
 <!-- Mobile Menu -->
 <div class="mobile-menu" id="mobileMenu">
-  <a href="https://t.me/AraFaaaah" target="_blank" class="tg-mobile">✈️ Join Telegram</a>
+  <a href="https://t.me/+c6wr1cp_PgY1MTM1" target="_blank" class="tg-mobile">✈️ Join Telegram</a>
   <button onclick="showPage('home');toggleMenu()">🏠 Home</button>
 </div>
 
@@ -2738,7 +2958,7 @@ document.addEventListener('click',(e)=>{
 <div id="home" class="page active">
   <div class="tg-banner">
     <p>📢 নতুন apps এর update পেতে <b>Telegram Channel</b> এ Join করো!</p>
-    <a class="tg-join" href="https://t.me/AraFaaaah" target="_blank">✈️ Join Now</a>
+    <a class="tg-join" href="https://t.me/+c6wr1cp_PgY1MTM1" target="_blank">✈️ Join Now</a>
   </div>
   <div class="hero">
     <!-- Floating glow orbs -->
@@ -2774,7 +2994,7 @@ document.addEventListener('click',(e)=>{
 
     <!-- Premium CTA buttons -->
     <div class="hero-ctas">
-      <a class="cta-primary" href="https://t.me/AraFaaaah" target="_blank">✈️ Join Telegram</a>
+      <a class="cta-primary" href="https://t.me/+c6wr1cp_PgY1MTM1" target="_blank">✈️ Join Telegram</a>
       <button class="cta-secondary" onclick="document.querySelector('.categories').scrollIntoView({behavior:'smooth'})">🔥 Browse Apps</button>
     </div>
 
@@ -2846,8 +3066,21 @@ document.addEventListener('click',(e)=>{
         </div>
       </div>
 
+      <!-- PDF Library Card -->
+      <div class="feat-card pdf-card" onclick="document.getElementById('pdfLibSection').scrollIntoView({behavior:'smooth'})">
+        <div class="feat-card-inner">
+          <div class="feat-live-dot pdf-live-dot"><span class="fd pdf-fd"></span> Free Books</div>
+          <div class="feat-icon-wrap pdf-icon-wrap">📚</div>
+          <div class="pdf-badge"><span class="pdf-badge-dot"></span>New Books Daily</div>
+          <div class="feat-title pdf-title">PDF Library</div>
+          <div class="feat-desc">Books, guides & study materials — free PDF download করো</div>
+          <div class="pdf-count-row">📖 <b id="pdfTotalCount">0</b> books available</div>
+          <button class="feat-cta pdf-cta">Browse Books →</button>
+        </div>
+      </div>
+
       <!-- Telegram -->
-      <div class="feat-card tg-card" onclick="window.open('https://t.me/AraFaaaah','_blank')">
+      <div class="feat-card tg-card" onclick="window.open('https://t.me/+c6wr1cp_PgY1MTM1','_blank')">
         <div class="feat-card-inner">
           <div class="feat-live-dot"><span class="fd"></span> Join Us</div>
           <div class="feat-icon-wrap">✈️</div>
@@ -2909,13 +3142,80 @@ document.addEventListener('click',(e)=>{
     <div class="modal-site-promo">
       🆓 আরও free APK পেতে 👉
       <a href="https://hellopepo.github.io" target="_blank">hellopepo.github.io</a>
-      · ✈️ <a href="https://t.me/AraFaaaah" target="_blank">Telegram Join করো</a>
+      · ✈️ <a href="https://t.me/+c6wr1cp_PgY1MTM1" target="_blank">Telegram Join করো</a>
     </div>
   </div>
 </div>
 
 <!-- TRENDING SECTION — no title -->
 <div class="trending-section" id="trendingSection">
+
+<!-- ===== PDF LIBRARY SECTION ===== -->
+<div class="pdf-section" id="pdfLibSection">
+
+  <!-- Header -->
+  <div class="pdf-section-header">
+    <div class="pdf-header-left">
+      <div class="pdf-section-title">📚 PDF Library</div>
+      <div class="pdf-section-sub">Free books, guides & study materials</div>
+    </div>
+    <div class="pdf-header-right">
+      <div class="pdf-total-chip" id="pdfChipCount">0 Books</div>
+    </div>
+  </div>
+
+  <!-- Search & Filter -->
+  <div class="pdf-search-row">
+    <div class="pdf-search-wrap">
+      <span class="pdf-search-icon">🔍</span>
+      <input type="text" id="pdfSearch" placeholder="Search books, authors..." oninput="filterPDFs()"/>
+    </div>
+    <div class="pdf-cats" id="pdfCatBtns">
+      <button class="pdf-cat active" onclick="setPdfCat('All',this)">All</button>
+      <button class="pdf-cat" onclick="setPdfCat('Academic',this)">📘 Academic</button>
+      <button class="pdf-cat" onclick="setPdfCat('Novel',this)">📖 Novel</button>
+      <button class="pdf-cat" onclick="setPdfCat('Islamic',this)">🕌 Islamic</button>
+      <button class="pdf-cat" onclick="setPdfCat('Tech',this)">💻 Tech</button>
+      <button class="pdf-cat" onclick="setPdfCat('Other',this)">📦 Other</button>
+    </div>
+  </div>
+
+  <!-- Book Grid -->
+  <div class="pdf-grid" id="pdfGrid">
+    <div class="pdf-empty">
+      <div class="pdf-empty-icon">📚</div>
+      <div class="pdf-empty-title">Library is empty</div>
+      <div class="pdf-empty-sub">Admin panel থেকে books add করো</div>
+    </div>
+  </div>
+
+</div>
+
+<!-- PDF VIEWER MODAL -->
+<div class="pdf-modal-overlay" id="pdfModal" onclick="if(event.target===this)closePdfModal()">
+  <div class="pdf-modal">
+    <div class="pdf-modal-header">
+      <div class="pdf-modal-info">
+        <div class="pdf-modal-icon" id="pdfModalIcon">📖</div>
+        <div>
+          <div class="pdf-modal-title" id="pdfModalTitle">Book Title</div>
+          <div class="pdf-modal-meta" id="pdfModalMeta">Author · Category</div>
+        </div>
+      </div>
+      <button class="pdf-modal-close" onclick="closePdfModal()">✕</button>
+    </div>
+    <div class="pdf-modal-desc" id="pdfModalDesc"></div>
+    <div class="pdf-modal-actions">
+      <a class="pdf-dl-btn" id="pdfDlBtn" href="#" target="_blank" download>⬇️ Download PDF</a>
+      <a class="pdf-read-btn" id="pdfReadBtn" href="#" target="_blank">👁️ Read Online</a>
+    </div>
+    <div class="modal-site-promo">
+      📚 আরও books পেতে 👉 <a href="https://hellopepo.github.io" target="_blank">hellopepo.github.io</a>
+      · ✈️ <a href="https://t.me/+c6wr1cp_PgY1MTM1" target="_blank">Telegram Join করো</a>
+    </div>
+  </div>
+</div>
+
   <div class="trending-scroll" id="trendingScroll"></div>
   <div class="scroll-dots" id="scrollDots"></div>
 </div>
@@ -3103,6 +3403,53 @@ document.addEventListener('click',(e)=>{
       <div id="adminList"><div style="padding:2rem;text-align:center;color:var(--muted)">Loading...</div></div>
     </div>
 
+    <!-- ===== PDF LIBRARY ADMIN ===== -->
+    <div class="pdf-admin-card">
+      <div class="pdf-admin-title">📚 PDF Library Management</div>
+
+      <!-- Add PDF form -->
+      <div class="pdf-add-form">
+        <div class="pdf-add-form-title">➕ নতুন Book/PDF Add করো</div>
+        <div class="form-grid">
+          <div class="fg"><label>Book Title <span class="r">*</span></label><input type="text" id="pdf-title" placeholder="e.g. Physics Guide 2025"/></div>
+          <div class="fg"><label>Author</label><input type="text" id="pdf-author" placeholder="e.g. Dr. Karim"/></div>
+          <div class="fg"><label>Category</label>
+            <select id="pdf-cat">
+              <option value="Academic">📘 Academic</option>
+              <option value="Novel">📖 Novel</option>
+              <option value="Islamic">🕌 Islamic</option>
+              <option value="Tech">💻 Tech</option>
+              <option value="Other">📦 Other</option>
+            </select>
+          </div>
+          <div class="fg"><label>Language</label>
+            <select id="pdf-lang">
+              <option value="বাংলা">🇧🇩 বাংলা</option>
+              <option value="English">🇬🇧 English</option>
+              <option value="Both">🌐 Both</option>
+            </select>
+          </div>
+          <div class="fg full"><label>Description</label><textarea id="pdf-desc" placeholder="বইটির সংক্ষিপ্ত বিবরণ..." style="min-height:70px"></textarea></div>
+          <div class="fg full"><label>PDF Download Link <span class="r">*</span></label><input type="url" id="pdf-link" placeholder="https://drive.google.com/... বা যেকোনো direct PDF link"/></div>
+          <div class="fg full">
+            <label>Cover Image (optional)</label>
+            <input type="file" id="pdf-cover" accept="image/*" style="background:transparent;border:none;padding:0;color:var(--muted);font-size:0.83rem" onchange="prevPdfCover(this)"/>
+            <div class="pdf-cover-prev" id="pdfCoverPrev">📚</div>
+          </div>
+        </div>
+        <div style="display:flex;gap:0.75rem;margin-top:1rem;flex-wrap:wrap">
+          <button class="btn-g" id="pdfAddBtn" onclick="addPDF()">📚 Add Book</button>
+          <button class="btn-o" onclick="clearPdfForm()">✖️ Clear</button>
+        </div>
+      </div>
+
+      <!-- PDF list -->
+      <div class="pdf-admin-list-header">
+        <span>📖 All Books (<span id="pdfAdminCount">0</span>)</span>
+      </div>
+      <div id="pdfAdminList"><div style="padding:1.5rem;text-align:center;color:var(--muted);font-size:0.85rem">কোনো book নেই — উপরে add করো</div></div>
+    </div>
+
     <div class="settings-card">
       <div class="sec-title">⚙️ Settings</div>
       <label style="font-size:0.82rem;color:var(--muted);display:block;margin-bottom:0.4rem">🔑 Password পরিবর্তন</label>
@@ -3126,12 +3473,13 @@ document.addEventListener('click',(e)=>{
 
   <!-- Sport Tabs -->
   <div class="sport-tabs">
-    <button class="sport-tab active" id="stab-all"     onclick="setSportTab('all',this)">🌐 All Sports</button>
-    <button class="sport-tab"        id="stab-football" onclick="setSportTab('football',this)">⚽ Football</button>
-    <button class="sport-tab"        id="stab-cricket"  onclick="setSportTab('cricket',this)">🏏 Cricket</button>
-    <button class="sport-tab"        id="stab-upcoming" onclick="setSportTab('upcoming',this)">📅 Upcoming</button>
-    <button class="sport-tab"        id="stab-finished" onclick="setSportTab('finished',this)">✅ Finished</button>
-    <button class="sport-tab fifa-tab" id="stab-fifa"   onclick="setSportTab('fifa',this)">🌍 FIFA 2026</button>
+    <button class=\"sport-tab active\" id=\"stab-all\"     onclick=\"setSportTab('all',this)\">🌐 All Sports</button>
+    <button class=\"sport-tab\"        id=\"stab-football\" onclick=\"setSportTab('football',this)\">⚽ Football</button>
+    <button class=\"sport-tab\"        id=\"stab-cricket\"  onclick=\"setSportTab('cricket',this)\">🏏 Cricket</button>
+    <button class=\"sport-tab ipl-tab\" id=\"stab-ipl\"    onclick=\"setSportTab('ipl',this)\">🏏 Cricket Hub</button>
+    <button class=\"sport-tab\"        id=\"stab-upcoming\" onclick=\"setSportTab('upcoming',this)\">📅 Upcoming</button>
+    <button class=\"sport-tab\"        id=\"stab-finished\" onclick=\"setSportTab('finished',this)\">✅ Finished</button>
+    <button class=\"sport-tab fifa-tab\" id=\"stab-fifa\"   onclick=\"setSportTab('fifa',this)\">🌍 FIFA 2026</button>
   </div>
 
   <!-- Refresh -->
@@ -3215,6 +3563,72 @@ document.addEventListener('click',(e)=>{
     </div>
 
   </div>
+</div>
+
+<!-- ===== CRICKET HUB SECTION ===== -->
+<div id="cricketHubSection" style="display:none;padding:0 0 4rem">
+
+  <!-- Hero -->
+  <div class="ipl-hero">
+    <div class="ipl-hero-bg"></div>
+    <div class="ipl-orb ipl-orb1"></div>
+    <div class="ipl-orb ipl-orb2"></div>
+    <div class="ipl-hero-content">
+      <div class="ipl-trophy-wrap">
+        <span class="ipl-trophy">🏆</span>
+        <div class="ipl-trophy-ring"></div>
+      </div>
+      <div class="ipl-hero-title">IPL 2025</div>
+      <div class="ipl-hero-sub">Indian Premier League · Season 18</div>
+      <div class="ipl-hero-stats">
+        <div class="ipl-hstat"><div class="ipl-hnum">10</div><div class="ipl-hlbl">Teams</div></div>
+        <div class="ipl-hdiv"></div>
+        <div class="ipl-hstat"><div class="ipl-hnum">74</div><div class="ipl-hlbl">Matches</div></div>
+        <div class="ipl-hdiv"></div>
+        <div class="ipl-hstat"><div class="ipl-hnum">22</div><div class="ipl-hlbl">Remaining</div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Sub Tabs -->
+  <div class="ipl-subtabs">
+    <button class="ipl-stab active" onclick="setIPLTab('live',this)">🔴 Live</button>
+    <button class="ipl-stab" onclick="setIPLTab('standings',this)">📊 Points Table</button>
+    <button class="ipl-stab" onclick="setIPLTab('orange',this)">🟠 Orange Cap</button>
+    <button class="ipl-stab" onclick="setIPLTab('purple',this)">🟣 Purple Cap</button>
+    <button class="ipl-stab" onclick="setIPLTab('schedule',this)">📅 Schedule</button>
+  </div>
+
+  <!-- Live Matches -->
+  <div id="ipl-live" class="ipl-pane active">
+    <div class="ipl-pane-title">🔴 Live & Recent Matches</div>
+    <div id="iplLiveCards"></div>
+  </div>
+
+  <!-- Points Table -->
+  <div id="ipl-standings" class="ipl-pane">
+    <div class="ipl-pane-title">📊 Points Table — IPL 2025</div>
+    <div class="ipl-table-wrap"><table class="ipl-ptable" id="iplPointsTable"></table></div>
+  </div>
+
+  <!-- Orange Cap -->
+  <div id="ipl-orange" class="ipl-pane">
+    <div class="ipl-pane-title">🟠 Orange Cap — Top Run Scorers</div>
+    <div id="iplOrangeList"></div>
+  </div>
+
+  <!-- Purple Cap -->
+  <div id="ipl-purple" class="ipl-pane">
+    <div class="ipl-pane-title">🟣 Purple Cap — Top Wicket Takers</div>
+    <div id="iplPurpleList"></div>
+  </div>
+
+  <!-- Schedule -->
+  <div id="ipl-schedule" class="ipl-pane">
+    <div class="ipl-pane-title">📅 Upcoming Fixtures</div>
+    <div id="iplScheduleList"></div>
+  </div>
+
 </div>
 
 <!-- LIVE TV PAGE -->
@@ -5184,7 +5598,7 @@ document.addEventListener('keydown', e=>{ if(e.key==='Escape') closeTVModal(); }
 
     <div class="bnav-sep" aria-hidden="true"></div>
 
-    <a class="bnav-btn bnav-tg" href="https://t.me/AraFaaaah" target="_blank" rel="noopener" aria-label="Join Telegram">
+    <a class="bnav-btn bnav-tg" href="https://t.me/+c6wr1cp_PgY1MTM1" target="_blank" rel="noopener" aria-label="Join Telegram">
       <span class="icon">✈️</span>
       <span>Telegram</span>
     </a>
@@ -5923,6 +6337,199 @@ window.addEventListener('fb-ready', ()=>{
     if(firstTab) moveTabIndicator(firstTab);
   }, 800);
 });
+</script>
+
+<script>
+// ===== PDF LIBRARY SYSTEM =====
+const PDF_KEY = 'hp_pdfs_v1';
+
+function getPDFs(){
+  try{ return JSON.parse(localStorage.getItem(PDF_KEY)||'[]'); }
+  catch{ return []; }
+}
+function savePDFs(arr){
+  localStorage.setItem(PDF_KEY, JSON.stringify(arr));
+}
+
+// Render PDF grid on homepage
+function renderPDFs(search='', cat='All'){
+  const grid = document.getElementById('pdfGrid');
+  if(!grid) return;
+  let books = getPDFs();
+  if(cat !== 'All') books = books.filter(b => b.cat === cat);
+  if(search){
+    const q = search.toLowerCase();
+    books = books.filter(b =>
+      b.title.toLowerCase().includes(q) ||
+      (b.author||'').toLowerCase().includes(q) ||
+      (b.desc||'').toLowerCase().includes(q)
+    );
+  }
+  // Update count chips
+  const all = getPDFs();
+  const countEl = document.getElementById('pdfTotalCount');
+  const chipEl  = document.getElementById('pdfChipCount');
+  const cardEl  = document.getElementById('pdfTotalCount');
+  if(countEl) countEl.textContent = all.length;
+  if(chipEl)  chipEl.textContent  = all.length + ' Books';
+
+  if(!books.length){
+    grid.innerHTML = `<div class="pdf-empty">
+      <div class="pdf-empty-icon">📚</div>
+      <div class="pdf-empty-title">${search||cat!=='All'?'কোনো result নেই':'Library is empty'}</div>
+      <div class="pdf-empty-sub">${search||cat!=='All'?'অন্য keyword try করো':'Admin panel থেকে books add করো'}</div>
+    </div>`;
+    return;
+  }
+
+  grid.innerHTML = books.map((b,i) => `
+    <div class="pdf-book-card" style="animation-delay:${i*0.06}s" onclick="openPdfModal('${b.id}')">
+      <div class="pdf-cover">
+        ${b.cover ? `<img src="${b.cover}" alt="${b.title}" onerror="this.style.display='none'"/>` : '📚'}
+        <div class="pdf-cover-grad"></div>
+      </div>
+      <div class="pdf-book-body">
+        <div class="pdf-book-cat">${b.cat}</div>
+        <div class="pdf-book-title">${b.title}</div>
+        <div class="pdf-book-author">${b.author||'Unknown'} · ${b.lang||'বাংলা'}</div>
+        <button class="pdf-dl-chip" onclick="event.stopPropagation();window.open('${b.link}','_blank')">
+          ⬇️ Download
+        </button>
+      </div>
+    </div>
+  `).join('');
+}
+
+// Filter
+let _pdfCat = 'All';
+function setPdfCat(cat, btn){
+  _pdfCat = cat;
+  document.querySelectorAll('.pdf-cat').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+  renderPDFs(document.getElementById('pdfSearch')?.value||'', cat);
+}
+function filterPDFs(){
+  const q = document.getElementById('pdfSearch')?.value||'';
+  renderPDFs(q, _pdfCat);
+}
+
+// Open modal
+function openPdfModal(id){
+  const book = getPDFs().find(b=>b.id===id);
+  if(!book) return;
+  document.getElementById('pdfModalIcon').textContent  = book.cover ? '📖' : '📚';
+  document.getElementById('pdfModalTitle').textContent = book.title;
+  document.getElementById('pdfModalMeta').textContent  = `${book.author||'Unknown'} · ${book.cat} · ${book.lang||'বাংলা'}`;
+  document.getElementById('pdfModalDesc').textContent  = book.desc || 'বিবরণ নেই।';
+  document.getElementById('pdfDlBtn').href   = book.link;
+  document.getElementById('pdfReadBtn').href = book.link;
+  document.getElementById('pdfModal').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+function closePdfModal(){
+  document.getElementById('pdfModal').classList.remove('open');
+  document.body.style.overflow = '';
+}
+document.addEventListener('keydown', e=>{ if(e.key==='Escape') closePdfModal(); });
+
+// ===== ADMIN: Add PDF =====
+function prevPdfCover(input){
+  const file = input.files[0]; if(!file) return;
+  const reader = new FileReader();
+  reader.onload = e => {
+    const prev = document.getElementById('pdfCoverPrev');
+    prev.innerHTML = `<img src="${e.target.result}" style="width:100%;height:100%;object-fit:cover;border-radius:8px">`;
+    prev._data = e.target.result;
+  };
+  reader.readAsDataURL(file);
+}
+
+function addPDF(){
+  const title  = document.getElementById('pdf-title').value.trim();
+  const author = document.getElementById('pdf-author').value.trim();
+  const cat    = document.getElementById('pdf-cat').value;
+  const lang   = document.getElementById('pdf-lang').value;
+  const desc   = document.getElementById('pdf-desc').value.trim();
+  const link   = document.getElementById('pdf-link').value.trim();
+  const prev   = document.getElementById('pdfCoverPrev');
+
+  if(!title){ toast('Book title দাও!','error'); return; }
+  if(!link){  toast('PDF link দাও!','error'); return; }
+
+  const btn = document.getElementById('pdfAddBtn');
+  btn.disabled = true; btn.textContent = '⏳ Saving...';
+
+  const book = {
+    id: 'pdf_' + Date.now(),
+    title, author, cat, lang, desc, link,
+    cover: prev._data || '',
+    addedAt: new Date().toLocaleDateString('bn-BD')
+  };
+
+  const books = getPDFs();
+  books.unshift(book);
+  savePDFs(books);
+
+  clearPdfForm();
+  renderPDFs();
+  loadAdminPDFs();
+  toast(`"${title}" library তে add হয়েছে! 📚`);
+  btn.disabled = false; btn.textContent = '📚 Add Book';
+}
+
+function clearPdfForm(){
+  ['pdf-title','pdf-author','pdf-desc','pdf-link'].forEach(id=>{
+    const el = document.getElementById(id); if(el) el.value='';
+  });
+  const prev = document.getElementById('pdfCoverPrev');
+  if(prev){ prev.innerHTML='📚'; prev._data=null; }
+  const fi = document.getElementById('pdf-cover');
+  if(fi) fi.value='';
+}
+
+function deletePDF(id){
+  const book = getPDFs().find(b=>b.id===id);
+  if(!book || !confirm(`"${book.title}" delete করবে?`)) return;
+  savePDFs(getPDFs().filter(b=>b.id!==id));
+  renderPDFs();
+  loadAdminPDFs();
+  toast(`"${book.title}" deleted!`);
+}
+
+function loadAdminPDFs(){
+  const list  = document.getElementById('pdfAdminList');
+  const count = document.getElementById('pdfAdminCount');
+  if(!list) return;
+  const books = getPDFs();
+  if(count) count.textContent = books.length;
+  if(!books.length){
+    list.innerHTML='<div style="padding:1.5rem;text-align:center;color:var(--muted);font-size:0.85rem">কোনো book নেই — উপরে add করো</div>';
+    return;
+  }
+  list.innerHTML = books.map(b=>`
+    <div class="pdf-admin-row">
+      <div class="pdf-admin-icon">${b.cover?`<img src="${b.cover}">`:'📚'}</div>
+      <div class="pdf-admin-info">
+        <div class="pdf-admin-name">${b.title}</div>
+        <div class="pdf-admin-meta">${b.author||'Unknown'} · ${b.cat} · ${b.lang}</div>
+      </div>
+      <button class="pdf-del-btn" onclick="deletePDF('${b.id}')">🗑️</button>
+    </div>
+  `).join('');
+}
+
+// Hook into existing admin load
+const _origLoadAdminApps = window.loadAdminApps;
+window.loadAdminApps = function(){
+  if(_origLoadAdminApps) _origLoadAdminApps();
+  loadAdminPDFs();
+};
+
+// Init on page load
+document.addEventListener('DOMContentLoaded', ()=>{
+  renderPDFs();
+});
+window.addEventListener('load', ()=>{ renderPDFs(); });
 </script>
 
 </body>

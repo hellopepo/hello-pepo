@@ -3763,74 +3763,158 @@ function formatMatchDate(dt){
 }
 
 // ════════════════════════════
-//  CRICKET — cricapi.com free
-// ════════════════════════════
-async function fetchCricket(){
-  try{
-    const res = await fetch('https://api.cricapi.com/v1/currentMatches?apikey=a52ea237-4f9a-4a64-862a-152f3f3ba3d8&offset=0');
-    if(!res.ok) throw new Error('cricapi '+res.status);
-    const json = await res.json();
-    if(json.status !== 'success') throw new Error('cricapi bad response');
-    return parseCricketAPI(json.data||[]);
-  }catch(e){
-    console.warn('CricAPI failed:', e.message);
-    return fetchCricketFallback();
+//  CRICKET — cricapi.com (Real API key)
+// ════════════════════════════════════════
+const CRIC_API_KEY = 'c29509bf-1782-4f12-bdaa-bd1cfeb6c550';
+const CRIC_BASE    = 'https://api.cricapi.com/v1';
+// ▼ Cloudflare Worker proxy URL — replace after deploying cricket-worker.js
+// Example: 'https://cricket-proxy.YOUR-NAME.workers.dev'
+const CRIC_PROXY   = 'https://cricket-proxy.yeasin83446.workers.dev';
+
+// Smart fetch: tries proxy first (for GitHub Pages), falls back to direct
+async function cricFetch(endpoint){
+  const useProxy = CRIC_PROXY && CRIC_PROXY !== 'YOUR_WORKER_URL_HERE';
+  if(useProxy){
+    const res = await fetch(`${CRIC_PROXY}?endpoint=${endpoint}&offset=0`);
+    if(!res.ok) throw new Error('Proxy error '+res.status);
+    return res.json();
+  } else {
+    // Direct call (works on localhost, may fail on GitHub Pages due to CORS)
+    const res = await fetch(`${CRIC_BASE}/${endpoint}?apikey=${CRIC_API_KEY}&offset=0`);
+    if(!res.ok) throw new Error('CricAPI error '+res.status);
+    return res.json();
   }
 }
 
-function parseCricketAPI(matches){
-  const live=[], upcoming=[], finished=[];
-  (matches||[]).slice(0,15).forEach(m=>{
-    const t1 = m.teams?.[0]||m.t1||'Team A';
-    const t2 = m.teams?.[1]||m.t2||'Team B';
-    const s1 = m.score?.[0] ? `${m.score[0].r}/${m.score[0].w}` : '';
-    const ov1= m.score?.[0]?.o ? `${m.score[0].o} ov` : '';
-    const s2 = m.score?.[1] ? `${m.score[1].r}/${m.score[1].w}` : '';
-    const ov2= m.score?.[1]?.o ? `${m.score[1].o} ov` : '';
-    const isLive = m.matchStarted && !m.matchEnded;
-    const isDone = m.matchEnded;
-    const status = isLive?'live': isDone?'finished':'upcoming';
-    const obj = {
-      id:m.id, sport:'cricket', league:(m.name||'Cricket').split(',')[0],
-      leagueIcon:'🏏',
-      team1:{name:t1, flag:getFlag(t1), score:s1, overs:ov1},
-      team2:{name:t2, flag:getFlag(t2), score:s2, overs:ov2},
-      status,
-      time: isLive?(m.status||'Live'):isDone?'Finished':formatMatchDate(m.dateTimeGMT),
-      venue: m.venue||'TBC',
-      detail: m.status||'',
-      minute: isLive?(m.status||''):'',
-    };
-    if(status==='live') live.push(obj);
-    else if(status==='finished') finished.push(obj);
-    else upcoming.push(obj);
+// Country flag map for cricket teams
+const CRICKET_FLAGS = {
+  'india':'🇮🇳','australia':'🇦🇺','england':'🏴󠁧󠁢󠁥󠁮󠁧󠁿','pakistan':'🇵🇰',
+  'south africa':'🇿🇦','new zealand':'🇳🇿','west indies':'🏝️','sri lanka':'🇱🇰',
+  'bangladesh':'🇧🇩','afghanistan':'🇦🇫','zimbabwe':'🇿🇼','ireland':'🇮🇪',
+  'scotland':'🏴󠁧󠁢󠁳󠁣󠁴󠁿','netherlands':'🇳🇱','namibia':'🇳🇦','canada':'🇨🇦',
+  'usa':'🇺🇸','united states':'🇺🇸','kenya':'🇰🇪','nepal':'🇳🇵',
+  'oman':'🇴🇲','uae':'🇦🇪','united arab emirates':'🇦🇪','png':'🇵🇬',
+  'papua new guinea':'🇵🇬','uganda':'🇺🇬','tanzania':'🇹🇿',
+  'mumbai indians':'🔵','chennai super kings':'🟡','royal challengers':'🔴',
+  'kolkata knight riders':'🟣','delhi capitals':'🔵','rajasthan royals':'🩷',
+  'sunrisers hyderabad':'🟠','punjab kings':'🔴','gujarat titans':'🔵',
+  'lucknow super giants':'🔵',
+};
+
+function cricFlag(teamName){
+  if(!teamName) return '🏏';
+  const lower = teamName.toLowerCase();
+  for(const [k,v] of Object.entries(CRICKET_FLAGS)){
+    if(lower.includes(k)) return v;
+  }
+  // fallback: first letter emoji-style
+  return '🏏';
+}
+
+function cricFormatDate(dateStr){
+  if(!dateStr) return 'TBC';
+  try{
+    const d = new Date(dateStr);
+    return d.toLocaleString('en-GB',{day:'2-digit',month:'short',hour:'2-digit',minute:'2-digit'});
+  }catch(e){ return dateStr; }
+}
+
+function cricMatchType(m){
+  const type = (m.matchType||'').toUpperCase();
+  if(type==='TEST') return '🏏 TEST';
+  if(type==='ODI')  return '🏏 ODI';
+  if(type==='T20')  return '🏏 T20';
+  if(type==='T20I') return '🏏 T20I';
+  return '🏏 '+(m.matchType||'Cricket');
+}
+
+function cricParseScore(m, teamIdx){
+  // score array: each entry has {r, w, o, inning}
+  const scores = (m.score||[]).filter(s=>{
+    const inning = (s.inning||'').toLowerCase();
+    const teamName = (m.teams?.[teamIdx]||'').toLowerCase();
+    return inning.includes(teamName) || inning.includes(`inning ${teamIdx+1}`) || inning.includes(`innings ${teamIdx+1}`);
   });
-  return { live, upcoming:upcoming.slice(0,5), finished:finished.slice(0,4), standings:[] };
+  if(!scores.length){
+    // fallback: take by index
+    const s = m.score?.[teamIdx];
+    if(!s) return {score:'', overs:''};
+    return {
+      score: `${s.r??''}${s.w!==undefined ? '/'+s.w : ''}`,
+      overs: s.o ? `(${s.o} ov)` : ''
+    };
+  }
+  // multiple innings (TEST)
+  return {
+    score: scores.map(s=>`${s.r??''}${s.w!==undefined?'/'+s.w:''}`).join(' & '),
+    overs: scores.map(s=>s.o?(s.o+' ov'):'' ).filter(Boolean).join(' & ')
+  };
 }
 
-async function fetchCricketFallback(){
+function cricBuildMatch(m){
+  const t1  = m.teams?.[0] || 'Team A';
+  const t2  = m.teams?.[1] || 'Team B';
+  const sc1 = cricParseScore(m, 0);
+  const sc2 = cricParseScore(m, 1);
+  const isLive   = m.matchStarted && !m.matchEnded;
+  const isDone   = m.matchEnded;
+  const status   = isLive ? 'live' : isDone ? 'finished' : 'upcoming';
+  const leagueRaw= (m.name||'Cricket').split(',');
+  const league   = leagueRaw[leagueRaw.length-1]?.trim() || 'Cricket';
+  return {
+    id:         m.id,
+    sport:      'cricket',
+    league:     league,
+    leagueIcon: cricMatchType(m),
+    team1:{ name:t1, flag:cricFlag(t1), score:sc1.score, overs:sc1.overs },
+    team2:{ name:t2, flag:cricFlag(t2), score:sc2.score, overs:sc2.overs },
+    status,
+    time:   isLive ? (m.status||'Live') : isDone ? 'Finished' : cricFormatDate(m.dateTimeGMT),
+    venue:  m.venue || 'TBC',
+    detail: m.status || (isLive ? 'In Progress' : isDone ? 'Match Ended' : 'Scheduled'),
+    minute: isLive ? (m.status||'') : '',
+  };
+}
+
+async function fetchCricket(){
+  const live=[], upcoming=[], finished=[];
   try{
-    const res = await fetch('https://www.thesportsdb.com/api/v1/json/3/eventsseason.php?id=4484&s=2024-2025');
-    const json = await res.json();
-    const events = (json.events||[]).slice(0,8);
-    const live=[], upcoming=[], finished=[];
-    events.forEach(e=>{
-      const t1=e.strHomeTeam||'Team A', t2=e.strAwayTeam||'Team B';
-      const done = e.strStatus==='Match Finished' || (e.intHomeScore!==null && e.intHomeScore!==undefined);
-      const status = done?'finished':'upcoming';
-      const obj={
-        id:e.idEvent, sport:'cricket', league:e.strLeague||'Cricket', leagueIcon:'🏏',
-        team1:{name:t1,flag:getFlag(t1),score:done?String(e.intHomeScore||0):'',overs:''},
-        team2:{name:t2,flag:getFlag(t2),score:done?String(e.intAwayScore||0):'',overs:''},
-        status, time:done?'FT':formatMatchDate(e.dateEvent+' '+e.strTime),
-        venue:e.strVenue||'TBC', detail:e.strStatus||'', minute:'',
-      };
-      if(status==='finished') finished.push(obj); else upcoming.push(obj);
-    });
-    return { live, upcoming:upcoming.slice(0,5), finished:finished.slice(0,4), standings:[] };
-  }catch(e2){
-    return { live:[], upcoming:[], finished:[], standings:[] };
-  }
+    // 1. currentMatches — live + recent
+    const j1 = await cricFetch('currentMatches');
+    if(j1.status==='success'){
+      (j1.data||[]).forEach(m=>{
+        const obj = cricBuildMatch(m);
+        if(obj.status==='live')          live.push(obj);
+        else if(obj.status==='finished') finished.push(obj);
+        else                             upcoming.push(obj);
+      });
+    }
+  }catch(e){ console.warn('CricAPI currentMatches failed:', e.message); }
+
+  try{
+    // 2. matches endpoint — upcoming fixtures (if we have few upcoming)
+    if(upcoming.length < 4){
+      const j2 = await cricFetch('matches');
+      if(j2.status==='success'){
+        (j2.data||[]).forEach(m=>{
+          const obj = cricBuildMatch(m);
+          const dup = [...live,...upcoming,...finished].some(x=>x.id===obj.id);
+          if(!dup){
+            if(obj.status==='live')          live.push(obj);
+            else if(obj.status==='finished') finished.push(obj);
+            else                             upcoming.push(obj);
+          }
+        });
+      }
+    }
+  }catch(e){ console.warn('CricAPI matches failed:', e.message); }
+
+  return {
+    live:     live.slice(0, 6),
+    upcoming: upcoming.slice(0, 8),
+    finished: finished.slice(0, 6),
+    standings: [],
+  };
 }
 
 // ════════════════════════════════════════════
@@ -3844,79 +3928,141 @@ const FOOTBALL_LEAGUES = [
   {id:'4334', name:'Ligue 1',         icon:'🇫🇷'},
 ];
 
+// ════════════════════════════════════════
+//  FOOTBALL-DATA.ORG API KEY
+// ════════════════════════════════════════
+const FD_API_KEY = 'b280d0eb1ec84b5f815d7a7fc537a052';
+const FD_HEADERS = { 'X-Auth-Token': FD_API_KEY };
+
+// Leagues to fetch: EPL(PL), Champions League(CL), La Liga(PD), Bundesliga(BL1), Serie A(SA)
+const FD_COMPETITIONS = [
+  {code:'PL',  name:'Premier League',      icon:'🏴󠁧󠁢󠁥󠁮󠁧󠁿'},
+  {code:'CL',  name:'Champions League',    icon:'⭐'},
+  {code:'PD',  name:'La Liga',             icon:'🇪🇸'},
+  {code:'BL1', name:'Bundesliga',          icon:'🇩🇪'},
+  {code:'SA',  name:'Serie A',             icon:'🇮🇹'},
+];
+
+async function fdFetch(path){
+  const res = await fetch(`https://api.football-data.org/v4/${path}`, {
+    headers: FD_HEADERS,
+    signal: AbortSignal.timeout(10000)
+  });
+  if(!res.ok) throw new Error(`HTTP ${res.status}`);
+  return res.json();
+}
+
+function fdMatchStatus(m){
+  const s = m.status;
+  if(s==='IN_PLAY'||s==='PAUSED') return 'live';
+  if(s==='FINISHED')              return 'finished';
+  if(s==='TIMED'||s==='SCHEDULED') return 'upcoming';
+  return 'upcoming';
+}
+
+function fdFormatTime(m){
+  const s = m.status;
+  if(s==='IN_PLAY') return `${m.minute||'?'}'`;
+  if(s==='PAUSED')  return 'HT';
+  if(s==='FINISHED')return 'FT';
+  try{
+    const d = new Date(m.utcDate);
+    return d.toLocaleString('en-GB',{day:'2-digit',month:'short',hour:'2-digit',minute:'2-digit'});
+  }catch(e){ return '—'; }
+}
+
+function fdMapMatch(m, comp){
+  const status = fdMatchStatus(m);
+  const hs = m.score?.fullTime?.home ?? m.score?.halfTime?.home;
+  const as = m.score?.fullTime?.away ?? m.score?.halfTime?.away;
+  const hasScore = hs !== null && hs !== undefined;
+  return {
+    id: m.id,
+    sport: 'football',
+    league: comp.name,
+    leagueIcon: comp.icon,
+    team1:{
+      name: m.homeTeam?.shortName || m.homeTeam?.name || 'Home',
+      flag: m.homeTeam?.crest
+        ? `<img src="${m.homeTeam.crest}" style="width:36px;height:36px;object-fit:contain;" onerror="this.outerHTML='⚽'">`
+        : getFlag(m.homeTeam?.name||''),
+      score: hasScore && status!=='upcoming' ? String(hs) : ''
+    },
+    team2:{
+      name: m.awayTeam?.shortName || m.awayTeam?.name || 'Away',
+      flag: m.awayTeam?.crest
+        ? `<img src="${m.awayTeam.crest}" style="width:36px;height:36px;object-fit:contain;" onerror="this.outerHTML='⚽'">`
+        : getFlag(m.awayTeam?.name||''),
+      score: hasScore && status!=='upcoming' ? String(as) : ''
+    },
+    status,
+    time: fdFormatTime(m),
+    minute: m.minute ? `${m.minute}'` : '',
+    venue: m.venue || 'TBC',
+    detail: comp.name,
+  };
+}
+
 async function fetchFootball(){
   try{
-    const leagueIds = ['4328','4480','4335'];
-    const reqs = leagueIds.flatMap(id=>[
-      fetch(`https://www.thesportsdb.com/api/v1/json/3/eventslast.php?id=${id}`).catch(()=>null),
-      fetch(`https://www.thesportsdb.com/api/v1/json/3/eventsnext.php?id=${id}`).catch(()=>null),
-    ]);
-    const responses = await Promise.all(reqs);
-    const jsons = await Promise.all(responses.map(r=>r?r.json().catch(()=>null):null));
+    const live=[], upcoming=[], finished=[];
 
-    const now = new Date();
-    let live=[], upcoming=[], finished=[];
+    // Fetch today + yesterday + tomorrow matches for all competitions in parallel
+    const today   = new Date();
+    const yday    = new Date(today); yday.setDate(yday.getDate()-1);
+    const tmrw    = new Date(today); tmrw.setDate(tmrw.getDate()+7); // next 7 days
+    const df      = d => d.toISOString().split('T')[0];
+    const dateFrom= df(yday);
+    const dateTo  = df(tmrw);
 
-    jsons.forEach((json,idx)=>{
-      if(!json) return;
-      const leagueId = leagueIds[Math.floor(idx/2)];
-      const lg = FOOTBALL_LEAGUES.find(l=>l.id===leagueId)||{name:'Football',icon:'⚽'};
-      const isNext = idx%2===1;
-      const events = json.results||json.events||[];
+    const results = await Promise.allSettled(
+      FD_COMPETITIONS.map(c =>
+        fdFetch(`competitions/${c.code}/matches?dateFrom=${dateFrom}&dateTo=${dateTo}`)
+          .then(d => ({comp:c, matches: d.matches||[]}))
+          .catch(() => ({comp:c, matches:[]}))
+      )
+    );
 
-      events.forEach(e=>{
-        const matchDate = new Date((e.dateEvent||'')+'T'+(e.strTime||'00:00:00')+'Z');
-        const diffMins = (now - matchDate)/60000;
-        const hasScore = e.intHomeScore!==null && e.intHomeScore!==undefined && e.intHomeScore!=='';
-
-        let status, matchTime, minute='';
-        if(e.strStatus==='Half Time'){ status='live'; matchTime='HT'; minute='HT'; }
-        else if(e.strStatus==='Match Finished'){ status='finished'; matchTime='FT'; }
-        else if(e.strStatus==='Postponed'){ status='upcoming'; matchTime='PST'; }
-        else if(hasScore && diffMins>0 && diffMins<115){
-          status='live'; minute=`${Math.min(Math.round(diffMins),90)}'`;
-          matchTime=minute;
-        } else if(hasScore){ status='finished'; matchTime='FT'; }
-        else if(isNext||diffMins<0){ status='upcoming'; matchTime=formatMatchDate(matchDate); }
-        else { status='finished'; matchTime='FT'; }
-
-        const obj={
-          id:e.idEvent, sport:'football',
-          league:lg.name, leagueIcon:lg.icon,
-          team1:{name:e.strHomeTeam||'Home', flag:getTeamBadge(e.strHomeTeam,e.strHomeTeamBadge), score:hasScore?String(e.intHomeScore):''},
-          team2:{name:e.strAwayTeam||'Away', flag:getTeamBadge(e.strAwayTeam,e.strAwayTeamBadge), score:hasScore?String(e.intAwayScore):''},
-          status, time:matchTime, minute,
-          venue:e.strVenue||'TBC', detail:e.strLeague||lg.name,
-        };
-        if(status==='live') live.push(obj);
-        else if(status==='upcoming') upcoming.push(obj);
-        else finished.push(obj);
+    results.forEach(r=>{
+      if(r.status!=='fulfilled') return;
+      const {comp, matches} = r.value;
+      matches.forEach(m=>{
+        const mapped = fdMapMatch(m, comp);
+        if(mapped.status==='live')     live.push(mapped);
+        else if(mapped.status==='upcoming') upcoming.push(mapped);
+        else finished.push(mapped);
       });
     });
 
-    // Fetch EPL table
-    let standings=[];
+    // Sort finished by most recent first
+    finished.sort((a,b)=> new Date(b.time) - new Date(a.time));
+
+    // Fetch EPL standings
+    let standings = [];
     try{
-      const tr = await fetch('https://www.thesportsdb.com/api/v1/json/3/lookuptable.php?l=4328&s=2024-2025');
-      const tj = await tr.json();
-      standings = (tj.table||[]).slice(0,10).map((t,i)=>({
-        rank:i+1,
-        team:(t.strTeam||'Team')+' '+getFlag(t.strTeam||''),
-        badge:t.strTeamBadge||'',
-        p:t.intPlayed||0, w:t.intWin||0, l:t.intLoss||0, d:t.intDraw||0,
-        pts:t.intPoints||0,
-        form:(t.strForm||'').split('').slice(0,5).map(f=>f==='W'?'W':f==='L'?'L':'D'),
+      const stData = await fdFetch('competitions/PL/standings');
+      const table = stData?.standings?.find(s=>s.type==='TOTAL')?.table || [];
+      standings = table.slice(0,12).map((row,i)=>({
+        rank: i+1,
+        team: row.team?.shortName || row.team?.name || 'Team',
+        badge: row.team?.crest || '',
+        p: row.playedGames||0,
+        w: row.won||0,
+        l: row.lost||0,
+        d: row.draw||0,
+        pts: row.points||0,
+        form: (row.form||'').split(',').slice(-5).map(f=>f==='W'?'W':f==='L'?'L':'D'),
       }));
-    }catch(e){}
+    }catch(e){ console.warn('Standings fetch failed',e.message); }
 
     return {
-      live: live.slice(0,4),
-      upcoming: upcoming.slice(0,6),
-      finished: finished.slice(0,6),
+      live:     live.slice(0,6),
+      upcoming: upcoming.slice(0,8),
+      finished: finished.slice(0,8),
       standings,
     };
   }catch(e){
-    console.warn('Football API failed:', e.message);
+    console.warn('Football-data.org fetch failed:', e.message);
     return {live:[],upcoming:[],finished:[],standings:[]};
   }
 }
@@ -3925,41 +4071,69 @@ async function fetchFootball(){
 //  RENDER FUNCTIONS
 // ════════════════════════════════
 function makeMatchCard(m){
-  const isCricket = m.sport==='cricket';
-  const statusLabel = m.status==='live'
-    ? `<span style="display:flex;align-items:center;gap:5px;"><span style="width:7px;height:7px;background:#ff2d55;border-radius:50%;display:inline-block;animation:pulseDot 1s ease-in-out infinite;"></span>LIVE${m.minute?' '+m.minute:''}</span>`
-    : m.status==='upcoming'?'🕐 UPCOMING':'✅ FT';
-  const statusClass = m.status==='live'?'status-live':m.status==='upcoming'?'status-upcoming':'status-finished';
-  const cardClass = 'match-card'+(m.status==='live'?' live-card':'');
-  const s1 = m.team1.score||(m.status==='upcoming'?'':'-');
-  const s2 = m.team2.score||(m.status==='upcoming'?'':'-');
-  const ov1 = isCricket&&m.team1.overs?`<small style="font-size:0.6rem;color:var(--muted);display:block">${m.team1.overs}</small>`:'';
-  const ov2 = isCricket&&m.team2.overs?`<small style="font-size:0.6rem;color:var(--muted);display:block">${m.team2.overs}</small>`:'';
-  const sportTag = `<span style="font-size:0.7rem;opacity:0.6;">${m.sport==='cricket'?'🏏':'⚽'}</span>`;
+  const isCricket = m.sport === 'cricket';
+  const isLive    = m.status === 'live';
+  const isUpcoming= m.status === 'upcoming';
+
+  const statusLabel = isLive
+    ? `<span style="display:flex;align-items:center;gap:5px;">
+        <span style="width:7px;height:7px;background:#ff2d55;border-radius:50%;display:inline-block;animation:pulseDot 1s ease-in-out infinite;"></span>
+        LIVE
+       </span>`
+    : isUpcoming ? '🕐 UPCOMING' : '✅ FT';
+  const statusClass = isLive ? 'status-live' : isUpcoming ? 'status-upcoming' : 'status-finished';
+  const cardClass   = 'match-card' + (isLive ? ' live-card' : '');
+
+  // Scores
+  const s1 = m.team1.score || (isUpcoming ? '' : '—');
+  const s2 = m.team2.score || (isUpcoming ? '' : '—');
+
+  // Cricket: overs shown below score
+  const ov1 = isCricket && m.team1.overs
+    ? `<div style="font-size:0.6rem;color:var(--cyan);margin-top:2px;font-weight:600;">${m.team1.overs}</div>` : '';
+  const ov2 = isCricket && m.team2.overs
+    ? `<div style="font-size:0.6rem;color:var(--cyan);margin-top:2px;font-weight:600;">${m.team2.overs}</div>` : '';
+
+  // Centre column: VS or score or time
+  let centreHtml;
+  if(isLive && isCricket){
+    centreHtml = `<div style="font-size:0.65rem;color:#ff2d55;font-weight:700;text-align:center;letter-spacing:0.06em;animation:fadeInOut 1.8s ease infinite;">● LIVE</div>`;
+  } else if(isLive){
+    centreHtml = `<div style="font-size:0.72rem;color:#ff2d55;font-weight:700;">LIVE</div>`;
+  } else if(isUpcoming){
+    centreHtml = `<div class="vs-text">VS</div><div class="match-time">${m.time}</div>`;
+  } else {
+    centreHtml = `<div style="font-size:0.7rem;color:var(--muted);font-weight:600;">FT</div>`;
+  }
+
+  // Live status bar (cricket only — shows current status string like "IND need 120 runs")
+  const liveBar = (isLive && isCricket && m.detail && m.detail !== 'In Progress')
+    ? `<div style="background:rgba(255,45,85,0.07);border:1px solid rgba(255,45,85,0.2);border-radius:8px;padding:0.4rem 0.7rem;margin-top:0.6rem;font-size:0.72rem;color:#ff9f9f;text-align:center;line-height:1.4;">${m.detail}</div>` : '';
+
   return `<div class="${cardClass}" style="cursor:default;">
     <div class="match-card-top">
-      <div class="match-league">${m.leagueIcon} ${m.league} ${sportTag}</div>
+      <div class="match-league">${m.leagueIcon} <span style="max-width:160px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;display:inline-block;vertical-align:middle">${m.league}</span></div>
       <div class="match-status ${statusClass}">${statusLabel}</div>
     </div>
     <div class="match-teams">
       <div class="match-team">
         <div class="team-flag">${m.team1.flag}</div>
-        <div class="team-name">${m.team1.name}</div>
-        <div class="team-score${!s1||s1==='-'?' no-score':''}">${s1}${ov1}</div>
+        <div class="team-name" style="font-size:0.77rem;font-weight:700;">${m.team1.name}</div>
+        ${s1 ? `<div class="team-score" style="font-size:${isCricket?'1.1rem':'1.3rem'};letter-spacing:-0.5px;">${s1}</div>${ov1}` : `<div class="team-score no-score"></div>`}
       </div>
       <div class="match-vs">
-        <div class="vs-text">${m.status==='live'?'':'VS'}</div>
-        <div class="match-time">${m.time}</div>
+        ${centreHtml}
       </div>
       <div class="match-team">
         <div class="team-flag">${m.team2.flag}</div>
-        <div class="team-name">${m.team2.name}</div>
-        <div class="team-score${!s2||s2==='-'?' no-score':''}">${s2}${ov2}</div>
+        <div class="team-name" style="font-size:0.77rem;font-weight:700;">${m.team2.name}</div>
+        ${s2 ? `<div class="team-score" style="font-size:${isCricket?'1.1rem':'1.3rem'};letter-spacing:-0.5px;">${s2}</div>${ov2}` : `<div class="team-score no-score"></div>`}
       </div>
     </div>
-    <div class="match-card-footer">
-      <div class="match-venue">📍 ${m.venue}</div>
-      <div class="match-overs">${m.detail}</div>
+    ${liveBar}
+    <div class="match-card-footer" style="margin-top:${liveBar?'0.4rem':'0.8rem'}">
+      <div class="match-venue">📍 ${(m.venue||'TBC').substring(0,35)}${(m.venue||'').length>35?'…':''}</div>
+      ${!isLive || !isCricket ? `<div class="match-overs" style="font-size:0.68rem;color:var(--cyan)">${m.time}</div>` : ''}
     </div>
   </div>`;
 }
@@ -4032,7 +4206,7 @@ function renderSportsData(footballData, cricketData){
     </div>`;
   }
   if(data.showTable && data.standings && data.standings.length){
-    html += `<div class="sports-section-title">🏆 Premier League Table</div>${makeStandingsTable(data.standings)}`;
+    html += `<div class="sports-section-title">🏴󠁧󠁢󠁥󠁮󠁧󠁿 Premier League Table</div>${makeStandingsTable(data.standings)}`;
   }
 
   document.getElementById('sportsContent').innerHTML = html;
@@ -4283,6 +4457,8 @@ function setFifaTab(tab, btn){
   document.querySelectorAll('.fifa-tab-content').forEach(c=>c.classList.remove('active'));
   const el = document.getElementById('fifa-'+tab);
   if(el) el.classList.add('active');
+  if(tab==='scores')  fifaLoadMatches();
+  if(tab==='scorers' && typeof fifaLoadScorers==='function') fifaLoadScorers();
 }
 
 // ── Groups renderer ──
@@ -4300,7 +4476,7 @@ function fifaLoadGroups(){
 async function fetchFifaStandings(){
   try {
     const res = await fetch('https://api.football-data.org/v4/competitions/WC/standings', {
-      headers:{'X-Auth-Token': ''},
+      headers:{'X-Auth-Token': 'b280d0eb1ec84b5f815d7a7fc537a052'},
       signal: AbortSignal.timeout(8000)
     });
     if(!res.ok) return null;
@@ -4395,7 +4571,7 @@ async function fifaLoadMatches(){
   }
   try {
     const res = await fetch('https://api.football-data.org/v4/competitions/WC/matches?status=LIVE,IN_PLAY,PAUSED,FINISHED', {
-      headers:{'X-Auth-Token':''},
+      headers:{'X-Auth-Token':'b280d0eb1ec84b5f815d7a7fc537a052'},
       signal: AbortSignal.timeout(8000)
     });
     if(!res.ok) throw new Error('API error');
@@ -4513,7 +4689,45 @@ function fifaLoadFixtures(){
   el.innerHTML = html;
 }
 
-// Scorers tab — placeholder until tournament starts
+// Scorers tab — fetch real data when FIFA tab is active
+async function fifaLoadScorers(){
+  const sc = document.getElementById('fifaScorers');
+  if(!sc) return;
+  const phase = getFifaPhase();
+  if(phase === 'pre'){
+    sc.innerHTML = `<div class="fifa-info-box">
+      <div style="font-size:1.5rem;margin-bottom:0.5rem">⚽</div>
+      <strong>Top scorers will appear here once the tournament begins (June 11, 2026).</strong><br>
+      Data updates automatically during the tournament.
+    </div>`;
+    return;
+  }
+  sc.innerHTML = `<div class="fifa-info-box"><div style="font-size:1.5rem;margin-bottom:0.5rem">⏳</div>Loading scorers...</div>`;
+  try{
+    const data = await fdFetch('competitions/WC/scorers?limit=20');
+    const scorers = data.scorers || [];
+    if(!scorers.length){
+      sc.innerHTML = `<div class="fifa-info-box">No scorer data yet.</div>`;
+      return;
+    }
+    sc.innerHTML = `<div class="standings-wrap"><table class="standings-table">
+      <thead><tr><th>#</th><th>Player</th><th>Team</th><th>Goals</th><th>Assists</th></tr></thead>
+      <tbody>${scorers.map((s,i)=>`<tr class="rank-${i+1}">
+        <td><span class="rank-num">${i+1}</span></td>
+        <td style="font-weight:700">${s.player?.name||'—'}</td>
+        <td><div class="team-cell">
+          ${s.team?.crest?`<img src="${s.team.crest}" style="width:16px;height:16px;object-fit:contain;border-radius:2px;margin-right:4px;" onerror="this.remove()">`:'' }
+          ${s.team?.shortName||s.team?.name||'—'}
+        </div></td>
+        <td><span style="color:var(--green);font-weight:800;font-family:'Syne',sans-serif">${s.goals??0}</span></td>
+        <td style="color:var(--cyan)">${s.assists??0}</td>
+      </tr>`).join('')}</tbody>
+    </table></div>`;
+  }catch(e){
+    sc.innerHTML = `<div class="fifa-info-box">Could not load scorers: ${e.message}</div>`;
+  }
+}
+
 document.addEventListener('DOMContentLoaded',()=>{
   const sc = document.getElementById('fifaScorers');
   if(sc){
